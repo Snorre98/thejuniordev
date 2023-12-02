@@ -1,6 +1,9 @@
 # Dependency directories
 node_modules/
 
+# Yarn
+.yarn
+
 # Compiled output
 /dist
 /build
