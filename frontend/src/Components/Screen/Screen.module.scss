@@ -1,0 +1,16 @@
+.screen {
+    width: 16rem;
+    height: 32rem;
+    border: 5px solid black;
+    border-radius: 1.75rem;
+    display: flex;
+    justify-content: center;
+}
+
+.notch {
+    width: 5rem;
+    height: 1rem;
+    background-color: black;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
