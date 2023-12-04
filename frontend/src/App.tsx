@@ -1,12 +1,14 @@
-import './App.scss'
-import {Screen} from "./Components/Screen/Screen.tsx"
+import "./App.scss";
+import { Screen } from "./Components/Screen/Screen.tsx";
+import { Notification } from "./Components/Notification/Notification.tsx";
 
 function App() {
   return (
     <>
-    <Screen/>
-      <h1>APP</h1>
+      <Screen>
+        <Notification />
+      </Screen>
     </>
-  )
+  );
 }
-export default App
+export default App;
