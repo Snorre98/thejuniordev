@@ -1,19 +1,40 @@
-.bezel {
-  width: 16rem;
-  height: 32rem;
-  border: 8px solid black;
-  border-radius: 1.75rem;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
+.screen {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  background-image: url("../../assets/placeholder-background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.notch {
+.screen::-webkit-scrollbar {
+  display: none;
+}
+
+.topDiv {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.bottomDiv {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.line {
+  display: block;
   width: 5rem;
-  height: 1rem;
-  background-color: black;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  position: absolute;
+  height: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 2em;
   z-index: 999;
 }
