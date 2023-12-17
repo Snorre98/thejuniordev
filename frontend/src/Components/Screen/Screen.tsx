@@ -49,21 +49,21 @@ export function Screen({ topScreen, bottomScreen }: ScreenProps) {
           style={{ opacity: calculateOpacity().topOpacity }}
           id="topDiv">
           {topScreen}
-          <div className={styles.item1}>test 1</div>
+          {/* <div className={styles.item1}>test 1</div>
           <div className={styles.item2}>test 2</div>
           <div className={styles.item3}>
             <Notification />
-          </div>
-          <div className={styles.item4}>
+          </div> */}
+          {/* <div className={styles.item4}>
             <span className={styles.line} />
-          </div>
+          </div> */}
         </div>
         <div
           className={styles.bottomDiv}
           style={{ opacity: calculateOpacity().bottomOpacity }}
           id="bottomDiv">
           {bottomScreen}
-          <span className={styles.line} />
+          {/* <span className={styles.line} /> */}
         </div>
       </div>
     </Bezel>

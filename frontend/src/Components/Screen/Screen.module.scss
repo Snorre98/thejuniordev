@@ -19,18 +19,8 @@
 .topDiv {
   height: 100%;
   width: 100%;
-  // background-color: red;
-  display: grid;
-  grid-template-rows: auto auto auto auto;
-  gap: 6rem;
+  position: relative;
   transition: opacity 0.1s ease-in-out;
-}
-
-.topDiv > div {
-  color: black;
-  text-align: center;
-  justify-self: center;
-  align-self: center;
 }
 
 .bottomDiv {

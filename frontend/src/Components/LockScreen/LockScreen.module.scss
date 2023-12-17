@@ -1,0 +1,22 @@
+.lockScreenContainer {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto auto auto auto;
+  gap: 5em;
+  border: 2px solid yellow;
+}
+
+.item1 {
+  border: 2px solid red;
+}
+.item2 {
+  border: 2px solid blue;
+}
+.item3 {
+  border: 2px solid red;
+  height: fit-content;
+}
+
+.item4 {
+  border: 2px solid blue;
+}

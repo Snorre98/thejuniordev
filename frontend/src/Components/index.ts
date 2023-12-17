@@ -4,3 +4,4 @@ export { AppIcon } from "./AppIcon";
 export { Page } from "./Page";
 export { Button } from "./Button";
 export { Screen } from "./Screen";
+export { LockScreen } from "./LockScreen";
