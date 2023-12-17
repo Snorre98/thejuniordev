@@ -1,16 +1,19 @@
-.screen {
-    width: 16rem;
-    height: 32rem;
-    border: 5px solid black;
-    border-radius: 1.75rem;
-    display: flex;
-    justify-content: center;
+.bezel {
+  width: 16rem;
+  height: 32rem;
+  border: 8px solid black;
+  border-radius: 1.75rem;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .notch {
-    width: 5rem;
-    height: 1rem;
-    background-color: black;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+  width: 5rem;
+  height: 1rem;
+  background-color: black;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  position: absolute;
+  z-index: 999;
 }
