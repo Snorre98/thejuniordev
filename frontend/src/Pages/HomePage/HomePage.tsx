@@ -1,15 +1,6 @@
-import styles from "./HomePage.module.scss";
-import { LockScreen, Screen } from "../../Components";
+//import styles from "./HomePage.module.scss";
+import { LockScreen, Screen, HomeScreen } from "../../Components";
 
 export function HomePage() {
-  return (
-    <Screen
-      topScreen={<LockScreen />}
-      bottomScreen={
-        <div className={styles.bottmScreen}>
-          <h1>b</h1>
-        </div>
-      }
-    />
-  );
+  return <Screen topScreen={<LockScreen />} bottomScreen={<HomeScreen />} />;
 }
