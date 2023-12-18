@@ -2,21 +2,16 @@
   display: grid;
   height: 100%;
   grid-template-rows: auto auto auto auto;
-  gap: 5em;
-  border: 2px solid yellow;
-}
+  margin: 2em 0 2em 0;
+  gap: 4em;
 
-.item1 {
-  border: 2px solid red;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .item2 {
-  border: 2px solid blue;
-}
-.item3 {
-  border: 2px solid red;
+  display: flex;
   height: fit-content;
-}
-
-.item4 {
-  border: 2px solid blue;
+  justify-content: center;
+  align-items: center;
 }

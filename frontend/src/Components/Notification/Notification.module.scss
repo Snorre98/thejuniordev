@@ -1,18 +1,12 @@
 .notificationContainer {
-  justify-self: center;
   display: flex;
   flex-direction: row;
   width: 95%;
   height: 50%;
-  grid-row: 3/4;
   background-color: rgba(49, 49, 49, 0.7);
   border-radius: 1em;
   backdrop-filter: blur(20px);
   font-family: "Roboto Mono";
-
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 
   &:hover {
     cursor: pointer;

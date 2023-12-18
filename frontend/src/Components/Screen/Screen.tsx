@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Children } from "../../types";
 import styles from "./Screen.module.scss";
 import { Bezel } from "../Bezel";
-import { Notification } from "../Notification";
 
 type ScreenProps = {
   topScreen?: Children;
@@ -49,14 +48,6 @@ export function Screen({ topScreen, bottomScreen }: ScreenProps) {
           style={{ opacity: calculateOpacity().topOpacity }}
           id="topDiv">
           {topScreen}
-          {/* <div className={styles.item1}>test 1</div>
-          <div className={styles.item2}>test 2</div>
-          <div className={styles.item3}>
-            <Notification />
-          </div> */}
-          {/* <div className={styles.item4}>
-            <span className={styles.line} />
-          </div> */}
         </div>
         <div
           className={styles.bottomDiv}
