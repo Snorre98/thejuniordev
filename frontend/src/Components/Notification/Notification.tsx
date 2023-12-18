@@ -13,7 +13,7 @@ export function Notification({ onClick }: NotificationProps) {
         <div className={styles.notificationText}>
           <h5 className={styles.notificationHeader}>Snorre</h5>
           <p className={styles.notificationContent}>
-            Hei! Jeg heter Snorre :) Lær mer om meg her ved å trykke!
+            Snorre har sendt deg en melding.
           </p>
         </div>
       </div>
