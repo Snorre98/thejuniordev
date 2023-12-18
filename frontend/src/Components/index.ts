@@ -6,3 +6,4 @@ export { Button } from "./Button";
 export { Screen } from "./Screen";
 export { LockScreen } from "./LockScreen";
 export { Watch } from "./Watch";
+export { HomeScreen } from "./HomeScreen";
