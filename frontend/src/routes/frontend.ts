@@ -1,3 +1,4 @@
 export const ROUTES_FRONTEND = {
-    home: "/"
+  home: "/",
+  messages: "/messages",
 } as const;
