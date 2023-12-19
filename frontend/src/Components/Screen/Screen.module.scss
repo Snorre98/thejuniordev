@@ -1,6 +1,11 @@
 .screen {
   height: 100%;
   width: 100%;
+  position: relative;
+  // display: flex;
+  // flex-direction: column;
+  //display: grid;
+  //grid-template-columns: auto;
   overflow-x: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -17,26 +22,20 @@
 }
 
 .topDiv {
+  // display: block;
   height: 100%;
   width: 100%;
   position: relative;
   overflow: hidden;
-  transition: opacity 0.1s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .bottomDiv {
+  // display: block;
   height: 100%;
   width: 100%;
   position: relative;
   overflow: hidden;
-  transition: opacity 0.1s ease-in-out;
-}
-
-.line {
-  display: block;
-  width: 5rem;
-  height: 0.25rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 2em;
-  z-index: 999;
+  transition: all 0.4s ease-in-out;
+  transform: scale(0.5);
 }
