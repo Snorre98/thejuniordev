@@ -7,66 +7,79 @@ import { Line } from "../Line";
 type ScreenProps = {
   topScreen?: Children;
   bottomScreen?: Children;
+  defaultScreen: "top" | "bottom";
+  animated: boolean;
 };
 
-export function Screen({ topScreen, bottomScreen }: ScreenProps) {
+export function Screen({
+  topScreen,
+  bottomScreen,
+  defaultScreen,
+  animated,
+}: ScreenProps) {
   const [scrollY, setScrollY] = useState(0);
   const topDiv = document.getElementById("topDiv");
   const bottomDiv = document.getElementById("bottomDiv");
-  // const line = document.getElementById("line");
+  // const [defaultScreen, setDefaultScreen] = useState("top");
+
+  // if (screenOnLoad === "top") {
+  //   //view top screen by default
+  // } else if (screenOnLoad === "bottom") {
+  //   //view bottom screen by default
+  // }
+
+  useEffect(() => {
+    // const topDiv = document.getElementById("topDiv");
+    // const bottomDiv = document.getElementById("bottomDiv");
+    if (topDiv && bottomDiv) {
+      if (defaultScreen === "bottom") {
+        // bottomDiv?.scrollIntoView();
+        setScrollY(bottomDiv.offsetTop);
+      } else {
+        setScrollY(topDiv.offsetTop);
+      }
+    }
+  }, [bottomDiv, defaultScreen, topDiv]);
+
   useEffect(() => {
     if (scrollY >= 350) {
       if (bottomDiv && topDiv) {
         bottomDiv.scrollIntoView();
-        bottomDiv.style.transform = "scale(1)";
-        bottomDiv.style.opacity = "1";
-        topDiv.style.opacity = "0";
+        if (animated) {
+          bottomDiv.style.transform = "scale(1)";
+          bottomDiv.style.opacity = "1";
+          topDiv.style.opacity = "0";
+        }
       }
     }
     if (scrollY < 350) {
       if (bottomDiv && topDiv) {
         topDiv.scrollIntoView();
-        bottomDiv.style.transform = "scale(0.5)";
-        topDiv.style.opacity = "1";
-        bottomDiv.style.opacity = "0";
+        if (animated) {
+          bottomDiv.style.transform = "scale(0.5)";
+          topDiv.style.opacity = "1";
+          bottomDiv.style.opacity = "0";
+        } else {
+          bottomDiv.style.transform = "scale(1)";
+        }
       }
     }
-  }, [bottomDiv, scrollY, topDiv]);
+  }, [animated, bottomDiv, scrollY, topDiv]);
 
   const handleSwipe = (event) => {
     const screen = event.currentTarget;
     setScrollY(screen.scrollTop);
   };
 
-  // const calculateOpacity = () => {
-  //   //TODO: Make this dynamic (some function of scroll pos)
-  //   const screenHeight = document.getElementById("screen")?.offsetHeight;
-  //   const fadePoint = screenHeight / 4;
-
-  //   let topOpacity = 1;
-  //   let bottomOpacity = 0;
-
-  //   if (scrollY > fadePoint) {
-  //     topOpacity = 1 - (scrollY - fadePoint) / fadePoint;
-  //     bottomOpacity = (scrollY - fadePoint) / fadePoint;
-  //   }
-  //   return { topOpacity, bottomOpacity };
-  // };
   return (
     <Bezel>
       <div className={styles.screen} id="screen" onScroll={handleSwipe}>
         {/* <Line id="line" /> */}
-        <div
-          className={styles.topDiv}
-          // style={{ opacity: calculateOpacity().topOpacity }}
-          id="topDiv">
+        <div className={styles.topDiv} id="topDiv">
           {topScreen}
           {/* <Line id="line" /> */}
         </div>
-        <div
-          className={styles.bottomDiv}
-          // style={{ opacity: calculateOpacity().bottomOpacity }}
-          id="bottomDiv">
+        <div className={styles.bottomDiv} id="bottomDiv">
           {bottomScreen}
           {/* <Line id="line" /> */}
         </div>

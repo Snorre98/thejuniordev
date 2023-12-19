@@ -10,7 +10,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
   &:hover {
     cursor: pointer;
   }
@@ -19,4 +18,5 @@
 .appTitle {
   font-size: 0.75rem;
   font-weight: 600;
+  text-shadow: 1px 1px 1px black;
 }
