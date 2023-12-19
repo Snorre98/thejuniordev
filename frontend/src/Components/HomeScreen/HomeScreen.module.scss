@@ -11,21 +11,14 @@
 .appsContainer {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  // align-items: center;
-  // justify-content: space-between;
-  // flex-direction: row;
-  // flex-wrap: wrap;
   width: 95%;
   height: 90%;
 }
 
 .appIconContainer {
-  width: 45px;
-  height: 45px;
-  border: 2px solid red;
   border-radius: 0.75em;
   position: relative;
-  margin: 0.3em;
+  margin: 0.35em;
 }
 
 .favoriteApps {
@@ -33,7 +26,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1.5em;
+  margin: 0.35em;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 1em;
   padding: 0.2em;

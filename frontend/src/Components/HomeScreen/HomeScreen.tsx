@@ -12,6 +12,12 @@ type HomeScreenProps = {
   app9?: Children;
   app10?: Children;
   app11?: Children;
+
+  fApp1?: Children;
+
+  fApp2?: Children;
+
+  fApp3?: Children;
 };
 export function HomeScreen({
   app1,
@@ -25,6 +31,9 @@ export function HomeScreen({
   app9,
   app10,
   app11,
+  fApp1,
+  fApp2,
+  fApp3,
 }: HomeScreenProps) {
   return (
     <>
@@ -54,9 +63,9 @@ export function HomeScreen({
         <div className={styles.appIconContainer}>{app11}</div> */}
         </div>
         <div className={styles.favoriteApps}>
-          <div className={styles.appIconContainer}>{app9}</div>
-          <div className={styles.appIconContainer}>{app10}</div>
-          <div className={styles.appIconContainer}>{app11}</div>
+          <div className={styles.appIconContainer}>{fApp1}</div>
+          <div className={styles.appIconContainer}>{fApp2}</div>
+          <div className={styles.appIconContainer}>{fApp3}</div>
         </div>
       </div>
     </>
