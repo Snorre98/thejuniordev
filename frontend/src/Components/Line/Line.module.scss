@@ -1,0 +1,11 @@
+.line {
+  position: absolute;
+  width: 5rem;
+  height: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 2em;
+  z-index: 999;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
