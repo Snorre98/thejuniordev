@@ -28,6 +28,7 @@ export function Screen({ topScreen, bottomScreen }: ScreenProps) {
   };
 
   const calculateOpacity = () => {
+    //TODO: Make this dynamic (some function of scroll pos)
     const screenHeight = document.getElementById("screen")?.offsetHeight;
     const fadePoint = screenHeight / 4;
 
