@@ -1,0 +1,47 @@
+.messageContainer {
+  height: 4em;
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 0 0.5em 0 0.5em;
+  align-items: center;
+}
+
+.messageHead {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  font-weight: 600;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // margin-top: 1.2em;
+}
+
+.message {
+  height: 3em;
+  border-bottom: 0.5px solid gray;
+  font-size: 0.8rem;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  padding: 0;
+}
+
+.senderPhoto {
+  width: 2em;
+  height: 2em;
+  margin-right: 0.3em;
+}
+
+.messageSender {
+  grid-column: 1;
+}
+
+.messageDay {
+  grid-column: 5;
+}

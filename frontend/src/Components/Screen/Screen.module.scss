@@ -2,14 +2,11 @@
   height: 100%;
   width: 100%;
   position: relative;
-  // display: flex;
-  // flex-direction: column;
-  //display: grid;
-  //grid-template-columns: auto;
   overflow-x: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   scroll-behavior: smooth;
   background-image: url("../../assets/placeholder-background.jpg");
   background-position: center;
@@ -22,7 +19,6 @@
 }
 
 .topDiv {
-  // display: block;
   height: 100%;
   width: 100%;
   position: relative;
@@ -31,11 +27,9 @@
 }
 
 .bottomDiv {
-  // display: block;
   height: 100%;
   width: 100%;
   position: relative;
   overflow: hidden;
   transition: all 0.4s ease-in-out;
-  // transform: scale(0.5);
 }
