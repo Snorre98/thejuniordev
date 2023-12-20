@@ -1,0 +1,33 @@
+.messagesContainer {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(16, 16, 16);
+  color: rgba(255, 255, 255, 0.902);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.searchBar {
+  background-color: rgb(27, 27, 27);
+  height: 2em;
+  width: 15em;
+  border: none;
+  border-radius: 0.75em;
+  color: rgba(255, 255, 255, 0.902);
+  align-self: center;
+  justify-self: center;
+  padding: 0 0.5em 0 0.5em;
+}
+
+.msgScreenTitle {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0.6em 0 0 0;
+}
+
+.messageScreenTitle {
+  display: inline-block;
+  align-self: center;
+  margin: 1em 0 0 0;
+}

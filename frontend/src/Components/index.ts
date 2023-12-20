@@ -8,3 +8,5 @@ export { LockScreen } from "./LockScreen";
 export { Watch } from "./Watch";
 export { HomeScreen } from "./HomeScreen";
 export { Line } from "./Line";
+export { Message } from "./Message";
+export { MessagesScreen } from "./MessagesScreen";
