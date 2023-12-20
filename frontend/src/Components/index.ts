@@ -10,3 +10,4 @@ export { HomeScreen } from "./HomeScreen";
 export { Line } from "./Line";
 export { Message } from "./Message";
 export { MessagesScreen } from "./MessagesScreen";
+export { ChatScreen } from "./ChatScreen";

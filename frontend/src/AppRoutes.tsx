@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage, MessagesPage } from "./Pages";
+import { HomePage, MessagesPage, ChatPage } from "./Pages";
 import { JrOutlet } from "./Components/JrOutlet";
 import { ROUTES } from "./routes";
 
@@ -11,6 +11,7 @@ export function AppRoutes() {
         <Route
           path={ROUTES.frontend.messages}
           element={<MessagesPage />}></Route>
+        <Route path={ROUTES.frontend.chat} element={<ChatPage />}></Route>
       </Route>
     </Routes>
   );
