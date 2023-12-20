@@ -1,5 +1,6 @@
 import { Message } from "..";
 import styles from "./MessagesScreen.module.scss";
+import photo from "../../assets/Photos.png";
 
 export function MessagesScreen() {
   return (
@@ -11,10 +12,30 @@ export function MessagesScreen() {
           <span>Ny</span>
         </div>
         <input className={styles.searchBar} placeholder="søk" type="text" />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
+        <Message
+          message={`test image, test image, test image. This is a test. 
+            Tests. test image, test image, test image. This is a test. Tests.`}
+          photoURL={photo}
+          sender={"Snorre"}
+        />
+        <Message
+          message={`test image, test image, test image. This is a test. 
+            Tests. test image, test image, test image. This is a test. Tests.`}
+          photoURL={photo}
+          sender={"Snorre"}
+        />
+        <Message
+          message={`test image, test image, test image. This is a test. 
+            Tests. test image, test image, test image. This is a test. Tests.`}
+          photoURL={photo}
+          sender={"Snorre"}
+        />
+        <Message
+          message={`test image, test image, test image. This is a test. 
+            Tests. test image, test image, test image. This is a test. Tests.`}
+          photoURL={photo}
+          sender={"Snorre"}
+        />
       </div>
     </>
   );
