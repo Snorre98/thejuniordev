@@ -7,9 +7,9 @@ export function MessagesScreen() {
     <>
       <div className={styles.messagesContainer}>
         <div className={styles.msgScreenTitle}>
-          <span>Rediger</span>
+          <button className = {styles.topButtons}>Rediger</button>
           <h5 className={styles.messageScreenTitle}>Meldinger</h5>
-          <span>Ny</span>
+          <button className={styles.topButtons}>Ny</button>
         </div>
         <input className={styles.searchBar} placeholder="søk" type="text" />
         <Message

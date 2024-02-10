@@ -33,3 +33,20 @@
   align-self: center;
   margin: 1em 0 0 0;
 }
+
+.topButtons {
+  font-size: 0.8rem;
+  background-color: #242424;
+  width: fit-content;
+  align-self: center;
+  justify-self: center;
+  padding: 2px 0.5rem 2px 0.5rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    background-color: #474747;
+  }
+}
