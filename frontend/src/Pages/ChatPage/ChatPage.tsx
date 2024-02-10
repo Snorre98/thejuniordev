@@ -1,4 +1,4 @@
-import styles from "./ChatPage.module.scss";
+//import styles from "./ChatPage.module.scss";
 import { ChatScreen, Screen } from "../../Components";
 
 export function ChatPage() {

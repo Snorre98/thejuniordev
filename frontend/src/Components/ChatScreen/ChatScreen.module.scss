@@ -7,6 +7,7 @@
   width: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
+  //border: 2px solid red;
 }
 
 .chatHead {
@@ -16,25 +17,27 @@
 .avatar {
   width: 2em;
   height: auto;
-  border: 2px solid yellow;
+  //border: 2px solid yellow;
 }
 
 .chatTitle {
   margin: 0;
 }
-
-.chatMessage {
-  height: fit-content;
-  grid-row: 2;
-  width: 65%;
-  justify-self: end;
-  margin: 1em;
-  background-color: rgb(0, 136, 255);
-  color: white;
-  text-align: left;
-  padding: 0.7em;
-  border-radius: 1.5em 1.5em 0 1.5em;
+.chatMessages {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 350px;
+  //border: 2px solid yellow;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chatMessages::-webkit-scrollbar {
+  display: none;
+}
+
 
 .chatInputContainer {
   display: flex;

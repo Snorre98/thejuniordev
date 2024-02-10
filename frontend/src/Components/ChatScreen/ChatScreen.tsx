@@ -1,5 +1,6 @@
 import styles from "./ChatScreen.module.scss";
 import avatar from "../../assets/Map.png";
+import {ChatMessage} from "./Subcomponents";
 export function ChatScreen() {
   const sendBtn = document.getElementById("sendBtn");
   const showBtn = () => {
@@ -21,9 +22,13 @@ export function ChatScreen() {
           <h5 className={styles.chatTitle}>Snorre</h5>
         </div>
       </div>
-      <p className={styles.chatMessage}>
-        Hei! Loerer asdad asdas dasdajddals ddd asd{" "}
-      </p>
+        <div className={styles.chatMessages}>
+            <ChatMessage messageText={"lorem ipsumas dasd sd asclsdkfølasd føksjdø"} isSender={true}/>
+            <ChatMessage messageText={"lorem ipsumas dasd sd asclsdkfølasd føksjdø"} isSender={true}/>
+            <ChatMessage messageText={"lorem ipsumas dasd sd asclsdkfølasd føksjdø"} isSender={true}/>
+            <ChatMessage messageText={"lorem ipsumas dasd sd asclsdkfølasd føksjdø"} isSender={true}/>
+        </div>
+
       <div className={styles.chatInputContainer}>
         <input
           type="text"

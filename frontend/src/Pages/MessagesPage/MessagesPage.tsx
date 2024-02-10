@@ -1,7 +1,7 @@
 import {
   AppIcon,
   HomeScreen,
-  LockScreen,
+  //LockScreen,
   MessagesScreen,
   Screen,
 } from "../../Components";
@@ -9,7 +9,7 @@ import map from "../../assets/Map.png";
 import appstore from "../../assets/AppStore.png";
 import safari from "../../assets/Safari.png";
 import photos from "../../assets/Photos.png";
-import styles from "./MessagesPage.module.scss";
+//import styles from "./MessagesPage.module.scss";
 
 export function MessagesPage() {
   return (
