@@ -1,0 +1,78 @@
+@import "../../constants";
+
+.chatContainer {
+  background-color: $darkM-bgC;
+  color: $darkM-txtC;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.chatHead {
+  grid-row: 1;
+}
+
+.avatar {
+  width: 2em;
+  height: auto;
+  border: 2px solid yellow;
+}
+
+.chatTitle {
+  margin: 0;
+}
+
+.chatMessage {
+  height: fit-content;
+  grid-row: 2;
+  width: 65%;
+  justify-self: end;
+  margin: 1em;
+  background-color: rgb(0, 136, 255);
+  color: white;
+  text-align: left;
+  padding: 0.7em;
+  border-radius: 1.5em 1.5em 0 1.5em;
+}
+
+.chatInputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  grid-row: 4;
+  width: 100%;
+  align-items: end;
+  justify-content: end;
+}
+
+.chatInput,
+.sendBtn {
+  display: inline-block;
+  margin: 1em 1em 1em 1em;
+}
+
+.chatInput {
+  border: none;
+  outline: none;
+  height: 2em;
+  border-radius: 5em;
+  padding-left: 1em;
+  width: 75%;
+}
+
+.sendBtn {
+  position: fixed;
+  background-color: rgb(49, 183, 34);
+  padding: 0.7em;
+  border-radius: 100%;
+  display: none;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+}
+
+.sendBtn:active {
+  transform: translateY(-8px);
+}

@@ -20,20 +20,12 @@ export function Screen({
   const [scrollY, setScrollY] = useState(0);
   const topDiv = document.getElementById("topDiv");
   const bottomDiv = document.getElementById("bottomDiv");
-  // const [defaultScreen, setDefaultScreen] = useState("top");
-
-  // if (screenOnLoad === "top") {
-  //   //view top screen by default
-  // } else if (screenOnLoad === "bottom") {
-  //   //view bottom screen by default
-  // }
-
+  const screen = document.getElementById("screen");
   useEffect(() => {
-    // const topDiv = document.getElementById("topDiv");
-    // const bottomDiv = document.getElementById("bottomDiv");
-    if (topDiv && bottomDiv) {
+    if (topDiv && bottomDiv && screen) {
       if (defaultScreen === "bottom") {
-        // bottomDiv?.scrollIntoView();
+        // screen.style.backgroundImage = "none";
+        bottomDiv.scrollIntoView();
         setScrollY(bottomDiv.offsetTop);
       } else {
         setScrollY(topDiv.offsetTop);
@@ -45,6 +37,7 @@ export function Screen({
     if (scrollY >= 350) {
       if (bottomDiv && topDiv) {
         bottomDiv.scrollIntoView();
+
         if (animated) {
           bottomDiv.style.transform = "scale(1)";
           bottomDiv.style.opacity = "1";

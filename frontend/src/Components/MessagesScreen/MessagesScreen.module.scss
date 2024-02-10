@@ -1,7 +1,9 @@
+@import "../../constants";
+
 .messagesContainer {
   width: 100%;
   height: 100%;
-  background-color: rgb(16, 16, 16);
+  background-color: $darkM-bgC;
   color: rgba(255, 255, 255, 0.902);
   display: flex;
   flex-direction: column;
