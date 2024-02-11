@@ -6,12 +6,18 @@
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-
   scroll-behavior: smooth;
   background-image: url("../../assets/placeholder-background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: grab;
+}
+
+.screenGrab {
+  @extend .screen;
+  cursor: grabbing;
+
 }
 
 .screen::-webkit-scrollbar {

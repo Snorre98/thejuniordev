@@ -7,7 +7,7 @@ import photos from "../../assets/Photos.png";
 export function HomePage() {
   return (
     <Screen
-      defaultScreen="bottom"
+      //defaultScreen="bottom"
       animated={true}
       topScreen={<LockScreen />}
       bottomScreen={

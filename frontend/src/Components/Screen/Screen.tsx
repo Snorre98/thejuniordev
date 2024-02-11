@@ -1,36 +1,33 @@
-import { useEffect, useState } from "react";
-import { Children } from "../../types";
+import { useEffect, useRef, useState} from "react";
+import {Children} from "../../types";
 import styles from "./Screen.module.scss";
-import { Bezel } from "../Bezel";
-import { Line } from "../Line";
+import {Bezel} from "../Bezel";
 
 type ScreenProps = {
   topScreen?: Children;
   bottomScreen?: Children;
-  defaultScreen: "top" | "bottom";
+  //TODO: this fixed weird jumping effect, find out if it was needed
+  //defaultScreen: "top" | "bottom";
   animated: boolean;
 };
 
 export function Screen({
-  topScreen,
-  bottomScreen,
-  defaultScreen,
-  animated,
-}: ScreenProps) {
+                         topScreen,
+                         bottomScreen,
+                         //defaultScreen,
+                         animated,
+                       }: ScreenProps) {
   const [scrollY, setScrollY] = useState(0);
+  const [mouseGrab, setMouseGrab] = useState(false);
+  const [cursorCoords, setCursorCoords] = useState({x: 0, y: 0});
+  const [startY, setStartY] = useState(0);
+
+  const screenRef = useRef<HTMLDivElement>(null);
+
   const topDiv = document.getElementById("topDiv");
   const bottomDiv = document.getElementById("bottomDiv");
-  // const [defaultScreen, setDefaultScreen] = useState("top");
-
-  // if (screenOnLoad === "top") {
-  //   //view top screen by default
-  // } else if (screenOnLoad === "bottom") {
-  //   //view bottom screen by default
-  // }
-
+  /*
   useEffect(() => {
-    // const topDiv = document.getElementById("topDiv");
-    // const bottomDiv = document.getElementById("bottomDiv");
     if (topDiv && bottomDiv) {
       if (defaultScreen === "bottom") {
         // bottomDiv?.scrollIntoView();
@@ -40,6 +37,7 @@ export function Screen({
       }
     }
   }, [bottomDiv, defaultScreen, topDiv]);
+  */
 
   useEffect(() => {
     if (scrollY >= 350) {
@@ -66,24 +64,56 @@ export function Screen({
     }
   }, [animated, bottomDiv, scrollY, topDiv]);
 
-  const handleSwipe = (event) => {
+  const handleSwipe = (event: { currentTarget: any; }) => {
     const screen = event.currentTarget;
     setScrollY(screen.scrollTop);
   };
 
+  const handleGrab = () => {
+    setMouseGrab(true);
+  }
+
+  const handleReleas = () => {
+    setMouseGrab(false)
+  }
+
+  const handleMouseMove = (event: { clientX: number; target: { offsetLeft: number; offsetTop: number; }; clientY: number; }) => {
+    if(mouseGrab) {
+      const currentY = event.clientY
+      const deltaY = startY - currentY;
+
+      if(screenRef.current){
+        screenRef.current.scrollTop += deltaY*15;
+      }
+      setStartY(currentY)
+    }
+
+    setCursorCoords({
+      x: event.clientX - event.target.offsetLeft,
+      y: event.clientY - event.target.offsetTop,
+    });
+ }
+
   return (
+      <>
+      <p>Relative: ({cursorCoords.x}, {cursorCoords.y})</p>
     <Bezel>
-      <div className={styles.screen} id="screen" onScroll={handleSwipe}>
-        {/* <Line id="line" /> */}
+      <div
+          className={mouseGrab ? styles.screenGrab : styles.screen}
+          id="screen" ref={screenRef}
+          onScroll={handleSwipe}
+          onMouseDown={handleGrab}
+          onMouseUp={handleReleas}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleReleas}>
         <div className={styles.topDiv} id="topDiv">
           {topScreen}
-          {/* <Line id="line" /> */}
         </div>
         <div className={styles.bottomDiv} id="bottomDiv">
           {bottomScreen}
-          {/* <Line id="line" /> */}
         </div>
       </div>
     </Bezel>
+      </>
   );
 }

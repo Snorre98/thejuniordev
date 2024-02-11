@@ -20,7 +20,7 @@ export function MessagesPage() {
         topScreen={<LockScreen />}
         bottomScreen={<MessagesScreen />}></Screen> */}
       <Screen
-        defaultScreen="bottom"
+        //defaultScreen="bottom"
         animated={true}
         topScreen={<MessagesScreen />}
         bottomScreen={
