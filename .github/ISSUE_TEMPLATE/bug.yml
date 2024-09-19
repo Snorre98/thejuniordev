@@ -1,7 +1,51 @@
 name: 🐞 Bug
 description: File a bug/issue
 title: "[BUG] <title>"
-labels: ["Bug", "Needs Triage"]
+labels: [
+"accessibility",
+"backend",
+"billig",
+"blocked",
+"bug",
+"component",
+"dependencies",
+"devops",
+"difficulty: advanced",
+"difficulty: easy",
+"difficulty: medium",
+"discussion",
+"documentation",
+"duplicate",
+"enhancement",
+"frontend",
+"fullstack",
+"Git Action",
+"help wanted",
+"invalid",
+"javascript",
+"maintenance",
+"OPT",
+"page",
+"parent",
+"post-release",
+"priority: high",
+"priority: low",
+"priority: medium",
+"python",
+"question",
+"needs triage",
+"feature request",
+"good first issue",
+"in progress",
+"need more info",
+"security",
+"testing",
+"UX/UI",
+"performance",
+"refactoring",
+"technical debt",
+"wontfix"
+]
 body:
 - type: checkboxes
   attributes:
