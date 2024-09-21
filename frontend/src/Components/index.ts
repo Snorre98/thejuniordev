@@ -1,6 +1,6 @@
 export { AppButton } from "./AppButton";
 export { Page } from "./Page";
-export { Screen } from "./Screen";
+export { OldScreen } from "./OldScreen";
 export { Watch } from "./Watch";
 export { Line } from "./Line";
 export { Message } from "./Message";

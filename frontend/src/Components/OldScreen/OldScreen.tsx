@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState} from "react";
 import {Children} from "../../types";
-import styles from "./Screen.module.scss";
+import styles from "./OldScreen.module.scss";
 import {Bezel} from "../Bezel";
 
 type ScreenProps = {
@@ -11,7 +11,7 @@ type ScreenProps = {
   animated: boolean;
 };
 
-export function Screen({
+export function OldScreen({
                          topScreen,
                          bottomScreen,
                          //defaultScreen,
