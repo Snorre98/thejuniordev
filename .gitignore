@@ -54,3 +54,26 @@ debug.log
 
 # Storybook build artifacts
 storybook-static/
+
+
+# Logs
+   logs
+   *.log
+   npm-debug.log*
+
+   # Dependency directories
+   node_modules/
+
+   # npm cache directory
+   .npm
+
+   # Optional npm cache directory
+   .node_repl_history
+
+   # Output of 'npm pack'
+   *.tgz
+   
+
+   
+
+   
