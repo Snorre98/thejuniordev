@@ -1,11 +1,29 @@
+.lineContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%; // Set this to the height of your screen
+  overflow: hidden;
+  touch-action: none; // Prevents default touch actions
+  z-index: 999;
+}
+
 .line {
   position: absolute;
   width: 5rem;
-  height: 0.25rem;
+  height: 1rem;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 2em;
-  z-index: 999;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+
+  &:hover {
+    cursor: grab;
+  }
+ 
+  &:active {
+    cursor: grabbing;
+  }
 }

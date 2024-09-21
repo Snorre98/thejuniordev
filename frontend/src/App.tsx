@@ -1,13 +1,19 @@
 import { useStore } from './store'
 import { LockDisplay, MessagesDisplay, HomeDisplay } from './Display';
-import { AppButton } from './Components';
+import { AppButton, Page } from './Components';
 import map from "./assets/Map.png";
 import appstore from "./assets/AppStore.png";
 import safari from "./assets/Safari.png";
 import photos from "./assets/Photos.png";
 
 const App = () => {
-  const { currentScreen, setScreen } = useStore()
+  const { currentScreen, setScreen } = useStore();
+
+  const handlePullUp = () => {
+    console.log("Pull up handled in App component");
+    // Add your logic here for what should happen when pulled up
+    // For example, you might want to change the screen or show a different view
+  }
 
   // Placeholder data for apps
   const appData = [
@@ -36,15 +42,15 @@ const App = () => {
   ));
 
   return (
-    <div>
-      {currentScreen === 'lock' && <LockDisplay onUnlock={() => setScreen('home')} />}
+    <Page>
+      {currentScreen === 'lock' && <LockDisplay onUnlock={() => setScreen('home')} onPullUp={handlePullUp} />}
       {currentScreen === 'home' && <HomeDisplay apps={apps} favoriteApps={favoriteApps} onBack={() => setScreen('lock')}/>}
       {currentScreen === 'messages' && <MessagesDisplay onBack={() => setScreen('home')} />}
       {currentScreen === 'bio' && <MessagesDisplay onBack={() => setScreen('home')} />}
       {currentScreen === 'portfolio' && <MessagesDisplay onBack={() => setScreen('home')} />}
       {currentScreen === 'cv' && <MessagesDisplay onBack={() => setScreen('home')} />}
       {/* Add more screens as needed */}
-    </div>
+      </Page>
   )
 }
 
