@@ -1,11 +1,11 @@
-import styles from "./AppIcon.module.scss";
-type AppIconProps = {
+import styles from "./AppButton.module.scss";
+type AppButtonProps = {
   onclick?: () => void;
   iconURL: string;
   appTitle?: string;
 };
 
-export function AppIcon({ onclick, appTitle, iconURL }: AppIconProps) {
+export function AppButton({ onclick, appTitle, iconURL }: AppButtonProps) {
   return (
     <div className={styles.appContainer}>
       <div
