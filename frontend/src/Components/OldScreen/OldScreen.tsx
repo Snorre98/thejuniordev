@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState} from "react";
 import {Children} from "../../types";
 import styles from "./OldScreen.module.scss";
-import {Bezel} from "../Bezel";
+import {Bezel} from "../Screen/components/Bezel";
 
 type ScreenProps = {
   topScreen?: Children;

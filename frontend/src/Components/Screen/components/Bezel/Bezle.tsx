@@ -1,4 +1,4 @@
-import { Children } from "../../types";
+import { Children } from "../../../../types";
 import styles from "./Bezel.module.scss";
 
 type BezelProps = {

@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
-import { Bezel } from "../Bezel";
+import { Bezel } from "./components/Bezel";
 import styles from "./Screen.module.scss";
 
 export interface ScreenProps {
