@@ -1,12 +1,12 @@
 import { Message } from "../../Components";
-import styles from "./MessagesScreen.module.scss";
+import styles from "./MessagesDisplay.module.scss";
 import photo from "../../assets/Photos.png";
 
-type MessagesScreenProps = {
+type MessagesDisplayProps = {
   onBack: () => void;
 };
 
-export function MessagesScreen({ onBack }: MessagesScreenProps) {
+export function MessagesDisplay({ onBack }: MessagesDisplayProps) {
   return (
     <>
       <div className={styles.messagesContainer}>

@@ -1,13 +1,12 @@
-// src/Components/HomeScreen.tsx
 import { ReactNode } from "react";
-import styles from "./HomeScreen.module.scss";
+import styles from "./HomeDisplay.module.scss";
 
-type HomeScreenProps = {
+type HomeDisplayProps = {
   apps: ReactNode[];
   favoriteApps: ReactNode[];
 };
 
-export function HomeScreen({ apps, favoriteApps }: HomeScreenProps) {
+export function HomeDisplay({ apps, favoriteApps }: HomeDisplayProps) {
   return (
     <div className={styles.homeScreenContainer}>
       <div className={styles.appsContainer}>

@@ -1,12 +1,12 @@
-import styles from "./LockScreen.module.scss";
+import styles from "./LockDisplay.module.scss";
 import { Notification } from "../../Components/Notification";
 import { Watch } from "../../Components/Watch";
 
-type LockScreenProps = {
+type LockDisplayProps = {
   onUnlock: () => void;
 };
 
-export function LockScreen({ onUnlock }: LockScreenProps) {
+export function LockDisplay({ onUnlock }: LockDisplayProps) {
   return (
     <>
       <div className={styles.lockScreenContainer}>
