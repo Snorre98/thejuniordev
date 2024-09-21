@@ -1,9 +1,10 @@
-import { Children } from "../../types";
+// src/Components/HomeScreen.tsx
+import { ReactNode } from "react";
 import styles from "./HomeScreen.module.scss";
 
 type HomeScreenProps = {
-  apps: Children[];
-  favoriteApps: Children[];
+  apps: ReactNode[];
+  favoriteApps: ReactNode[];
 };
 
 export function HomeScreen({ apps, favoriteApps }: HomeScreenProps) {

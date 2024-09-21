@@ -1,17 +1,18 @@
 import styles from "./AppButton.module.scss";
+
 type AppButtonProps = {
-  onclick?: () => void;
+  onOpenApp: () => void;
   iconURL: string;
   appTitle?: string;
 };
 
-export function AppButton({ onclick, appTitle, iconURL }: AppButtonProps) {
+export function AppButton({ onOpenApp, appTitle, iconURL }: AppButtonProps) {
   return (
     <div className={styles.appContainer}>
       <div
         className={styles.appIcon}
         style={{ backgroundImage: `url(${iconURL})` }}
-        onClick={onclick}
+        onClick={onOpenApp}
       />
       <span className={styles.appTitle}>{appTitle}</span>
     </div>
