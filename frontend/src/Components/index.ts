@@ -1,5 +1,3 @@
-export { Navbar } from "./Navbar";
-export { JrOutlet } from "./JrOutlet";
 export { AppButton } from "./AppButton";
 export { Page } from "./Page";
 export { Button } from "./Button";
