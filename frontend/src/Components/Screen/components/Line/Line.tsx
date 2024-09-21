@@ -7,7 +7,7 @@ type LineProps = {
   pullUpThreshold?: number;
 };
 
-export function Line({ id, onPullUp, pullUpThreshold = 325 }: LineProps) {
+export function Line({ id, onPullUp, pullUpThreshold = 200 }: LineProps) {
   const [scrollY, setScrollY] = useState(0);
   const [mouseGrab, setMouseGrab] = useState(false);
   const [startY, setStartY] = useState(0);
@@ -49,7 +49,7 @@ export function Line({ id, onPullUp, pullUpThreshold = 325 }: LineProps) {
 
   const handleInteractionEnd = () => {
     setMouseGrab(false);
-    if (scrollY < pullUpThreshold) {
+    if (scrollY <= pullUpThreshold) {
       //console.log('Line falling back');
       setScrollY(0);
     }
