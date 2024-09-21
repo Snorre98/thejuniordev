@@ -12,8 +12,15 @@ const appData = [
   { title: "LinkedIn", icon: map },
   { title: "GitHub", icon: appstore },
   { title: "Studies", icon: safari },
-  { title: "Settings", icon: map },
-  { title: "Messages", icon: safari },
+  { title: "LinkedIn", icon: map },
+  { title: "GitHub", icon: appstore },
+  { title: "Studies", icon: safari },
+  { title: "LinkedIn", icon: map },
+  { title: "GitHub", icon: appstore },
+  { title: "Studies", icon: safari },
+  { title: "LinkedIn", icon: map },
+  { title: "GitHub", icon: appstore },
+  { title: "Studies", icon: safari },
   // Add more apps as needed
 ];
 
