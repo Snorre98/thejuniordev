@@ -2,15 +2,22 @@ import styles from "./LockDisplay.module.scss";
 import { Notification } from "../../Components/Notification";
 import { Watch } from "../../Components/Watch";
 import { Screen, ScreenProps } from "../../Components";
+import { useStore } from '../../store'
 
-interface LockDisplayProps extends ScreenProps {
+type LockDisplayProps = Omit<ScreenProps, 'onUnlock' | 'onPullUp'> & {
   dummyProp?: string;
-}
+};
 
-export function LockDisplay({ onUnlock, ...props }: LockDisplayProps) {
+export function LockDisplay({ ...props }: LockDisplayProps) {
+  const { setScreen } = useStore();
+
+  const handleUnlock = () => {
+    setScreen('home');
+  };
+
   return (
-    <Screen onUnlock={onUnlock}>
-          <div className={styles.lockScreenContainer}>
+    <Screen onUnlock={handleUnlock} onPullUp={handleUnlock}>
+      <div className={styles.lockScreenContainer}>
         <div className={styles.item1}>
           <Watch />
         </div>

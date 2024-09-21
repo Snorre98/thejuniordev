@@ -3,8 +3,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100%; // Set this to the height of your screen
-  overflow: hidden;
+  height: 60px; // Adjust this value as needed
+  overflow: visible;
   touch-action: none; // Prevents default touch actions
   z-index: 999;
 }
@@ -12,17 +12,14 @@
 .line {
   position: absolute;
   width: 5rem;
-  height: 1rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  height: 0.25rem;
+  background-color: rgb(255, 255, 255);
   border-radius: 2em;
-  bottom: 0;
+  bottom: 10px; // Adjust this value to position the line
   left: 50%;
   transform: translateX(-50%);
+  cursor: grab;
 
-  &:hover {
-    cursor: grab;
-  }
- 
   &:active {
     cursor: grabbing;
   }

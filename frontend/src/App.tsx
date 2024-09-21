@@ -9,12 +9,6 @@ import photos from "./assets/Photos.png";
 const App = () => {
   const { currentScreen, setScreen } = useStore();
 
-  const handlePullUp = () => {
-    console.log("Pull up handled in App component");
-    // Add your logic here for what should happen when pulled up
-    // For example, you might want to change the screen or show a different view
-  }
-
   // Placeholder data for apps
   const appData = [
     { title: "Bio", icon: appstore, onOpenApp: () => window.open('https://linkedin.com', '_blank') },
@@ -43,14 +37,14 @@ const App = () => {
 
   return (
     <Page>
-      {currentScreen === 'lock' && <LockDisplay onUnlock={() => setScreen('home')} onPullUp={handlePullUp} />}
-      {currentScreen === 'home' && <HomeDisplay apps={apps} favoriteApps={favoriteApps} onBack={() => setScreen('lock')}/>}
-      {currentScreen === 'messages' && <MessagesDisplay onBack={() => setScreen('home')} />}
-      {currentScreen === 'bio' && <MessagesDisplay onBack={() => setScreen('home')} />}
-      {currentScreen === 'portfolio' && <MessagesDisplay onBack={() => setScreen('home')} />}
-      {currentScreen === 'cv' && <MessagesDisplay onBack={() => setScreen('home')} />}
+      {currentScreen === 'lock' && <LockDisplay />}
+      {currentScreen === 'home' && <HomeDisplay apps={apps} favoriteApps={favoriteApps} />}
+      {currentScreen === 'messages' && <MessagesDisplay />}
+      {currentScreen === 'bio' && <MessagesDisplay />}
+      {currentScreen === 'portfolio' && <MessagesDisplay />}
+      {currentScreen === 'cv' && <MessagesDisplay />}
       {/* Add more screens as needed */}
-      </Page>
+    </Page>
   )
 }
 
