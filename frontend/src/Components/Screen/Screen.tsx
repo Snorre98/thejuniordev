@@ -2,12 +2,12 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { Bezel } from "../Bezel";
 import styles from "./Screen.module.scss";
 
-export type ScreenProps = {
+export interface ScreenProps {
   children: ReactNode;
   onPullUp?: () => void;
   onUnlock?: () => void;
   onBack?: () => void;
-};
+}
 
 export function Screen({
   children,
