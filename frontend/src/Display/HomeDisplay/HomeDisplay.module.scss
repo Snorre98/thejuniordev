@@ -9,6 +9,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
 }
 
 .appsContainer {
@@ -23,6 +24,7 @@
   align-self: flex-start;
   justify-self: center;
   margin: 1.35em;
+  transition: all 0.45s ease-in-out;
 }
 
 .appIconContainer {
