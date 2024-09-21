@@ -1,8 +1,6 @@
 import { create } from 'zustand'
-import { AppSlice, createAppSlice } from './slices/appSlice'
+import { AppState, createAppSlice } from './slices/appSlice'
 
-type StoreState = AppSlice;
-
-export const useStore = create<StoreState>()((...a) => ({
+export const useStore = create<AppState>()((...a) => ({
   ...createAppSlice(...a),
 }))

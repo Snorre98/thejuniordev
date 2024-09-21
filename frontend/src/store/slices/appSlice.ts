@@ -1,11 +1,11 @@
 import { StateCreator } from 'zustand'
 
-export interface AppSlice {
-  currentScreen: 'lock' | 'home' | 'messages'
-  setScreen: (screen: AppSlice['currentScreen']) => void
+export type AppState = {
+  currentScreen: 'lock' | 'home' | 'messages' | 'bio' | 'portfolio' | 'cv'
+  setScreen: (screen: AppState['currentScreen']) => void
 }
 
-export const createAppSlice: StateCreator<AppSlice> = (set) => ({
+export const createAppSlice: StateCreator<AppState> = (set) => ({
   currentScreen: 'lock',
   setScreen: (screen) => set({ currentScreen: screen }),
 })

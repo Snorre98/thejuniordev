@@ -1,17 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage, MessagesPage } from "./Pages";
-import { JrOutlet } from "./Components/JrOutlet";
+import { App } from "./App";
 import { ROUTES } from "./routes";
 
 export function AppRoutes() {
   return (
     <Routes>
-      <Route element={<JrOutlet />}>
-        <Route path={ROUTES.frontend.home} element={<HomePage />}></Route>
-        <Route
-          path={ROUTES.frontend.messages}
-          element={<MessagesPage />}></Route>
-      </Route>
+      <Route path={ROUTES.frontend.home} element={<App />} />
+      <Route path={ROUTES.frontend.messages} element={<App />} />
     </Routes>
   );
 }
