@@ -36,9 +36,9 @@ const App = () => {
   ));
 
   return (
-    <div className="app-container">
+    <div>
       {currentScreen === 'lock' && <LockDisplay onUnlock={() => setScreen('home')} />}
-      {currentScreen === 'home' && <HomeDisplay apps={apps} favoriteApps={favoriteApps} />}
+      {currentScreen === 'home' && <HomeDisplay apps={apps} favoriteApps={favoriteApps} onBack={() => setScreen('lock')}/>}
       {currentScreen === 'messages' && <MessagesDisplay onBack={() => setScreen('home')} />}
       {currentScreen === 'bio' && <MessagesDisplay onBack={() => setScreen('home')} />}
       {currentScreen === 'portfolio' && <MessagesDisplay onBack={() => setScreen('home')} />}

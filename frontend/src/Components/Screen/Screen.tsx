@@ -3,7 +3,7 @@ import { Bezel } from "./components/Bezel";
 import styles from "./Screen.module.scss";
 
 export interface ScreenProps {
-  children: ReactNode;
+  children?: ReactNode;
   onPullUp?: () => void;
   onUnlock?: () => void;
   onBack?: () => void;
@@ -52,6 +52,8 @@ export function Screen({
   }, [scrollY, onPullUp]);
 
   return (
+    <>
+    
     <Bezel>
       <div
         className={mouseGrab ? styles.screenGrab : styles.screen}
@@ -63,7 +65,11 @@ export function Screen({
         onMouseLeave={handleRelease}
       >
         {children}
-        {onPullUp && (
+        
+      </div>
+    </Bezel>
+    <div>
+      {onPullUp && (
           <button className={styles.pullUpButton} onClick={onPullUp}>
             Pull Up
           </button>
@@ -78,7 +84,7 @@ export function Screen({
             Back
           </button>
         )}
-      </div>
-    </Bezel>
+    </div>
+    </>
   );
 }
