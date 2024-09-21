@@ -1,4 +1,4 @@
-import { Message } from "..";
+import { Message } from "../../Components";
 import styles from "./MessagesScreen.module.scss";
 import photo from "../../assets/Photos.png";
 

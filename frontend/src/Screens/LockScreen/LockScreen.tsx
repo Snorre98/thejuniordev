@@ -1,6 +1,6 @@
 import styles from "./LockScreen.module.scss";
-import { Notification } from "../Notification";
-import { Watch } from "../Watch";
+import { Notification } from "../../Components/Notification";
+import { Watch } from "../../Components/Watch";
 
 type LockScreenProps = {
   onUnlock: () => void;

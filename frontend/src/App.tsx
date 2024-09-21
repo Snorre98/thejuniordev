@@ -1,5 +1,6 @@
 import { useStore } from './store'
-import { LockScreen, MessagesScreen, HomeScreen, AppButton } from './Components'
+import { LockScreen, MessagesScreen, HomeScreen } from './Screens';
+import { AppButton } from './Components';
 import map from "./assets/Map.png";
 import appstore from "./assets/AppStore.png";
 import safari from "./assets/Safari.png";
