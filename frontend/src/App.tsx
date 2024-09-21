@@ -1,5 +1,5 @@
 import { useStore } from './store'
-import { LockScreen, MessagesScreen, HomeScreen } from './Screens';
+import { LockDisplay, MessagesDisplay, HomeDisplay } from './Display';
 import { AppButton } from './Components';
 import map from "./assets/Map.png";
 import appstore from "./assets/AppStore.png";
@@ -36,13 +36,13 @@ const App = () => {
   ));
 
   return (
-    <div className="app-container">
-      {currentScreen === 'lock' && <LockScreen onUnlock={() => setScreen('home')} />}
-      {currentScreen === 'home' && <HomeScreen apps={apps} favoriteApps={favoriteApps} />}
-      {currentScreen === 'messages' && <MessagesScreen onBack={() => setScreen('home')} />}
-      {currentScreen === 'bio' && <MessagesScreen onBack={() => setScreen('home')} />}
-      {currentScreen === 'portfolio' && <MessagesScreen onBack={() => setScreen('home')} />}
-      {currentScreen === 'cv' && <MessagesScreen onBack={() => setScreen('home')} />}
+    <div>
+      {currentScreen === 'lock' && <LockDisplay onUnlock={() => setScreen('home')} />}
+      {currentScreen === 'home' && <HomeDisplay apps={apps} favoriteApps={favoriteApps} onBack={() => setScreen('lock')}/>}
+      {currentScreen === 'messages' && <MessagesDisplay onBack={() => setScreen('home')} />}
+      {currentScreen === 'bio' && <MessagesDisplay onBack={() => setScreen('home')} />}
+      {currentScreen === 'portfolio' && <MessagesDisplay onBack={() => setScreen('home')} />}
+      {currentScreen === 'cv' && <MessagesDisplay onBack={() => setScreen('home')} />}
       {/* Add more screens as needed */}
     </div>
   )
