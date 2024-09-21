@@ -3,11 +3,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 35px; // Adjust this value as needed
+  height: 45px; // Adjust this value as needed
   overflow: visible;
   touch-action: none; // Prevents default touch actions
   z-index: 999;
-  //border: 2px solid red;
+  border: 2px solid red;
 }
 
 .line {
@@ -16,7 +16,7 @@
   height: 0.5rem;
   background-color: rgb(255, 255, 255);
   border-radius: 2em;
-  bottom: 10px; // Adjust this value to position the line
+  bottom: 5px; // Adjust this value to position the line
   left: 50%;
   transform: translateX(-50%);
   cursor: grab;
