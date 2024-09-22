@@ -18,3 +18,14 @@
   position: absolute;
   z-index: 999;
 }
+
+.lockButton {
+  width: 0.5rem;
+  height: 3rem;
+  background-color: rgb(34, 31, 31);
+  position: absolute;
+  top: 35%;
+  left: 1096px;
+  z-index: 999;
+  cursor: pointer;
+}
