@@ -7,7 +7,7 @@ import { ReactNode, useEffect, useRef } from "react";
 interface ChatDisplayProps extends ScreenProps {
   children?: ReactNode;
 }
-export function ChatDisplay({onBack, ...props}: ChatDisplayProps) {
+export function ChatDisplay({onBack, onPullUp, ...props}: ChatDisplayProps) {
   const sendBtn = document.getElementById("sendBtn");
   const chatMessagesRef = useRef<HTMLDivElement>(null);
   const showBtn = () => {
@@ -28,7 +28,7 @@ export function ChatDisplay({onBack, ...props}: ChatDisplayProps) {
   }, []);
  
   return (
-    <Screen onBack={onBack} {...props}>
+    <Screen onBack={onBack} {...props} onPullUp={onPullUp}>
     <div className={styles.chatContainer}>
       <div className={styles.chatHead}>
         <button className={styles.backBtn} onClick={onBack}><Icon icon="mdi:arrow-left-drop-circle" width="1.2rem" height="1.2rem" /></button>

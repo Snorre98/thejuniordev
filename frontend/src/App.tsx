@@ -44,7 +44,7 @@ const App = () => {
       {currentScreen === 'bio' && <MessagesDisplay />}
       {currentScreen === 'portfolio' && <MessagesDisplay />}
       {currentScreen === 'cv' && <MessagesDisplay />}
-      {currentScreen === 'chat' && <ChatDisplay onBack={() => setScreen('messages')}/>}
+      {currentScreen === 'chat' && <ChatDisplay onBack={() => setScreen('messages')} onPullUp={() => setScreen('home')}/>}
       {/* Add more screens as needed */}
     </Page>
   )
