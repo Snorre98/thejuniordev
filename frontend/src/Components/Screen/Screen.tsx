@@ -12,8 +12,8 @@ export interface ScreenProps {
 export function Screen({
   children,
   onPullUp,
-  onUnlock,
-  onBack,
+  // onUnlock,
+  // onBack,
 }: ScreenProps) {
 
   return (
@@ -24,10 +24,15 @@ export function Screen({
       className={styles.screen}
       >
         {children}
-        <Line onPullUp={onPullUp} />
+        {
+          onPullUp && (
+            <Line onPullUp={onPullUp} />
+          )
+        }
+       
       </div>
     </Bezel>
-    <div>
+    {/* <div>
       {onPullUp && (
           <button className={styles.pullUpButton} onClick={onPullUp}>
             Pull Up
@@ -43,7 +48,7 @@ export function Screen({
             Back
           </button>
         )}
-    </div>
+    </div> */}
     </>
   );
 }

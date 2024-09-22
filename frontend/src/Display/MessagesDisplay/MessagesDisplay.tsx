@@ -2,6 +2,7 @@ import { Screen, ScreenProps } from '../../Components';
 import { Message } from '../../Components';
 import styles from './MessagesDisplay.module.scss';
 import photo from '../../assets/Photos.png';
+import { useStore } from '../../store';
 
 interface MessagesDisplayProps extends ScreenProps {
   messages?: Array<{
@@ -13,6 +14,12 @@ interface MessagesDisplayProps extends ScreenProps {
 }
 
 export function MessagesDisplay({ onBack, ...props }: MessagesDisplayProps) {
+  const { setScreen } = useStore();
+
+  const handleUnlock = () => {
+    setScreen('home');
+  };
+
   const defaultMessages = [
     {
       id: '1',
@@ -47,7 +54,7 @@ export function MessagesDisplay({ onBack, ...props }: MessagesDisplayProps) {
   const messages = props.messages || defaultMessages;
 
   return (
-    <Screen onBack={onBack}
+    <Screen onBack={onBack} onUnlock={handleUnlock} onPullUp={handleUnlock}
     //  onOpenApp={onOpenApp} 
      {...props}>
       <div className={styles.messagesContainer}>
