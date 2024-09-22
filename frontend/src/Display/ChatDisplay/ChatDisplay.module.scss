@@ -46,12 +46,12 @@
 
 .chatMessagesWrapper {
   flex-grow: 1;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 
-.chatMessages::-webkit-scrollbar {
+.chatMessagesWrapper::-webkit-scrollbar {
   display: none;
 }
 
