@@ -1,0 +1,38 @@
+.bezelWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.bezel {
+  width: 16rem;
+  height: 32rem;
+  border: 8px solid black;
+  border-radius: 1.75rem;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  overflow-y: scroll;
+  box-shadow: 2px 2px 15px 4px rgba(0, 0, 0, 0.394);
+}
+
+.notch {
+  width: 5rem;
+  height: 1rem;
+  background-color: black;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  position: absolute;
+  z-index: 999;
+}
+
+.lockButton {
+  width: 0.35rem;
+  height: 3rem;
+  background-color: rgb(30, 28, 27);
+  border-top-right-radius: 0.15rem;
+  border-bottom-right-radius: 0.15rem;
+  z-index: 999;
+  cursor: pointer;
+}

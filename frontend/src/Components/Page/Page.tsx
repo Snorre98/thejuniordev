@@ -1,4 +1,3 @@
-// import classNames from "classnames";
 import { Children } from "../../types";
 import styles from "./Page.module.scss"
 

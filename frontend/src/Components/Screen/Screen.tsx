@@ -1,82 +1,54 @@
-import { useEffect, useState } from "react";
-import { Children } from "../../types";
+import { ReactNode } from "react";
+import { Bezel, Line } from "./components";
 import styles from "./Screen.module.scss";
-import { Bezel } from "../Bezel";
-import { Line } from "../Line";
 
-type ScreenProps = {
-  topScreen?: Children;
-  bottomScreen?: Children;
-  defaultScreen: "top" | "bottom";
-  animated: boolean;
-};
+export interface ScreenProps {
+  children?: ReactNode;
+  onPullUp?: () => void;
+  onUnlock?: () => void;
+  onBack?: () => void;
+}
 
 export function Screen({
-  topScreen,
-  bottomScreen,
-  defaultScreen,
-  animated,
+  children,
+  onPullUp,
+  // onUnlock,
+  // onBack,
 }: ScreenProps) {
-  const [scrollY, setScrollY] = useState(0);
-  const topDiv = document.getElementById("topDiv");
-  const bottomDiv = document.getElementById("bottomDiv");
-  const screen = document.getElementById("screen");
-  useEffect(() => {
-    if (topDiv && bottomDiv && screen) {
-      if (defaultScreen === "bottom") {
-        // screen.style.backgroundImage = "none";
-        bottomDiv.scrollIntoView();
-        setScrollY(bottomDiv.offsetTop);
-      } else {
-        setScrollY(topDiv.offsetTop);
-      }
-    }
-  }, [bottomDiv, defaultScreen, topDiv]);
-
-  useEffect(() => {
-    if (scrollY >= 350) {
-      if (bottomDiv && topDiv) {
-        bottomDiv.scrollIntoView();
-
-        if (animated) {
-          bottomDiv.style.transform = "scale(1)";
-          bottomDiv.style.opacity = "1";
-          topDiv.style.opacity = "0";
-        }
-      }
-    }
-    if (scrollY < 350) {
-      if (bottomDiv && topDiv) {
-        topDiv.scrollIntoView();
-        if (animated) {
-          bottomDiv.style.transform = "scale(0.5)";
-          topDiv.style.opacity = "1";
-          bottomDiv.style.opacity = "0";
-        } else {
-          bottomDiv.style.transform = "scale(1)";
-        }
-      }
-    }
-  }, [animated, bottomDiv, scrollY, topDiv]);
-
-  const handleSwipe = (event) => {
-    const screen = event.currentTarget;
-    setScrollY(screen.scrollTop);
-  };
 
   return (
+    <>
+    
     <Bezel>
-      <div className={styles.screen} id="screen" onScroll={handleSwipe}>
-        {/* <Line id="line" /> */}
-        <div className={styles.topDiv} id="topDiv">
-          {topScreen}
-          {/* <Line id="line" /> */}
-        </div>
-        <div className={styles.bottomDiv} id="bottomDiv">
-          {bottomScreen}
-          {/* <Line id="line" /> */}
-        </div>
+      <div
+      className={styles.screen}
+      >
+        {children}
+        {
+          onPullUp && (
+            <Line onPullUp={onPullUp} />
+          )
+        }
+       
       </div>
     </Bezel>
+    {/* <div>
+      {onPullUp && (
+          <button className={styles.pullUpButton} onClick={onPullUp}>
+            Pull Up
+          </button>
+        )}
+        {onUnlock && (
+          <button className={styles.unlockButton} onClick={onUnlock}>
+            Unlock
+          </button>
+        )}
+        {onBack && (
+          <button className={styles.backButton} onClick={onBack}>
+            Back
+          </button>
+        )}
+    </div> */}
+    </>
   );
 }

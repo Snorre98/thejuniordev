@@ -1,13 +1,10 @@
-export { Navbar } from "./Navbar";
-export { JrOutlet } from "./JrOutlet";
-export { AppIcon } from "./AppIcon";
+export { AppButton } from "./AppButton";
 export { Page } from "./Page";
-export { Button } from "./Button";
-export { Screen } from "./Screen";
-export { LockScreen } from "./LockScreen";
+export { OldScreen } from "./OldScreen";
 export { Watch } from "./Watch";
-export { HomeScreen } from "./HomeScreen";
-export { Line } from "./Line";
 export { Message } from "./Message";
-export { MessagesScreen } from "./MessagesScreen";
-export { ChatScreen } from "./ChatScreen";
+export { Screen } from "./Screen";
+
+
+/* ------------------ types ------------------ */
+export type {ScreenProps} from "./Screen";
