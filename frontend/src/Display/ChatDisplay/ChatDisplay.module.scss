@@ -1,8 +1,9 @@
 @import "../../constants";
+
 .chatContainer {
   display: flex;
   flex-direction: column;
-  height: 100%; // Use full height of the scree
+  height: 100%;
 }
 
 .chatHead {
@@ -11,18 +12,16 @@
   align-items: center;
   z-index: 2;
   background-color: rgb(21, 21, 21);
-  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   position: sticky;
   top: 0;
-  flex-shrink: 0; // Prevent shrinking
+  flex-shrink: 0;
 }
 
 .backBtn {
   grid-column: 1;
   width: 2rem;
   height: 2rem;
-  margin: 0;
   border: none;
   background: none;
   cursor: pointer;
@@ -46,13 +45,10 @@
 }
 
 .chatMessagesWrapper {
-  flex-grow: 1; // Allow this to grow and take available space
-  overflow-y: auto; // Enable vertical scrolling
+  flex-grow: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  overflow: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none; 
 }
 
 .chatMessages::-webkit-scrollbar {
@@ -78,7 +74,7 @@
   outline: none;
   height: 2.5em;
   border-radius: 5em;
-  padding: 0 3em 0 1.25em; // Add right padding for the button
+  padding: 0 3em 0 1.25em;
   width: 100%;
   border: 1px solid gainsboro;
 }
@@ -97,12 +93,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
 
-  &:active {
-    transform: translateY(-50%) scale(0.95);
-  }
+.sendBtn:active {
+  transform: translateY(-50%) scale(0.95);
+}
 
-  &:hover {
-    opacity: 0.9;
-  }
+.sendBtn:hover {
+  opacity: 0.9;
 }

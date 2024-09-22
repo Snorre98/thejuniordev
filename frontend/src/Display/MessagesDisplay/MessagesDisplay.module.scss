@@ -23,15 +23,19 @@
 }
 
 .msgScreenTitle {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin: 0.6em 0 0 0;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr 1fr;
+  // margin: 0.6em 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
 }
 
 .messageScreenTitle {
-  display: inline-block;
-  align-self: center;
-  margin: 1em 0 0 0;
+//   display: inline-block;
+//   align-self: center;
+  margin: 1.5em 0 0 0;
 }
 
 .topButtons {
