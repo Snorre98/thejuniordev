@@ -8,6 +8,7 @@
   "header"
   "chatmessages"
   "chatinput";
+  height: 100%;
 }
 
 .chatHead {
@@ -44,13 +45,13 @@
 }
 
 .chatMessages {
+  grid-area: chatmessages;
   display: flex;
   flex-direction: column;
   overflow: auto;
   height: 350px;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-  grid-area: chatmessages;
   //border: 2px solid yellow;
 }
 
@@ -60,13 +61,13 @@
 }
 
 .chatInputContainer {
+  grid-area: chatinput;
   display: flex;
   flex-direction: row;
   align-items: end;
   justify-content: end;
   gap: 0.5em;
   width: 100%;
-  grid-area: chatinput;
 }
 
 .chatInput,
