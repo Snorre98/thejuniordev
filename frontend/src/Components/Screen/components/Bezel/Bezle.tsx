@@ -12,15 +12,14 @@ export function Bezel({ children }: BezelProps) {
   const handleLock = () => {
     setScreen('lock');
   };
+
   return (
-    <div>
-         <span className={styles.lockButton} onClick={handleLock}/>
-<div className={styles.bezel}>
-      <span className={styles.notch} />
-   
-      {children}
+    <div className={styles.bezelWrapper}>
+        <div className={styles.bezel}>
+          <span className={styles.notch} />
+            {children}
+        </div>
+        <span className={styles.lockButton} onClick={handleLock}/>
     </div>
-    </div>
-    
   );
 }

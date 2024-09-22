@@ -1,3 +1,10 @@
+.bezelWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .bezel {
   width: 16rem;
   height: 32rem;
@@ -20,12 +27,11 @@
 }
 
 .lockButton {
-  width: 0.5rem;
+  width: 0.35rem;
   height: 3rem;
-  background-color: rgb(34, 31, 31);
-  position: absolute;
-  top: 35%;
-  left: 1096px;
+  background-color: rgb(30, 28, 27);
+  border-top-right-radius: 0.15rem;
+  border-bottom-right-radius: 0.15rem;
   z-index: 999;
   cursor: pointer;
 }
