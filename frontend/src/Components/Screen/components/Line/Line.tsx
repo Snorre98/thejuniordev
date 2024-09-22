@@ -24,7 +24,7 @@ export function Line({ id, onPullUp, pullUpThreshold = 200 }: LineProps) {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (isDragging) {
-        const newY = e.clientY - dragStartY;
+        const newY = Math.min(0, e.clientY - dragStartY);
         setPosition({ y: newY });
 
         if (-newY >= pullUpThreshold) {
