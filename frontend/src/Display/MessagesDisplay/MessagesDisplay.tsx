@@ -59,9 +59,7 @@ export function MessagesDisplay({ onBack, ...props }: MessagesDisplayProps) {
      {...props}>
       <div className={styles.messagesContainer}>
         <div className={styles.msgScreenTitle}>
-          <span onClick={onBack}>Back</span>
           <h5 className={styles.messageScreenTitle}>Meldinger</h5>
-          {/* <span onClick={() => onOpenApp && onOpenApp('newMessage')}>Ny</span> */}
         </div>
         <input className={styles.searchBar} placeholder="søk" type="text" />
         {messages.map((msg) => (
@@ -70,6 +68,7 @@ export function MessagesDisplay({ onBack, ...props }: MessagesDisplayProps) {
             message={msg.message}
             photoURL={msg.photoURL}
             sender={msg.sender}
+            onClick={()=> setScreen('chat')}
           />
         ))}
       </div>

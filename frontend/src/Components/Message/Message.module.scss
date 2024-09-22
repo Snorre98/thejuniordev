@@ -4,6 +4,9 @@
   grid-template-columns: auto auto;
   padding: 0 0.5em 0 0.5em;
   align-items: center;
+  &:hover{
+    cursor:pointer;
+  }
 }
 
 .messageHead {

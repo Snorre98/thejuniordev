@@ -1,7 +1,7 @@
 import { StateCreator } from "zustand"
 
 export type AppState = {
-  currentScreen: 'lock' | 'home' | 'messages' | 'bio' | 'portfolio' | 'cv'
+  currentScreen: 'lock' | 'home' | 'messages' | 'bio' | 'portfolio' | 'cv' | 'chat'
   isPulledUp: boolean
   setScreen: (screen: AppState['currentScreen']) => void
   setPulledUp: (isPulledUp: boolean) => void

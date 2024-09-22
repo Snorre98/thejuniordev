@@ -1,7 +1,9 @@
+@import "../../constants";
+
 .messagesContainer {
   width: 100%;
   height: 100%;
-  background-color: rgb(16, 16, 16);
+  background-color: $darkM-bgC;
   color: rgba(255, 255, 255, 0.902);
   display: flex;
   flex-direction: column;
@@ -21,13 +23,34 @@
 }
 
 .msgScreenTitle {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin: 0.6em 0 0 0;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr 1fr;
+  // margin: 0.6em 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
 }
 
 .messageScreenTitle {
-  display: inline-block;
+//   display: inline-block;
+//   align-self: center;
+  margin: 1.5em 0 0 0;
+}
+
+.topButtons {
+  font-size: 0.8rem;
+  background-color: #242424;
+  width: fit-content;
   align-self: center;
-  margin: 1em 0 0 0;
+  justify-self: center;
+  padding: 2px 0.5rem 2px 0.5rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    background-color: #474747;
+  }
 }
