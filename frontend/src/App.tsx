@@ -1,10 +1,11 @@
 import { useStore } from './store'
-import { LockDisplay, MessagesDisplay, HomeDisplay } from './Display';
+import { LockDisplay, MessagesDisplay, HomeDisplay, ChatDisplay } from './Display';
 import { AppButton, Page } from './Components';
 import map from "./assets/Map.png";
 import appstore from "./assets/AppStore.png";
 import safari from "./assets/Safari.png";
 import photos from "./assets/Photos.png";
+import imessage from "./assets/imessage.png";
 
 const App = () => {
   const { currentScreen, setScreen } = useStore();
@@ -16,15 +17,15 @@ const App = () => {
     { title: "CV", icon: photos, onOpenApp: () => window.open('https://linkedin.com', '_blank') },
     { title: "LinkedIn", icon: map, onOpenApp: () => window.open('https://linkedin.com', '_blank') },
     { title: "GitHub", icon: appstore, onOpenApp: () => window.open('https://github.com', '_blank') },
-    { title: "Studies", icon: safari, onOpenApp: () => setScreen('messages') },
+    { title: "imessage", icon: safari, onOpenApp: () => setScreen('messages') },
     // Add more apps as needed
   ];
 
   // Placeholder data for favorite apps
   const favoriteAppData = [
-    { icon: photos, onOpenApp: () => setScreen('messages') },
-    { icon: photos, onOpenApp: () => setScreen('messages') },
-    { icon: photos, onOpenApp: () => setScreen('messages') },
+    { icon: imessage, onOpenApp: () => setScreen('messages') },
+    { icon: imessage, onOpenApp: () => setScreen('messages') },
+    { icon: imessage, onOpenApp: () => setScreen('messages') },
   ];
 
   const apps = appData.map((app, index) => (
@@ -43,6 +44,7 @@ const App = () => {
       {currentScreen === 'bio' && <MessagesDisplay />}
       {currentScreen === 'portfolio' && <MessagesDisplay />}
       {currentScreen === 'cv' && <MessagesDisplay />}
+      {currentScreen === 'chat' && <ChatDisplay onBack={() => setScreen('messages')}/>}
       {/* Add more screens as needed */}
     </Page>
   )

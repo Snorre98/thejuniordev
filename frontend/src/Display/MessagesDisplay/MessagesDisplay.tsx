@@ -70,6 +70,7 @@ export function MessagesDisplay({ onBack, ...props }: MessagesDisplayProps) {
             message={msg.message}
             photoURL={msg.photoURL}
             sender={msg.sender}
+            onClick={()=> setScreen('chat')}
           />
         ))}
       </div>

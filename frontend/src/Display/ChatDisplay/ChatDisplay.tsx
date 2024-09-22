@@ -1,7 +1,14 @@
-import styles from "./ChatScreen.module.scss";
+import styles from "./ChatDisplay.module.scss";
 import avatar from "../../assets/Map.png";
 import {ChatMessage} from "./Subcomponents";
-export function ChatScreen() {
+import { Screen, ScreenProps } from '../../Components';
+import { ReactNode } from "react";
+
+interface ChatDisplayProps extends ScreenProps {
+  children?: ReactNode;
+}
+
+export function ChatDisplay({onBack, ...props}: ChatDisplayProps) {
   const sendBtn = document.getElementById("sendBtn");
   const showBtn = () => {
     if (sendBtn) {
@@ -13,7 +20,9 @@ export function ChatScreen() {
       sendBtn.style.display = "none";
     }
   };
+  
   return (
+    <Screen onBack={onBack} {...props}>
     <div className={styles.chatContainer}>
       <div className={styles.chatHead}>
         <button className={styles.backBtn}></button>
@@ -28,7 +37,6 @@ export function ChatScreen() {
             <ChatMessage messageText={"lorem ipsumas dasd sd asclsdkfølasd føksjdø"} isSender={true}/>
             <ChatMessage messageText={"lorem ipsumas dasd sd asclsdkfølasd føksjdø"} isSender={true}/>
         </div>
-
       <div className={styles.chatInputContainer}>
         <input
           type="text"
@@ -39,5 +47,6 @@ export function ChatScreen() {
         <button className={styles.sendBtn} id="sendBtn"></button>
       </div>
     </div>
+    </Screen>
   );
 }
