@@ -15,6 +15,7 @@ export function ChatDisplay({onBack, ...props}: ChatDisplayProps) {
       sendBtn.style.display = "block";
     }
   };
+
   const hideButton = () => {
     if (sendBtn) {
       sendBtn.style.display = "none";
@@ -25,8 +26,8 @@ export function ChatDisplay({onBack, ...props}: ChatDisplayProps) {
     <Screen onBack={onBack} {...props}>
     <div className={styles.chatContainer}>
       <div className={styles.chatHead}>
-        <button className={styles.backBtn}></button>
-        <div>
+        <button className={styles.backBtn}>TEST</button>
+        <div className={styles.personaWrapper}>
           <img src={avatar} className={styles.avatar} />
           <h5 className={styles.chatTitle}>Snorre</h5>
         </div>

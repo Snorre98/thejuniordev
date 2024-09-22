@@ -1,36 +1,57 @@
 @import "../../constants";
 
 .chatContainer {
+  display: grid;
   background-color: $darkM-bgC;
   color: $darkM-txtC;
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  //border: 2px solid red;
+  grid-template-areas: 
+  "header"
+  "chatmessages"
+  "chatinput";
 }
 
 .chatHead {
-  grid-row: 1;
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  margin-top: 1.5rem;
 }
+
+.backBtn {
+  grid-column: 1;
+  width: 2rem;
+  height: 2rem;
+}
+
+.personaWrapper {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
 
 .avatar {
   width: 2em;
   height: auto;
-  //border: 2px solid yellow;
 }
 
 .chatTitle {
   margin: 0;
 }
+
 .chatMessages {
   display: flex;
   flex-direction: column;
   overflow: auto;
   height: 350px;
-  //border: 2px solid yellow;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  grid-area: chatmessages;
+  //border: 2px solid yellow;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -38,15 +59,14 @@
   display: none;
 }
 
-
 .chatInputContainer {
   display: flex;
   flex-direction: row;
-  gap: 0.5em;
-  grid-row: 4;
-  width: 100%;
   align-items: end;
   justify-content: end;
+  gap: 0.5em;
+  width: 100%;
+  grid-area: chatinput;
 }
 
 .chatInput,
@@ -79,3 +99,4 @@
 .sendBtn:active {
   transform: translateY(-8px);
 }
+
