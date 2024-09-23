@@ -15,16 +15,14 @@ import DEFAULT_BG from "./assets/placeholder-background.jpg";
 import { useStore } from "./store";
 
 const App = () => {
-	const {
-		currentScreen,
-		setScreen,
-		//setBackground,
-		setDefaultBackground,
-	} = useStore();
+	const { currentScreen, setScreen, setBackground, setDefaultBackground } =
+		useStore();
 
 	useEffect(() => {
 		setDefaultBackground(DEFAULT_BG);
-	}, [setDefaultBackground]);
+		setBackground("messages", "NONE");
+		setBackground("chat", "NONE"); // No background for messages screen
+	}, [setDefaultBackground, setBackground]);
 
 	// Placeholder data for apps
 	const appData = [
@@ -79,7 +77,16 @@ const App = () => {
 
 	return (
 		<Page>
-			{currentScreen === "lock" && <LockDisplay />}
+			{currentScreen === "lock" && (
+				<LockDisplay
+					notification={{
+						onClick: undefined,
+						appIcon: undefined,
+						notificationTitle: undefined,
+						notificationContent: undefined,
+					}}
+				/>
+			)}
 			{currentScreen === "home" && (
 				<HomeDisplay apps={apps} favoriteApps={favoriteApps} />
 			)}

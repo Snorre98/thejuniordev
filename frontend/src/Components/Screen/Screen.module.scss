@@ -8,6 +8,9 @@
   scrollbar-width: none;
   scroll-behavior: smooth;
   background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .screen::-webkit-scrollbar {
