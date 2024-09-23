@@ -76,4 +76,38 @@ storybook-static/
 
    
 
-   
+# Supabase
+/supabase/.branches
+/supabase/.temp
+/supabase/.env
+
+# Local Supabase data
+/supabase/volumes
+
+# Supabase functions build output
+/supabase/functions/**/*.js
+
+# Supabase config files (if you're not sharing these)
+/supabase/config.toml
+
+# Any local development files
+*.dev.js
+*.local.js
+
+# API keys and secrets
+*.pem
+*.key
+
+# Backup files
+*.bak
+
+# Database files
+*.sqlite
+*.db
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Dependency directories
+.pnp
+.pnp.js

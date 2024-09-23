@@ -19,6 +19,7 @@
     "format:fix": "biome format --write"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
     "postcss-preset-env": "^9.3.0",
