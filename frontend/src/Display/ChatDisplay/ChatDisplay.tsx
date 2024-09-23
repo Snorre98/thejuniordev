@@ -4,15 +4,7 @@ import { ChatMessage } from "./Subcomponents";
 import { Screen, ScreenProps } from '../../Components';
 import { Icon } from '@iconify/react';
 import { useEffect, useRef, useState } from "react";
-import { supabase } from '../../../supabaseClient';
-
-interface Message {
-  id: number;
-  created_at: string;
-  message_text: string;
-  is_sender: boolean;
-  sender: string;
-}
+import { fetchMessages, Message } from '../../api/chatApi';
 
 interface ChatDisplayProps extends ScreenProps {
   message: Message;
@@ -20,43 +12,26 @@ interface ChatDisplayProps extends ScreenProps {
 
 export function ChatDisplay({onBack, onPullUp, ...props}: ChatDisplayProps) {
   const [messages, setMessages] = useState<Message[]>([]);
-  const sendBtn = document.getElementById("sendBtn");
   const chatMessagesRef = useRef<HTMLDivElement>(null);
 
-  const showBtn = () => {
-    if (sendBtn) {
-      sendBtn.style.display = "block";
-    }
-  };
-
-  const hideButton = () => {
-    if (sendBtn) {
-      sendBtn.style.display = "none";
-    }
-  };
+  const sendBtn = document.getElementById("sendBtn");
+  const showBtn = () => {if (sendBtn) sendBtn.style.display = "block";};
+  const hideButton = () => {if (sendBtn) sendBtn.style.display = "none";};
  
   useEffect(() => {
+    loadMessages();
+  }, []);
+
+  async function loadMessages() {
+    const fetchedMessages = await fetchMessages();
+    setMessages(fetchedMessages);
+  }
+
+    useEffect(() => {
     if (chatMessagesRef.current) {
       chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
     }
-    fetchMessages();
-  }, []);
-
-  async function fetchMessages() {
-    try {
-      let { data, error } = await supabase
-        .from('chat_messages')
-        .select('*');
-     
-      if (error) {
-        console.error('Error fetching messages:', error);
-      } else {
-        setMessages(data || []);
-      }
-    } catch (err) {
-      console.error('Exception while fetching messages:', err);
-    }
-  }
+  }, [messages]);
  
   return (
     <Screen onBack={onBack} {...props} onPullUp={onPullUp}>
