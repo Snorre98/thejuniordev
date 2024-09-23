@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import { Bezel, Line } from "./components";
-import styles from "./Screen.module.scss";
+import { ReactNode } from 'react';
+import { Bezel, Line } from './components';
+import styles from './Screen.module.scss';
 
 export interface ScreenProps {
   children?: ReactNode;
@@ -15,24 +15,15 @@ export function Screen({
   // onUnlock,
   // onBack,
 }: ScreenProps) {
-
   return (
     <>
-    
-    <Bezel>
-      <div
-      className={styles.screen}
-      >
-        {children}
-        {
-          onPullUp && (
-            <Line onPullUp={onPullUp} />
-          )
-        }
-       
-      </div>
-    </Bezel>
-    {/* <div>
+      <Bezel>
+        <div className={styles.screen}>
+          {children}
+          {onPullUp && <Line onPullUp={onPullUp} />}
+        </div>
+      </Bezel>
+      {/* <div>
       {onPullUp && (
           <button className={styles.pullUpButton} onClick={onPullUp}>
             Pull Up

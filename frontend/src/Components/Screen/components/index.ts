@@ -1,2 +1,2 @@
-export {Bezel} from "./Bezel";
-export {Line} from "./Line";
+export { Bezel } from './Bezel';
+export { Line } from './Line';

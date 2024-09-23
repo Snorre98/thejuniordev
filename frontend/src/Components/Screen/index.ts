@@ -1,4 +1,4 @@
-export {Screen} from "./Screen";
+export { Screen } from './Screen';
 //export type {ScreenProps} from "./Screen";
 
-export type { ScreenProps } from "./Screen";
+export type { ScreenProps } from './Screen';

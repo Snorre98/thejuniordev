@@ -1,1 +1,1 @@
-export { LockDisplay } from "./LockDisplay";
+export { LockDisplay } from './LockDisplay';

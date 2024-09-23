@@ -1,5 +1,5 @@
-import { SupabaseClient } from '@supabase/supabase-js'
+import { SupabaseClient } from '@supabase/supabase-js';
 
-declare const supabase: SupabaseClient
+declare const supabase: SupabaseClient;
 
-export { supabase }
+export { supabase };

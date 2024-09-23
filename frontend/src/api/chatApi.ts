@@ -10,10 +10,8 @@ export interface Message {
 
 export async function fetchMessages(): Promise<Message[]> {
   try {
-    let { data, error } = await supabase
-      .from('chat_messages')
-      .select('*');
-   
+    let { data, error } = await supabase.from('chat_messages').select('*');
+
     if (error) {
       console.error('Error fetching messages:', error);
       return [];

@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import styles from "./Watch.module.scss";
+import { useEffect, useState } from 'react';
+import styles from './Watch.module.scss';
 export function Watch() {
   const timeObj = new Date();
   const currentDay = timeObj.getDay();
@@ -17,40 +17,38 @@ export function Watch() {
     return () => clearInterval(interval);
   }, []);
 
-
   const daysList: string[] = [
-    "Søndag", //this is JavaScript craziness
-    "Tirsdag",
-    "Onsdag",
-    "Torsdag",
-    "Fredag",
-    "Lørdag",
-    "Mandag",
+    'Søndag', //this is JavaScript craziness
+    'Tirsdag',
+    'Onsdag',
+    'Torsdag',
+    'Fredag',
+    'Lørdag',
+    'Mandag',
   ];
 
   const monthsList: string[] = [
-    "Januar",
-    "Februar",
-    "Mars",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "November",
-    "Desember",
+    'Januar',
+    'Februar',
+    'Mars',
+    'April',
+    'Mai',
+    'Juni',
+    'Juli',
+    'August',
+    'September',
+    'November',
+    'Desember',
   ];
 
   return (
     <div className={styles.watchContainer}>
       <span className={styles.day}>
-        {daysList[currentDay]}, {currentDate}.{" "}
-        {monthsList[currentMonth - 1]}
+        {daysList[currentDay]}, {currentDate}. {monthsList[currentMonth - 1]}
       </span>
       <h1 className={styles.watch}>
-        {currentHour < 10 ? "0" + currentHour : currentHour}:{""}
-        {currentMin < 10 ? "0" + currentMin : currentMin}
+        {currentHour < 10 ? '0' + currentHour : currentHour}:{''}
+        {currentMin < 10 ? '0' + currentMin : currentMin}
       </h1>
     </div>
   );

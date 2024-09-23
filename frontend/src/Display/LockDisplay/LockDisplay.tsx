@@ -1,8 +1,8 @@
-import styles from "./LockDisplay.module.scss";
-import { Notification } from "../../Components/Notification";
-import { Watch } from "../../Components/Watch";
-import { Screen, ScreenProps } from "../../Components";
-import { useStore } from '../../store'
+import styles from './LockDisplay.module.scss';
+import { Notification } from '../../Components/Notification';
+import { Watch } from '../../Components/Watch';
+import { Screen, ScreenProps } from '../../Components';
+import { useStore } from '../../store';
 
 type LockDisplayProps = Omit<ScreenProps, 'onUnlock' | 'onPullUp'> & {
   dummyProp?: string;
