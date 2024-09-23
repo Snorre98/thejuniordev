@@ -1,4 +1,5 @@
 import styles from "./Message.module.scss";
+import lemur from "../../assets/lemur-avatar.jpg";
 
 type MessageProps = {
   onClick?: () => void;
@@ -6,7 +7,8 @@ type MessageProps = {
   photoURL: string;
   sender: string;
 };
-export function Message({ onClick, message, photoURL, sender }: MessageProps) {
+
+export function Message({ onClick, message, photoURL=lemur, sender="N/A" }: MessageProps) {
   return (
     <>
       <div className={styles.messageContainer} onClick={onClick}>
