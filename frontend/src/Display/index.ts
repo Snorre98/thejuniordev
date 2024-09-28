@@ -1,4 +1,5 @@
-export { HomeDisplay } from './HomeDisplay';
-export { MessagesDisplay } from './MessagesDisplay';
-export { LockDisplay } from './LockDisplay';
-export { ChatDisplay } from './ChatDisplay';
+export { ChatDisplay } from "./ChatDisplay";
+export { HomeDisplay } from "./HomeDisplay";
+export { LockDisplay } from "./LockDisplay";
+export { MessagesDisplay } from "./MessagesDisplay";
+export { ProjectDisplay } from "./ProjectDisplay";
