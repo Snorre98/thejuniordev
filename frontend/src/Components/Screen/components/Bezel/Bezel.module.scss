@@ -8,12 +8,13 @@
 .bezel {
   width: 20rem;
   height: 40rem;
-  border: 8px solid black;
+  border: 8px solid rgb(23, 23, 24);
   border-radius: 1.75rem;
   display: flex;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 2px 2px 15px 4px rgba(0, 0, 0, 0.394);
+  box-shadow: 2px 2px 15px 4px rgb(14, 12, 12);
+  outline: 2px solid rgb(65, 68, 85);
 }
 
 .bezel::-webkit-scrollbar {

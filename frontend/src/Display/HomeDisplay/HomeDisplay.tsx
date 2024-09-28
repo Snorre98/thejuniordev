@@ -57,18 +57,31 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 		}
 	}, [fetchData]);
 
-	const renderAppButton = useCallback(
+	const renderApps = useCallback(
 		(app: App) => (
 			<AppButton
 				key={app.id}
 				onOpenApp={() => onOpenApp(app.opens)}
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
+				isFavorit={false}
 			/>
 		),
 		[onOpenApp],
 	);
 
+	const renderFavApps = useCallback(
+		(app: App) => (
+			<AppButton
+				key={app.id}
+				onOpenApp={() => onOpenApp(app.opens)}
+				iconURL={app.icon_url}
+				appTitle={app.app_title}
+				isFavorit={true}
+			/>
+		),
+		[onOpenApp],
+	);
 	if (isLoading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error}</div>;
 
@@ -76,10 +89,10 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 		<Screen onBack={onBack} {...props}>
 			<div className={styles.homeScreenContainer}>
 				<div className={styles.appsContainer} ref={containerRef}>
-					{apps.map(renderAppButton)}
+					{apps.map(renderApps)}
 				</div>
 				<div className={styles.favoriteApps}>
-					{favoriteApps.map(renderAppButton)}
+					{favoriteApps.map(renderFavApps)}
 				</div>
 			</div>
 		</Screen>
