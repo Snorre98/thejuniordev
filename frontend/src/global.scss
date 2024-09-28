@@ -5,7 +5,9 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 1);
-  background-color: #cac8c8;
+  background: 
+	radial-gradient(circle at -33% 86%, rgba(159,208,214,0.90), rgba(230,204,180,0.90)),
+	url("./assets/grain.svg");
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

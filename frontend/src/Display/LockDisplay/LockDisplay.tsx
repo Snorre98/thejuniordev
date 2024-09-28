@@ -1,34 +1,49 @@
-import styles from "./LockDisplay.module.scss";
+import { useEffect, useState } from "react";
+import { Screen, type ScreenProps } from "../../Components";
 import { Notification } from "../../Components/Notification";
+import type { NotificationProps } from "../../Components/Notification/Notification";
 import { Watch } from "../../Components/Watch";
-import { Screen, ScreenProps } from "../../Components";
-import { useStore } from '../../store'
+import { useStore } from "../../store";
+import styles from "./LockDisplay.module.scss";
 
-type LockDisplayProps = Omit<ScreenProps, 'onUnlock' | 'onPullUp'> & {
-  dummyProp?: string;
+type LockDisplayProps = Omit<ScreenProps, "onUnlock" | "onPullUp"> & {
+	notification: NotificationProps;
 };
 
-export function LockDisplay({ ...props }: LockDisplayProps) {
-  const { setScreen } = useStore();
+const mock_notification: NotificationProps = {
+	notificationTitle: "Melding fra: Snorre",
+	notificationContent:
+		"Hei, dette er min portofolie side. Trykk på denne for å se en kort bio og viktige linker, eller utforsk selv....",
+};
 
-  const handleUnlock = () => {
-    setScreen('home');
-  };
+export function LockDisplay({ notification, ...props }: LockDisplayProps) {
+	const { setScreen } = useStore();
+	const [thisNotification, setNotification] = useState<NotificationProps>();
 
-  return (
-    <Screen onUnlock={handleUnlock} onPullUp={handleUnlock}>
-      <div className={styles.lockScreenContainer}>
-        <div className={styles.item1}>
-          <Watch />
-        </div>
-        <div className={styles.item2}>
-          <Notification />
-        </div>
-        <div className={styles.item3}>
-          <p>{props.dummyProp}</p>
-        </div>
-        <div className={styles.item4}></div>
-      </div>
-    </Screen>
-  );
+	useEffect(() => {
+		setNotification(mock_notification);
+		[];
+	});
+
+	const handleUnlock = () => {
+		setScreen("home");
+	};
+
+	return (
+		<Screen onUnlock={handleUnlock} onPullUp={handleUnlock} {...props}>
+			<div className={styles.lockScreenContainer}>
+				<div className={styles.watchWrapper}>
+					<Watch />
+				</div>
+				<div className={styles.notificationWrapper}>
+					<Notification
+						appIcon={thisNotification?.appIcon}
+						notificationTitle={thisNotification?.notificationTitle}
+						notificationContent={thisNotification?.notificationContent}
+						onClick={() => setScreen("chat")}
+					/>
+				</div>
+			</div>
+		</Screen>
+	);
 }

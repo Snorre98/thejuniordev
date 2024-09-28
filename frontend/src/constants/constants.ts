@@ -1,12 +1,12 @@
 export const THEME = {
-    DARK: "theme-dark",
-    LIGHT: "theme-light",
+  DARK: 'theme-dark',
+  LIGHT: 'theme-light',
 } as const;
 
 export type ThemeKey = keyof typeof THEME;
-export type ThemeValue = (typeof THEME)[ThemeKey]
+export type ThemeValue = (typeof THEME)[ThemeKey];
 
-export const THEME_KEY = "data-theme"
+export const THEME_KEY = 'data-theme';
 
 export const largeDesktopBpLower = 1201;
 export const desktopBpUpper = 1200;

@@ -1,17 +1,27 @@
 .lockScreenContainer {
-  display: grid;
   height: 100%;
-  grid-template-rows: auto auto auto auto;
-  margin: 2em 0 2em 0;
-  gap: 4em;
-
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "watchWrapper"
+    "notificationWrapper";
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-.item2 {
+
+.watchWrapper {
+  grid-area: watchWrapper;
   display: flex;
-  height: fit-content;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+
+.notificationWrapper {
+  grid-area: notificationWrapper;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: fit-content;
 }

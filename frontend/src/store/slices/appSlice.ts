@@ -1,15 +1,35 @@
-import { StateCreator } from "zustand"
+import type { StateCreator } from "zustand";
+
+export type Screen =
+	| "lock"
+	| "home"
+	| "messages"
+	| "bio"
+	| "portfolio"
+	| "cv"
+	| "chat";
 
 export type AppState = {
-  currentScreen: 'lock' | 'home' | 'messages' | 'bio' | 'portfolio' | 'cv' | 'chat'
-  isPulledUp: boolean
-  setScreen: (screen: AppState['currentScreen']) => void
-  setPulledUp: (isPulledUp: boolean) => void
-}
+	currentScreen: Screen;
+	isPulledUp: boolean;
+	backgrounds: { [key in Screen]?: string };
+	defaultBackground: string;
+	setScreen: (screen: Screen) => void;
+	setPulledUp: (isPulledUp: boolean) => void;
+	setBackground: (screen: Screen, background: string) => void;
+	setDefaultBackground: (background: string) => void;
+};
 
 export const createAppSlice: StateCreator<AppState> = (set) => ({
-  currentScreen: 'lock',
-  isPulledUp: false,
-  setScreen: (screen) => set({ currentScreen: screen }),
-  setPulledUp: (isPulledUp) => set({ isPulledUp }),
-})
+	currentScreen: "lock",
+	isPulledUp: false,
+	backgrounds: {},
+	defaultBackground: "",
+	setScreen: (screen) => set({ currentScreen: screen }),
+	setPulledUp: (isPulledUp) => set({ isPulledUp }),
+	setBackground: (screen, background) =>
+		set((state) => ({
+			backgrounds: { ...state.backgrounds, [screen]: background },
+		})),
+	setDefaultBackground: (background) => set({ defaultBackground: background }),
+});

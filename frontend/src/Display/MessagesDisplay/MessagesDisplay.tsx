@@ -54,9 +54,13 @@ export function MessagesDisplay({ onBack, ...props }: MessagesDisplayProps) {
   const messages = props.messages || defaultMessages;
 
   return (
-    <Screen onBack={onBack} onUnlock={handleUnlock} onPullUp={handleUnlock}
-    //  onOpenApp={onOpenApp} 
-     {...props}>
+    <Screen
+      onBack={onBack}
+      onUnlock={handleUnlock}
+      onPullUp={handleUnlock}
+      //  onOpenApp={onOpenApp}
+      {...props}
+    >
       <div className={styles.messagesContainer}>
         <div className={styles.msgScreenTitle}>
           <h5 className={styles.messageScreenTitle}>Meldinger</h5>
@@ -68,7 +72,7 @@ export function MessagesDisplay({ onBack, ...props }: MessagesDisplayProps) {
             message={msg.message}
             photoURL={msg.photoURL}
             sender={msg.sender}
-            onClick={()=> setScreen('chat')}
+            onClick={() => setScreen('chat')}
           />
         ))}
       </div>

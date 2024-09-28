@@ -1,1 +1,1 @@
-export { Bezel } from "./Bezle";
+export { Bezel } from './Bezle';

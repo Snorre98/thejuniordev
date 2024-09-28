@@ -1,1 +1,1 @@
-export { Watch } from "./Watch";
+export { Watch } from './Watch';

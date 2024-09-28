@@ -1,1 +1,1 @@
-export {MessagesDisplay} from "./MessagesDisplay";
+export { MessagesDisplay } from './MessagesDisplay';
