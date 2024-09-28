@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Page } from "./Components";
 import {
 	ChatDisplay,
@@ -6,12 +6,14 @@ import {
 	LockDisplay,
 	MessagesDisplay,
 } from "./Display";
+import type { Thread } from "./api/chatApi";
 import DEFAULT_BG from "./assets/background-two.jpg";
 import { useStore } from "./store";
 
 const App = () => {
 	const { currentScreen, setScreen, setBackground, setDefaultBackground } =
 		useStore();
+	const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
 
 	useEffect(() => {
 		setDefaultBackground(DEFAULT_BG);
@@ -27,30 +29,37 @@ const App = () => {
 		}
 	};
 
+	const handleSelectThread = (thread: Thread) => {
+		setSelectedThread(thread);
+		setScreen("chat");
+	};
+
+	const handleNotificationClick = () => {
+		setScreen("messages");
+	};
+
 	return (
 		<Page>
 			{currentScreen === "lock" && (
 				<LockDisplay
-					notification={{
-						onClick: undefined,
-						appIcon: undefined,
-						notificationTitle: undefined,
-						notificationContent: undefined,
-					}}
+					onPullUp={() => setScreen("home")}
+					onNotificationClick={handleNotificationClick}
 				/>
 			)}
 			{currentScreen === "home" && <HomeDisplay onOpenApp={handleOpenApp} />}
-			{currentScreen === "messages" && <MessagesDisplay />}
-			{currentScreen === "bio" && <MessagesDisplay />}
-			{currentScreen === "portfolio" && <MessagesDisplay />}
-			{currentScreen === "cv" && <MessagesDisplay />}
-			{currentScreen === "chat" && (
+			{currentScreen === "messages" && (
+				<MessagesDisplay
+					onSelectThread={handleSelectThread}
+					onPullUp={() => setScreen("home")}
+				/>
+			)}
+			{currentScreen === "chat" && selectedThread && (
 				<ChatDisplay
+					thread={selectedThread}
 					onBack={() => setScreen("messages")}
 					onPullUp={() => setScreen("home")}
 				/>
 			)}
-			{/* Add more screens as needed */}
 		</Page>
 	);
 };

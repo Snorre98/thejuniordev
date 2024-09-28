@@ -1,26 +1,26 @@
-import styles from './Message.module.scss';
-import lemur from '../../assets/lemur-avatar.jpg';
+import styles from "./Message.module.scss";
 
 type MessageProps = {
-  onClick?: () => void;
-  message: string;
-  photoURL: string;
-  sender: string;
+	onClick?: () => void;
+	message: string;
+	avatar: string;
+	sender: string;
+	thread: string;
 };
 
-export function Message({ onClick, message, photoURL = lemur, sender = 'N/A' }: MessageProps) {
-  return (
-    <>
-      <div className={styles.messageContainer} onClick={onClick}>
-        <img className={styles.senderPhoto} src={photoURL} />
-        <div className={styles.messageContent}>
-          <div className={styles.messageHead}>
-            <span className={styles.messageSender}>{sender}</span>
-            <span className={styles.messageDay}>Lørdag</span>
-          </div>
-          <p className={styles.message}>{message}</p>
-        </div>
-      </div>
-    </>
-  );
+export function Message({ ...props }: MessageProps) {
+	return (
+		<>
+			<div className={styles.messageContainer} {...props}>
+				<img className={styles.senderPhoto} src={props.avatar} />
+				<div className={styles.messageContent}>
+					<div className={styles.messageHead}>
+						<span className={styles.messageSender}>{props.sender}</span>
+						<span className={styles.messageDay}>Lørdag</span>
+					</div>
+					<p className={styles.message}>{props.message}</p>
+				</div>
+			</div>
+		</>
+	);
 }

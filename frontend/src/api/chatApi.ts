@@ -17,9 +17,13 @@ export interface Message {
 	sender: string;
 }
 
-export async function fetchMessages(): Promise<Message[]> {
+export async function fetchMessages(threadId: string): Promise<Message[]> {
 	try {
-		const { data, error } = await supabase.from("chat_message").select("*");
+		const { data, error } = await supabase
+			.from("chat_message")
+			.select("*")
+			.eq("thread", threadId)
+			.order("created_at", { ascending: true });
 
 		if (error) {
 			console.error("Error fetching messages:", error);
@@ -58,20 +62,63 @@ export interface User {
 	avatar: string;
 }
 
-export async function fetchUsername(id: string): Promise<Partial<User> | null> {
+export async function fetchUser(id: string): Promise<User | undefined> {
 	try {
 		const { data, error } = await supabase
 			.from("user")
-			.select("user_name")
+			.select("*")
 			.eq("id", id)
 			.single();
 		if (error) {
 			console.error("Error fetching latest message:", error);
-			return null;
+			return undefined;
 		}
 		return data;
 	} catch (error) {
 		console.error("Exception while fetching latest message:", error);
-		return null;
+		return undefined;
+	}
+}
+
+export interface Thread {
+	id: string;
+	created_at: string;
+	user_1: User;
+	user_2: User;
+	last_message: Message;
+}
+
+export async function fetchThreads(): Promise<Thread[]> {
+	try {
+		const { data, error } = await supabase
+			.from("chat_thread")
+			.select(`
+		  *,
+		  user_1:user!chat_thread_user_1_fkey(*),
+		  user_2:user!chat_thread_user_2_fkey(*),
+		  chat_message(*)
+		`)
+			.order("created_at", { ascending: false });
+
+		if (error) {
+			console.error("Error fetching threads:", error);
+			return [];
+		}
+
+		return (
+			data?.map((thread) => ({
+				...thread,
+				last_message: thread.chat_message.sort(
+					(
+						a: { created_at: string | number | Date },
+						b: { created_at: string | number | Date },
+					) =>
+						new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+				)[0],
+			})) || []
+		);
+	} catch (error) {
+		console.error("Exception while fetching threads:", error);
+		return [];
 	}
 }

@@ -3,16 +3,19 @@ import { Screen, type ScreenProps } from "../../Components";
 import { Notification } from "../../Components/Notification";
 import type { NotificationProps } from "../../Components/Notification/Notification";
 import { Watch } from "../../Components/Watch";
-import { fetchLatestMessage, fetchUsername } from "../../api/chatApi";
-import { useStore } from "../../store";
+import { fetchLatestMessage, fetchUser } from "../../api/chatApi";
 import styles from "./LockDisplay.module.scss";
 
-type LockDisplayProps = Omit<ScreenProps, "onUnlock" | "onPullUp"> & {
-	notification: NotificationProps;
-};
+interface LockDisplayProps extends ScreenProps {
+	onPullUp: () => void;
+	onNotificationClick: () => void;
+}
 
-export function LockDisplay({ notification, ...props }: LockDisplayProps) {
-	const { setScreen } = useStore();
+export function LockDisplay({
+	onPullUp,
+	onNotificationClick,
+	...props
+}: LockDisplayProps) {
 	const [latestNotification, setLatestNotification] =
 		useState<NotificationProps | null>(null);
 
@@ -20,7 +23,7 @@ export function LockDisplay({ notification, ...props }: LockDisplayProps) {
 		async function loadLatestMessage() {
 			const message = await fetchLatestMessage();
 			if (message) {
-				const sender = await fetchUsername(message?.sender);
+				const sender = await fetchUser(message?.sender);
 				if (sender) {
 					setLatestNotification({
 						notificationTitle: `Melding fra: ${sender.user_name}`,
@@ -32,12 +35,8 @@ export function LockDisplay({ notification, ...props }: LockDisplayProps) {
 		loadLatestMessage();
 	}, []);
 
-	const handleUnlock = () => {
-		setScreen("home");
-	};
-
 	return (
-		<Screen onUnlock={handleUnlock} onPullUp={handleUnlock} {...props}>
+		<Screen onPullUp={onPullUp}>
 			<div className={styles.lockScreenContainer}>
 				<div className={styles.watchWrapper}>
 					<Watch />
@@ -47,7 +46,7 @@ export function LockDisplay({ notification, ...props }: LockDisplayProps) {
 						<Notification
 							notificationTitle={latestNotification.notificationTitle}
 							notificationContent={latestNotification.notificationContent}
-							onClick={() => setScreen("chat")}
+							onClick={onNotificationClick}
 						/>
 					)}
 				</div>
