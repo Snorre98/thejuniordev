@@ -14,7 +14,6 @@ interface LockDisplayProps extends ScreenProps {
 export function LockDisplay({
 	onPullUp,
 	onNotificationClick,
-	...props
 }: LockDisplayProps) {
 	const [latestNotification, setLatestNotification] =
 		useState<NotificationProps | null>(null);
