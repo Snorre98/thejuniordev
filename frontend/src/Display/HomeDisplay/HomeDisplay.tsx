@@ -37,9 +37,9 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 			};
 			setApps(processApps(appsData));
 			setFavoriteApps(processApps(favoriteAppsData));
-		} catch (err) {
+		} catch (error) {
 			setError("Failed to fetch apps");
-			console.error(err);
+			console.error(error);
 		} finally {
 			setIsLoading(false);
 		}
@@ -47,9 +47,6 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 
 	useEffect(() => {
 		fetchData();
-	}, [fetchData]);
-
-	useEffect(() => {
 		const container = containerRef.current;
 		if (container) {
 			container.style.transform = "scale(0.5)";
@@ -58,7 +55,7 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 			container.style.transform = "scale(1)";
 			container.style.opacity = "1";
 		}
-	}, []);
+	}, [fetchData]);
 
 	const renderAppButton = useCallback(
 		(app: App) => (

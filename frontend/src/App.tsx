@@ -6,7 +6,7 @@ import {
 	LockDisplay,
 	MessagesDisplay,
 } from "./Display";
-import DEFAULT_BG from "./assets/placeholder-background.jpg";
+import DEFAULT_BG from "./assets/background-two.jpg";
 import { useStore } from "./store";
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
 		if (opens.startsWith("http")) {
 			window.open(opens, "_blank");
 		} else {
-			setScreen(opens as any); // Cast to any as setScreen might not accept all string values
+			setScreen(opens as string); // Cast to any as setScreen might not accept all string values
 		}
 	};
 
