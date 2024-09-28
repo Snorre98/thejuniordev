@@ -29,7 +29,7 @@ export function Message({ ...props }: MessageProps) {
 	return (
 		<>
 			<div className={styles.messageContainer} {...props}>
-				<img className={styles.senderPhoto} src={props.avatar} />
+				<img className={styles.senderPhoto} src={props.avatar} alt="avatar" />
 				<div className={styles.messageContent}>
 					<div className={styles.messageHead}>
 						<span className={styles.messageSender}>{props.sender}</span>
