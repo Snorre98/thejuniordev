@@ -1,6 +1,5 @@
 import { supabase } from "../../supabaseClient";
-
-const STORAGE_BASE_URL = "http://127.0.0.1:54321/storage/v1/object/public/";
+import { STORAGE_BASE_URL } from "../constants";
 
 export function getFullIconUrl(iconPath: string) {
 	if (!iconPath) {
