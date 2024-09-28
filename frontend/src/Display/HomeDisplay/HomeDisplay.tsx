@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Screen, type ScreenProps } from "../../Components";
 import { AppButton } from "../../Components/AppButton";
 import { getApps, getFavoriteApps, getFullIconUrl } from "../../api/appApi";
@@ -20,7 +20,7 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 	const [favoriteApps, setFavoriteApps] = useState<App[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const containerRef = React.useRef<HTMLDivElement>(null);
+	const [isVisible, setIsVisible] = useState(false);
 
 	const fetchData = useCallback(async () => {
 		try {
@@ -47,14 +47,10 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 
 	useEffect(() => {
 		fetchData();
-		const container = containerRef.current;
-		if (container) {
-			container.style.transform = "scale(0.5)";
-			container.style.opacity = "0";
-			container.offsetHeight;
-			container.style.transform = "scale(1)";
-			container.style.opacity = "1";
-		}
+		const timer = setTimeout(() => {
+			setIsVisible(true);
+		}, 30);
+		return () => clearTimeout(timer);
 	}, [fetchData]);
 
 	const renderApps = useCallback(
@@ -87,10 +83,10 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
 
 	return (
 		<Screen onBack={onBack} {...props}>
-			<div className={styles.homeScreenContainer}>
-				<div className={styles.appsContainer} ref={containerRef}>
-					{apps.map(renderApps)}
-				</div>
+			<div
+				className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ""}`}
+			>
+				<div className={styles.appsContainer}>{apps.map(renderApps)}</div>
 				<div className={styles.favoriteApps}>
 					{favoriteApps.map(renderFavApps)}
 				</div>
