@@ -8,7 +8,24 @@ type MessageProps = {
 	thread: string;
 };
 
+const truncateText = (text: string, maxLength: number) => {
+	if (text.length <= maxLength) return text;
+
+	// Find the last space within the maxLength
+	const lastSpaceIndex = text.lastIndexOf(" ", maxLength - 3);
+
+	if (lastSpaceIndex === -1) {
+		// If there's no space, just cut at maxLength
+		return `${text.slice(0, maxLength - 3)}...`;
+		// biome-ignore lint/style/noUselessElse: <explanation>
+	} else {
+		// Cut at the last space and add ellipsis
+		return `${text.slice(0, lastSpaceIndex)}...`;
+	}
+};
+
 export function Message({ ...props }: MessageProps) {
+	const truncatedContent = truncateText(props.message, 100);
 	return (
 		<>
 			<div className={styles.messageContainer} {...props}>
@@ -18,7 +35,7 @@ export function Message({ ...props }: MessageProps) {
 						<span className={styles.messageSender}>{props.sender}</span>
 						<span className={styles.messageDay}>Lørdag</span>
 					</div>
-					<p className={styles.message}>{props.message}</p>
+					<p className={styles.message}>{truncatedContent}</p>
 				</div>
 			</div>
 		</>
