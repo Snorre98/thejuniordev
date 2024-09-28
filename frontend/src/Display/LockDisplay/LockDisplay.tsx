@@ -3,45 +3,51 @@ import { Screen, type ScreenProps } from "../../Components";
 import { Notification } from "../../Components/Notification";
 import type { NotificationProps } from "../../Components/Notification/Notification";
 import { Watch } from "../../Components/Watch";
-import { useStore } from "../../store";
+import { fetchLatestMessage, fetchUser } from "../../api/chatApi";
 import styles from "./LockDisplay.module.scss";
 
-type LockDisplayProps = Omit<ScreenProps, "onUnlock" | "onPullUp"> & {
-	notification: NotificationProps;
-};
+interface LockDisplayProps extends ScreenProps {
+	onPullUp: () => void;
+	onNotificationClick: () => void;
+}
 
-const mock_notification: NotificationProps = {
-	notificationTitle: "Melding fra: Snorre",
-	notificationContent:
-		"Hei, dette er min portofolie side. Trykk på denne for å se en kort bio og viktige linker, eller utforsk selv....",
-};
-
-export function LockDisplay({ notification, ...props }: LockDisplayProps) {
-	const { setScreen } = useStore();
-	const [thisNotification, setNotification] = useState<NotificationProps>();
+export function LockDisplay({
+	onPullUp,
+	onNotificationClick,
+}: LockDisplayProps) {
+	const [latestNotification, setLatestNotification] =
+		useState<NotificationProps | null>(null);
 
 	useEffect(() => {
-		setNotification(mock_notification);
-		[];
-	});
-
-	const handleUnlock = () => {
-		setScreen("home");
-	};
+		async function loadLatestMessage() {
+			const message = await fetchLatestMessage();
+			if (message) {
+				const sender = await fetchUser(message?.sender);
+				if (sender) {
+					setLatestNotification({
+						notificationTitle: `Melding fra: ${sender.user_name}`,
+						notificationContent: message.message_text,
+					});
+				}
+			}
+		}
+		loadLatestMessage();
+	}, []);
 
 	return (
-		<Screen onUnlock={handleUnlock} onPullUp={handleUnlock} {...props}>
+		<Screen onPullUp={onPullUp}>
 			<div className={styles.lockScreenContainer}>
 				<div className={styles.watchWrapper}>
 					<Watch />
 				</div>
 				<div className={styles.notificationWrapper}>
-					<Notification
-						appIcon={thisNotification?.appIcon}
-						notificationTitle={thisNotification?.notificationTitle}
-						notificationContent={thisNotification?.notificationContent}
-						onClick={() => setScreen("chat")}
-					/>
+					{latestNotification && (
+						<Notification
+							notificationTitle={latestNotification.notificationTitle}
+							notificationContent={latestNotification.notificationContent}
+							onClick={onNotificationClick}
+						/>
+					)}
 				</div>
 			</div>
 		</Screen>
