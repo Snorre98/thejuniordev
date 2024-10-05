@@ -89,8 +89,9 @@ export function ProjectDisplay() {
 					<section className={styles.projectDescription}>
 						<h3>Teknisk oppsummering</h3>
 						<ul>
-							{mockProps.projectTechList.map((tech) => {
-								return <li>{tech}</li>;
+							{mockProps.projectTechList.map((tech, index) => {
+								// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+								return <li key={index}>{tech}</li>;
 							})}
 						</ul>
 					</section>
