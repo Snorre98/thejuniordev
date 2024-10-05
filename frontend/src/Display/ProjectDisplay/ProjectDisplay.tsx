@@ -1,11 +1,21 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
+import React from "react";
 import { Screen } from "../../Components/Screen";
 import SoundsGood from "../../assets/sounds-good.jpg";
 import styles from "./ProjectDisplay.module.scss";
 const mockProps = {
 	projectTitle: "Sounds Good",
 	projectIcon: SoundsGood,
-	projectParticipants: ["Sander", "Benjamin", "Snorre"],
+	projectParticipants: [
+		"Sander",
+		"Benjamin",
+		"Snorre",
+		"Sander",
+		"Benjamin",
+		"Snorre",
+		"Benjamin",
+		"Snorre",
+	],
 	projectCategory: "Student project",
 	projectRepo: "https://github.com/Snorre98/sounds-good",
 	projectDescription:
@@ -30,6 +40,17 @@ export function ProjectDisplay() {
 		window.open(mockProps.projectRepo, "_blank", "noopener,noreferrer");
 	};
 
+	const renderContributors = (contributors: string[]) => {
+		return contributors.map((contributor, index) => (
+			<React.Fragment key={index}>
+				{index > 0 && index === contributors.length - 1 && <span> and </span>}
+				{index > 0 && index < contributors.length - 1 && <span>, </span>}
+				<span>{contributor}</span>
+				{index === contributors.length - 1 && "."}
+			</React.Fragment>
+		));
+	};
+
 	return (
 		<Screen>
 			<div className={styles.projectContainer}>
@@ -44,11 +65,7 @@ export function ProjectDisplay() {
 					<h2 className={styles.projectTitle}>{mockProps.projectTitle}</h2>
 					<div className={styles.projectParticipants}>
 						<h5>Participants</h5>
-						<ul>
-							{mockProps.projectParticipants.map((item) => {
-								return <li>{item}</li>;
-							})}
-						</ul>
+						<p>{renderContributors(mockProps.projectParticipants)}</p>
 					</div>
 					<div className={styles.projectCategory}>
 						<h5>Kategori</h5>
