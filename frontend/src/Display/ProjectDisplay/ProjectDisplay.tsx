@@ -16,7 +16,7 @@ const mockProps = {
 		"Benjamin",
 		"Snorre",
 	],
-	projectCategory: "Student project",
+	projectCategory: "Student project Student project",
 	projectRepo: "https://github.com/Snorre98/sounds-good",
 	projectDescription:
 		"Sounds Good is a web application that allows you to search for different artists, albums, and songs and view details about them. On every song, you can comment and view other users' comments.",

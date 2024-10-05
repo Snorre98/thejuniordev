@@ -30,8 +30,9 @@ $btnHover: #2a313c;
     "image image title title"
     "image image participants category"
     "ghbtn ghbtn ghbtn ghbtn";
-    padding-top: 2rem;
-    padding-bottom: 0.5rem;
+    // padding-top: 2rem;
+    // padding-bottom: 0.5rem;
+    padding: 2rem 0.25rem 0.5rem 0.25rem;
     background: $contentItem;
     border-radius: 0 0 0.25rem 0.25rem;
     gap: 0.5rem;
@@ -107,8 +108,6 @@ $btnHover: #2a313c;
     overflow: hidden scroll;
 }
 
-
-
 .projectDescription {
     margin: 0.5rem;
     padding: 0.25rem 0.5rem;
@@ -119,11 +118,8 @@ $btnHover: #2a313c;
         padding: 0;
     }
 
-    & p {
+    & p, ul {
         margin-top: 0;
-    }
-
-    & ul {
-        margin-top: 0;
+        padding-left: 1rem;
     }
 }
