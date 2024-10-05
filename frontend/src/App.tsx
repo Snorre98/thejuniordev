@@ -45,7 +45,17 @@ const App = () => {
             position: 'relative',
           }}
         >
-          {CurrentComponent && <CurrentComponent onOpenApp={handleOpenApp} {...params} />}
+          {CurrentComponent && (
+            <CurrentComponent
+              //   onNotificationClick={function (): void {
+              // 			  throw new Error('Function not implemented.');
+              // 		  } } onBack={undefined} onSelectThread={function (thread: Thread): void {
+              // 			  throw new Error('Function not implemented.');
+              // 		  } } thread={undefined} onOpenApp={handleOpenApp}
+
+              {...params}
+            />
+          )}
           {showLine && <Line onPullUp={handlePullUp} />}
         </div>
       </Screen>
