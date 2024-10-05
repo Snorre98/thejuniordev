@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Page } from './Components';
+import { Screen } from './Components/Screen';
 import { BioDisplay, ChatDisplay, HomeDisplay, LockDisplay, MessagesDisplay, ProjectDisplay } from './Display';
 import type { Thread } from './api/chatApi';
 import DEFAULT_BG from './assets/background-two.jpg';
 import { useStore } from './store';
-// here
 const App = () => {
   const { currentScreen, setScreen, setBackground, setDefaultBackground } = useStore();
   const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
@@ -23,29 +23,37 @@ const App = () => {
     }
   };
 
-  const handleSelectThread = (thread: Thread) => {
-    setSelectedThread(thread);
-    setScreen('chat');
-  };
-
-  const handleNotificationClick = () => {
-    setScreen('messages');
-  };
-
   return (
     <Page>
-      {currentScreen === 'lock' && (
-        <LockDisplay onPullUp={() => setScreen('home')} onNotificationClick={handleNotificationClick} />
-      )}
-      {currentScreen === 'home' && <HomeDisplay onOpenApp={handleOpenApp} />}
-      {currentScreen === 'messages' && (
-        <MessagesDisplay onSelectThread={handleSelectThread} onPullUp={() => setScreen('home')} />
-      )}
-      {currentScreen === 'chat' && selectedThread && (
-        <ChatDisplay thread={selectedThread} onBack={() => setScreen('messages')} onPullUp={() => setScreen('home')} />
-      )}
-      {currentScreen === 'project' && <ProjectDisplay />}
-      {currentScreen === 'bio' && <BioDisplay />}
+      <Screen>
+        {currentScreen === 'lock' && (
+          <LockDisplay
+            onPullUp={() => setScreen('home')}
+            onNotificationClick={() => {
+              setScreen('messages');
+            }}
+          />
+        )}
+        {currentScreen === 'home' && <HomeDisplay onOpenApp={handleOpenApp} />}
+        {currentScreen === 'messages' && (
+          <MessagesDisplay
+            onSelectThread={(thread: Thread) => {
+              setSelectedThread(thread);
+              setScreen('chat');
+            }}
+            onPullUp={() => setScreen('home')}
+          />
+        )}
+        {currentScreen === 'chat' && selectedThread && (
+          <ChatDisplay
+            thread={selectedThread}
+            onBack={() => setScreen('messages')}
+            onPullUp={() => setScreen('home')}
+          />
+        )}
+        {currentScreen === 'project' && <ProjectDisplay />}
+        {currentScreen === 'bio' && <BioDisplay />}
+      </Screen>
     </Page>
   );
 };
