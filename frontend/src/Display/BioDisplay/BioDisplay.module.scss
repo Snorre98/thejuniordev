@@ -3,27 +3,30 @@
     background-color: black;
     width: 100%;
     height: 100%;
-    // display: grid;
-    // grid-template-areas: 
-    // "action-rack action-rack"
-    // "note-content note-content";
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
 .notesActionRack {
-    grid-area: action-rack;
-    width: 100%;
-    height: fit-content;
-    padding: 1rem 0 0.5rem 0;
+    padding: 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    color: orange;
+}
+
+.backBtn {
+    color: orange;
+    background: none;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .noteContent {
-    grid-item:note-content;
     overflow: scroll;
     display: flex;
     flex-direction: column;
@@ -31,52 +34,71 @@
 }
 
 .notesHeader {
-    border-bottom: 2px solid orange;
-    margin-top: 0;
+    margin: 0;
+    padding: 0 0 0 0.5rem;
 }
 
-// .noteTextWrapper {
-//     display: flex;
-//     flex-direction: column;
-// }
+.noteTextWrapper {
+   padding: 0 1rem 0 1rem;
+}
 
 .noteSubtitle {
-    margin-bottom: 0;
-    border-bottom: 1px solid orange;
+    margin: 1rem 0 0.25rem 0;
+    border-bottom: 2px solid orange;
 }
 
-// .noteSections {
-//     border: 2px solid green;
-// }
-
-
+.noteSections {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+}
 
 .noteSection {
     display: grid;
     grid-template-areas: 
-    "title title dates"
-    "description description description";
-    border-bottom: 1px solid;
+    "title title title dates"
+    "description description description description";
+    gap: 0.5rem 1rem;
+    //border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.25rem;
 }
 
 .noteHeader {
     grid-area: title;
     display: flex;
     flex-direction: row;
+    align-items: center;
     height: fit-content;
+    gap: 0.5rem;
 }
 
 .noteItemTitle {
-    border: 1px solid lightcoral;
+   margin: 0 0 0.5rem 0;
 }
 
 .noteItemDates {
     grid-area: dates;
-    border: 2px solid yellow;
+    font-size: small;
+    font-weight: bold;
 }
 
 .noteItemDescription {
     grid-area: description;
-    border: 2px solid lightgoldenrodyellow;
+    font-style: italic;
+    margin: 0;
 }
 
+.itemsDivider {
+    width: 100%;
+    //color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 166, 0, 0.5);
+}
+
+.actionFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: black;
+    color: orange
+}

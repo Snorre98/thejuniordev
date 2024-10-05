@@ -14,13 +14,13 @@ const MOCK_DATA = {
 						completed: false,
 						title: "Webutvikler",
 						description: "På Samfundet",
-						dates: "September 2022 - nå",
+						dates: "Sep. 2022 - nå",
 					},
 					{
 						completed: true,
-						title: "NTNU - jobb",
+						title: "NTNU - jobb NTNU - jobb NTNU - jobb",
 						description: "På Samfundet",
-						dates: "September 2022 - nå",
+						dates: "Sep. 2022 - nå",
 					},
 				],
 				Utdanning: [
@@ -28,13 +28,13 @@ const MOCK_DATA = {
 						completed: false,
 						title: "NTNU - Informatikk",
 						description: "Bachelorgrad",
-						dates: "August 2022 - nå",
+						dates: "Aug. 2022 - nå",
 					},
 					{
 						completed: true,
 						title: "NTNU - Kjemi",
 						description: "Bachelorgrad",
-						dates: "August 2022 - nå",
+						dates: "Aug. 2022 - nå",
 					},
 				],
 			},
@@ -59,20 +59,32 @@ export function BioDisplay() {
 			)}
 			<div className={styles.bioDisplayContainer}>
 				<div className={styles.notesActionRack}>
-					<button type="button" onClick={handleBackClick}>
-						back - Notater
+					<button
+						type="button"
+						onClick={handleBackClick}
+						className={styles.backBtn}
+					>
+						<Icon
+							icon="mdi:arrow-left-drop-circle"
+							width="1.2rem"
+							height="1.2rem"
+						/>
+						<span>Notater</span>
 					</button>
-					<Icon
-						icon={"ion:share-outline"}
-						width={"2rem"}
-						height={"2rem"}
-						color="white"
-					/>
-					<Icon
-						icon={"system-uicons:circle-menu"}
-						width={"2rem"}
-						height={"2rem"}
-					/>
+					<div>
+						<Icon
+							icon={"ion:share-outline"}
+							width={"2rem"}
+							height={"2rem"}
+							onClick={handleBackClick}
+						/>
+						<Icon
+							icon={"system-uicons:circle-menu"}
+							width={"2rem"}
+							height={"2rem"}
+							onClick={handleBackClick}
+						/>
+					</div>
 				</div>
 				<div className={styles.noteContent}>
 					{MOCK_DATA.NOTES_MOCK.map((note) => (
@@ -98,19 +110,48 @@ export function BioDisplay() {
 															height={"1.25rem"}
 														/>
 													)}
-													<h3 className={styles.noteItemTitle}>{item.title}</h3>
+													<h4 className={styles.noteItemTitle}>{item.title}</h4>
 												</div>
+												<span className={styles.noteItemDates}>
+													{item.dates}
+												</span>
 												<p className={styles.noteItemDescription}>
 													{item.description}
 												</p>
-												<p className={styles.noteItemDates}>{item.dates}</p>
 											</div>
 										))}
 									</div>
+									<hr className={styles.itemsDivider} />
 								</div>
 							))}
 						</React.Fragment>
 					))}
+				</div>
+				<div className={styles.actionFooter}>
+					<Icon
+						icon={"ph:list-checks-light"}
+						width={"2rem"}
+						height={"2rem"}
+						onClick={handleBackClick}
+					/>
+					<Icon
+						icon={"ph:camera-light"}
+						width={"2rem"}
+						height={"2rem"}
+						onClick={handleBackClick}
+					/>
+					<Icon
+						icon={"ph:pencil-circle-light"}
+						width={"2rem"}
+						height={"2rem"}
+						onClick={handleBackClick}
+					/>
+					<Icon
+						icon={"ph:note-pencil-light"}
+						width={"2rem"}
+						height={"2rem"}
+						onClick={handleBackClick}
+					/>
 				</div>
 			</div>
 		</Screen>
