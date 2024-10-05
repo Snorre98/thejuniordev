@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Page } from './Components';
 import { Screen } from './Components/Screen';
 import { Line } from './Components/Screen/components';
-import { BioDisplay, ChatDisplay, HomeDisplay, LockDisplay, MessagesDisplay, ProjectDisplay } from './Display';
-import type { Thread } from './api/chatApi';
 import DEFAULT_BG from './assets/background-two.jpg';
+import { useNavigation } from './hooks/useNavigation';
 import { useStore } from './store';
 
 const App = () => {
-  const { currentScreen, setScreen, setBackground, setDefaultBackground } = useStore();
-  const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
+  const { setBackground, setDefaultBackground } = useStore();
+  const { getCurrentRoute, navigate, params } = useNavigation();
 
   useEffect(() => {
     setDefaultBackground(DEFAULT_BG);
@@ -21,77 +20,20 @@ const App = () => {
     if (opens.startsWith('http')) {
       window.open(opens, '_blank');
     } else {
-      setScreen(opens as any);
+      navigate(`/${opens}`);
     }
-  };
-
-  const pullUpBehaviors = {
-    lock: () => setScreen('home'),
-    chat: () => setScreen('home'),
-    messages: () => setScreen('home'),
-    bio: () => setScreen('home'),
-    projects: () => setScreen('home'),
   };
 
   const handlePullUp = () => {
-    const behavior = pullUpBehaviors[currentScreen as keyof typeof pullUpBehaviors];
-    if (behavior) {
-      behavior();
-    } else {
-      setScreen('home');
-    }
+    navigate('/home');
   };
 
-  const renderCurrentScreen = () => {
-    switch (currentScreen) {
-      case 'lock':
-        return (
-          <LockDisplay
-            onNotificationClick={() => {
-              setScreen('messages');
-            }}
-          />
-        );
-      case 'home':
-        return <HomeDisplay onOpenApp={handleOpenApp} />;
-      case 'messages':
-        return (
-          <MessagesDisplay
-            onSelectThread={(thread: Thread) => {
-              setSelectedThread(thread);
-              setScreen('chat');
-            }}
-          />
-        );
-      case 'chat':
-        return selectedThread ? (
-          <ChatDisplay thread={selectedThread} onBack={() => setScreen('messages')} />
-        ) : (
-          <MessagesDisplay
-            onSelectThread={(thread: Thread) => {
-              setSelectedThread(thread);
-              setScreen('chat');
-            }}
-          />
-        );
-      case 'project':
-        return <ProjectDisplay />;
-      case 'bio':
-        return <BioDisplay />;
-      default:
-        return (
-          <LockDisplay
-            onNotificationClick={() => {
-              setScreen('messages');
-            }}
-          />
-        );
-    }
-  };
-
-  const { backgrounds, defaultBackground } = useStore();
+  const { backgrounds, defaultBackground, currentScreen } = useStore();
   const background = backgrounds[currentScreen] || defaultBackground;
-  const showLine = currentScreen in pullUpBehaviors;
+  const showLine = currentScreen !== 'home';
+
+  const CurrentComponent = getCurrentRoute()?.component;
+
   return (
     <Page>
       <Screen>
@@ -103,7 +45,7 @@ const App = () => {
             position: 'relative',
           }}
         >
-          {renderCurrentScreen()}
+          {CurrentComponent && <CurrentComponent onOpenApp={handleOpenApp} {...params} />}
           {showLine && <Line onPullUp={handlePullUp} />}
         </div>
       </Screen>
