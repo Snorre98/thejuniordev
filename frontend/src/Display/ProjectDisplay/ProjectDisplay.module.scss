@@ -1,69 +1,129 @@
+/* stylelint-disable scss/dollar-variable-pattern */
+/* stylelint-disable selector-class-pattern */
 $background: #010409;
 $contentItem: #0d1117;
 $createBtn: #238636;
-$actionBtn: #212830;
+$btnBackground: #212830;
 $border: #191e24;
 $shadow: #2d38458e;
+$scrollbar-bg: #558027;
+$scrollbar-thumb: #30363d;
+$scrollbar-thumb-hover: #6e7681;
+$btnBorder: #373d46;
+$btnHover: #2a313c;
 
-.projectContainer{
+.projectContainer {
     width: 100%;
     height: 100%;
-    background: #010409;
+    background: $background;
     display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow: hidden;
 }
 
-.projectHeader{
+.projectHeader {
+    display: grid;
     width: 100%;
     height: fit-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    grid-template-areas: 
+    "image image title title"
+    "image image participants category"
+    "ghbtn ghbtn ghbtn ghbtn";
     padding-top: 2rem;
-    padding-bottom: 2rem;
-    background: #0d1117;
+    padding-bottom: 0.5rem;
+    background: $contentItem;
+    border-radius: 0 0 0.25rem 0.25rem;
+    gap: 0.5rem;
+
+    & h5, p, ul {
+        margin: 0;
+        font-size: small;
+    }
 }
 
-.blurredBackground {
-    width: 120px;
-    height: 120px;
-    border-radius: 0.5rem;
-    background-color: rgb(255 255 255 / 40%);
-    backdrop-filter: 20px;
+.projectIconWrapper {
+    grid-area: image;
     display: flex;
-    align-items: center;
     justify-content: center;
-    border: 2px solid red;
-}
-
-.blurredIcon {
-    width: 120px;
-    height: 120px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.projectIconWrapper{
+    align-items: center;
     width: 90px;
+    min-width: 90px;
     height: 90px;
     overflow: hidden;
     border-radius: 0.5rem;
     outline: 1px solid $border;
-    box-shadow: 0 0 10px 4px #2d38458e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 0 10px 4px $shadow;
 }
 
-.projectIcon{
+.projectIcon {
     width: 100px;
     height: 100px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .projectTitle {
-    align-self: end;
-    border: 2px solid red;
+    grid-area: title;
+    margin: 0;
+    max-height: 90px;
+    height: fit-content;
+    border-bottom: 2px solid $border;
+    overflow: hidden;
+}
+
+.projectParticipants {
+    grid-area: participants;
+}
+.projectCategory{
+    grid-area: category;
+}
+
+.ghBtn {
+    grid-area: ghbtn;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid $btnBorder;
+    background: $btnBackground;
+    border-radius: 6px;
+    
+    &:hover {
+        background: $btnHover;
+    }
+}
+
+.projectContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: $contentItem;
+    border-radius:0.25rem 0.25rem 0 0;
+    overflow: hidden scroll;
+}
+
+
+
+.projectDescription {
+    margin: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: 2px solid $border;
+    
+    & h3 {
+        margin:0;
+        padding: 0;
+    }
+
+    & p {
+        margin-top: 0;
+    }
+
+    & ul {
+        margin-top: 0;
+    }
 }
