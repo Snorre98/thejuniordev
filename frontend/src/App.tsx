@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Page } from "./Components";
 import {
+	BioDisplay,
 	ChatDisplay,
 	HomeDisplay,
 	LockDisplay,
@@ -62,6 +63,7 @@ const App = () => {
 				/>
 			)}
 			{currentScreen === "project" && <ProjectDisplay />}
+			{currentScreen === "bio" && <BioDisplay />}
 		</Page>
 	);
 };
