@@ -3,11 +3,11 @@
   flex-direction: row;
   width: 95%;
   height: 50%;
-  background-color: rgba(49, 49, 49, 0.7);
+  background-color: rgb(49 49 49 / 70%);
   border-radius: 1em;
   backdrop-filter: blur(20px);
   font-family: "Roboto Mono";
-  padding: 0.15rem 0.25rem 0.15rem 0.25rem;
+  padding: 0.15rem 0.25rem;
 
   &:hover {
     cursor: pointer;
@@ -34,7 +34,7 @@
 }
 
 .notificationContent {
-  margin: 0 0.5em 0 0.5em;
+  margin: 0 0.5em;
   font-size: 0.7rem;
   text-align: left;
 }

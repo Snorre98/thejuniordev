@@ -1,0 +1,69 @@
+$background: #010409;
+$contentItem: #0d1117;
+$createBtn: #238636;
+$actionBtn: #212830;
+$border: #191e24;
+$shadow: #2d38458e;
+
+.projectContainer{
+    width: 100%;
+    height: 100%;
+    background: #010409;
+    display: flex;
+}
+
+.projectHeader{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background: #0d1117;
+}
+
+.blurredBackground {
+    width: 120px;
+    height: 120px;
+    border-radius: 0.5rem;
+    background-color: rgb(255 255 255 / 40%);
+    backdrop-filter: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
+}
+
+.blurredIcon {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.projectIconWrapper{
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    outline: 1px solid $border;
+    box-shadow: 0 0 10px 4px #2d38458e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projectIcon{
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.projectTitle {
+    align-self: end;
+    border: 2px solid red;
+}

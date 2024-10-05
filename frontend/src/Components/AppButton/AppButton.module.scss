@@ -1,10 +1,9 @@
 .appContainer {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   align-items: center;
   justify-content: center;
   text-align: center;
-  flex-wrap: wrap;
   max-width: 20%;
 }
 
@@ -21,6 +20,7 @@
 .appIcon {
   width: 45px;
   height: 45px;
+
   &:hover {
     cursor: pointer;
   }
@@ -30,7 +30,7 @@
   font-size: 0.75rem;
   font-weight: bolder;
   text-shadow: 2px 2px 2px black;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Safari */
+  user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
