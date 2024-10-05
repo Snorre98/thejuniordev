@@ -3,10 +3,12 @@
     background-color: black;
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-areas: 
-    "action-rack action-rack"
-    "note-content note-content";
+    // display: grid;
+    // grid-template-areas: 
+    // "action-rack action-rack"
+    // "note-content note-content";
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 
@@ -23,32 +25,58 @@
 .noteContent {
     grid-item:note-content;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.notesHeader {
+    border-bottom: 2px solid orange;
+    margin-top: 0;
+}
+
+// .noteTextWrapper {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+.noteSubtitle {
+    margin-bottom: 0;
+    border-bottom: 1px solid orange;
+}
+
+// .noteSections {
+//     border: 2px solid green;
+// }
+
+
+
+.noteSection {
+    display: grid;
+    grid-template-areas: 
+    "title title dates"
+    "description description description";
+    border-bottom: 1px solid;
 }
 
 .noteHeader {
-    border: 2px solid red;
-}
-
-.noteTextWrapper {
-    border: 2px solid yellow;
-}
-
-.noteSubtitle {
-    border: 2px solid lightblue;
-}
-
-.noteSections {
-    border: 2px solid green;
-}
-
-.noteSection {
-    border: 2px solid peru;
+    grid-area: title;
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
 }
 
 .noteItemTitle {
-    border: 2px solid lightcoral;
+    border: 1px solid lightcoral;
+}
+
+.noteItemDates {
+    grid-area: dates;
+    border: 2px solid yellow;
 }
 
 .noteItemDescription {
+    grid-area: description;
     border: 2px solid lightgoldenrodyellow;
 }
+

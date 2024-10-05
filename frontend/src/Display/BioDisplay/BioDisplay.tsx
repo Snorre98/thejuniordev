@@ -77,27 +77,29 @@ export function BioDisplay() {
 				<div className={styles.noteContent}>
 					{MOCK_DATA.NOTES_MOCK.map((note) => (
 						<React.Fragment>
-							<h1 className={styles.noteHeader}>{note.NOTE_TITLE}</h1>
+							<h1 className={styles.notesHeader}>{note.NOTE_TITLE}</h1>
 							{note.NOTE_SUBTITLES.map((subtitle) => (
 								<div className={styles.noteTextWrapper}>
-									<h4 className={styles.noteSubtitle}>{subtitle}</h4>
+									<h2 className={styles.noteSubtitle}>{subtitle}</h2>
 									<div className={styles.noteSections}>
 										{note.NOTE_CONTENTS[subtitle].map((item) => (
 											<div className={styles.noteSection}>
-												{item.completed ? (
-													<Icon
-														icon={"mdi:checkbox-marked-circle-outline"}
-														width={"1.25rem"}
-														height={"1.25rem"}
-													/>
-												) : (
-													<Icon
-														icon={"mdi:checkbox-blank-circle-outline"}
-														width={"1.25rem"}
-														height={"1.25rem"}
-													/>
-												)}
-												<p className={styles.noteItemTitle}>{item.title}</p>
+												<div className={styles.noteHeader}>
+													{item.completed ? (
+														<Icon
+															icon={"mdi:checkbox-marked-circle-outline"}
+															width={"1.25rem"}
+															height={"1.25rem"}
+														/>
+													) : (
+														<Icon
+															icon={"mdi:checkbox-blank-circle-outline"}
+															width={"1.25rem"}
+															height={"1.25rem"}
+														/>
+													)}
+													<h3 className={styles.noteItemTitle}>{item.title}</h3>
+												</div>
 												<p className={styles.noteItemDescription}>
 													{item.description}
 												</p>
