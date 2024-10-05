@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
-import { type ScreenProps } from '../../Components';
 import { Notification } from '../../Components/Notification';
 import type { NotificationProps } from '../../Components/Notification/Notification';
 import { Watch } from '../../Components/Watch';
 import { fetchLatestMessage, fetchUser } from '../../api/chatApi';
 import styles from './LockDisplay.module.scss';
 
-interface LockDisplayProps extends ScreenProps {
-  onPullUp: () => void;
+interface LockDisplayProps {
   onNotificationClick: () => void;
 }
 
-export function LockDisplay({ onPullUp, onNotificationClick }: LockDisplayProps) {
+export function LockDisplay({ onNotificationClick }: LockDisplayProps) {
   const [latestNotification, setLatestNotification] = useState<NotificationProps | null>(null);
 
   useEffect(() => {
@@ -31,7 +29,6 @@ export function LockDisplay({ onPullUp, onNotificationClick }: LockDisplayProps)
   }, []);
 
   return (
-    // <Screen onPullUp={onPullUp}>
     <div className={styles.lockScreenContainer}>
       <div className={styles.watchWrapper}>
         <Watch />
@@ -46,6 +43,5 @@ export function LockDisplay({ onPullUp, onNotificationClick }: LockDisplayProps)
         )}
       </div>
     </div>
-    // </Screen>
   );
 }

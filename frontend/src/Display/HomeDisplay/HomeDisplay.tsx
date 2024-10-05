@@ -15,7 +15,7 @@ interface HomeDisplayProps extends ScreenProps {
   onOpenApp: (opens: string) => void;
 }
 
-export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
+export function HomeDisplay({ onOpenApp }: HomeDisplayProps) {
   const [apps, setApps] = useState<App[]>([]);
   const [favoriteApps, setFavoriteApps] = useState<App[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -79,11 +79,9 @@ export function HomeDisplay({ onBack, onOpenApp, ...props }: HomeDisplayProps) {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    // <Screen onBack={onBack} {...props}>
     <div className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ''}`}>
       <div className={styles.appsContainer}>{apps.map(renderApps)}</div>
       <div className={styles.favoriteApps}>{favoriteApps.map(renderFavApps)}</div>
     </div>
-    // </Screen>
   );
 }

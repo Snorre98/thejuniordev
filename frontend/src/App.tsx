@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Page } from './Components';
 import { Screen } from './Components/Screen';
+import { Line } from './Components/Screen/components';
 import { BioDisplay, ChatDisplay, HomeDisplay, LockDisplay, MessagesDisplay, ProjectDisplay } from './Display';
 import type { Thread } from './api/chatApi';
 import DEFAULT_BG from './assets/background-two.jpg';
 import { useStore } from './store';
+
 const App = () => {
   const { currentScreen, setScreen, setBackground, setDefaultBackground } = useStore();
   const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
@@ -12,47 +14,98 @@ const App = () => {
   useEffect(() => {
     setDefaultBackground(DEFAULT_BG);
     setBackground('messages', 'NONE');
-    setBackground('chat', 'NONE'); // No background for messages screen
+    setBackground('chat', 'NONE');
   }, [setDefaultBackground, setBackground]);
 
   const handleOpenApp = (opens: string) => {
     if (opens.startsWith('http')) {
       window.open(opens, '_blank');
     } else {
-      setScreen(opens as string); // Cast to any as setScreen might not accept all string values
+      setScreen(opens as any);
     }
   };
 
-  return (
-    <Page>
-      <Screen>
-        {currentScreen === 'lock' && (
+  const pullUpBehaviors = {
+    lock: () => setScreen('home'),
+    chat: () => setScreen('home'),
+    messages: () => setScreen('home'),
+    bio: () => setScreen('home'),
+    projects: () => setScreen('home'),
+  };
+
+  const handlePullUp = () => {
+    const behavior = pullUpBehaviors[currentScreen as keyof typeof pullUpBehaviors];
+    if (behavior) {
+      behavior();
+    } else {
+      setScreen('home');
+    }
+  };
+
+  const renderCurrentScreen = () => {
+    switch (currentScreen) {
+      case 'lock':
+        return (
           <LockDisplay
-            onPullUp={() => setScreen('home')}
             onNotificationClick={() => {
               setScreen('messages');
             }}
           />
-        )}
-        {currentScreen === 'home' && <HomeDisplay onOpenApp={handleOpenApp} />}
-        {currentScreen === 'messages' && (
+        );
+      case 'home':
+        return <HomeDisplay onOpenApp={handleOpenApp} />;
+      case 'messages':
+        return (
           <MessagesDisplay
             onSelectThread={(thread: Thread) => {
               setSelectedThread(thread);
               setScreen('chat');
             }}
-            onPullUp={() => setScreen('home')}
           />
-        )}
-        {currentScreen === 'chat' && selectedThread && (
-          <ChatDisplay
-            thread={selectedThread}
-            onBack={() => setScreen('messages')}
-            onPullUp={() => setScreen('home')}
+        );
+      case 'chat':
+        return selectedThread ? (
+          <ChatDisplay thread={selectedThread} onBack={() => setScreen('messages')} />
+        ) : (
+          <MessagesDisplay
+            onSelectThread={(thread: Thread) => {
+              setSelectedThread(thread);
+              setScreen('chat');
+            }}
           />
-        )}
-        {currentScreen === 'project' && <ProjectDisplay />}
-        {currentScreen === 'bio' && <BioDisplay />}
+        );
+      case 'project':
+        return <ProjectDisplay />;
+      case 'bio':
+        return <BioDisplay />;
+      default:
+        return (
+          <LockDisplay
+            onNotificationClick={() => {
+              setScreen('messages');
+            }}
+          />
+        );
+    }
+  };
+
+  const { backgrounds, defaultBackground } = useStore();
+  const background = backgrounds[currentScreen] || defaultBackground;
+  const showLine = currentScreen in pullUpBehaviors;
+  return (
+    <Page>
+      <Screen>
+        <div
+          style={{
+            backgroundImage: background === 'NONE' ? 'none' : background ? `url(${background})` : 'none',
+            height: '100%',
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          {renderCurrentScreen()}
+          {showLine && <Line onPullUp={handlePullUp} />}
+        </div>
       </Screen>
     </Page>
   );
