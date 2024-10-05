@@ -1,5 +1,54 @@
 
 .bioDisplayContainer {
-    display: flex;
     background-color: black;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    "action-rack action-rack"
+    "note-content note-content";
+    overflow: hidden;
+}
+
+.notesActionRack {
+    grid-area: action-rack;
+    width: 100%;
+    height: fit-content;
+    padding: 1rem 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.noteContent {
+    grid-item:note-content;
+    overflow: scroll;
+}
+
+.noteHeader {
+    border: 2px solid red;
+}
+
+.noteTextWrapper {
+    border: 2px solid yellow;
+}
+
+.noteSubtitle {
+    border: 2px solid lightblue;
+}
+
+.noteSections {
+    border: 2px solid green;
+}
+
+.noteSection {
+    border: 2px solid peru;
+}
+
+.noteItemTitle {
+    border: 2px solid lightcoral;
+}
+
+.noteItemDescription {
+    border: 2px solid lightgoldenrodyellow;
 }
