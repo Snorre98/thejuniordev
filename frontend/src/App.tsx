@@ -5,6 +5,7 @@ import {
 	HomeDisplay,
 	LockDisplay,
 	MessagesDisplay,
+	ProjectDisplay,
 } from "./Display";
 import type { Thread } from "./api/chatApi";
 import DEFAULT_BG from "./assets/background-two.jpg";
@@ -60,6 +61,7 @@ const App = () => {
 					onPullUp={() => setScreen("home")}
 				/>
 			)}
+			{currentScreen === "project" && <ProjectDisplay />}
 		</Page>
 	);
 };

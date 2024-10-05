@@ -1,13 +1,6 @@
 import type { StateCreator } from "zustand";
 
-export type Screen =
-	| "lock"
-	| "home"
-	| "messages"
-	| "bio"
-	| "portfolio"
-	| "cv"
-	| "chat";
+export type Screen = "lock" | "home" | "messages" | "bio" | "chat" | "project";
 
 export type AppState = {
 	currentScreen: Screen;
