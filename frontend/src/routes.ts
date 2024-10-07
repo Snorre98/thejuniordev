@@ -2,6 +2,7 @@
 import {
 	BioDisplay,
 	ChatDisplay,
+	ErrorDisplay,
 	HomeDisplay,
 	LockDisplay,
 	MessagesDisplay,
@@ -35,6 +36,8 @@ export const routes: Record<Screens, React.ComponentType<any>> = {
 	chat: ChatDisplay,
 	project: ProjectDisplay,
 	bio: BioDisplay,
+	error: ErrorDisplay,
+	loading: LockDisplay,
 };
 
 export const useRoutes = () => {
