@@ -1,0 +1,33 @@
+.comingSoonAlert {
+  position: fixed;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: #210b55bc;
+  backdrop-filter: blur(7px);
+  border: 1px solid #210b55;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comingSoonHeader {
+  display: flex;
+  align-items: center;
+}
+
+.comingSoonIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  color: #ffffff;
+}
+
+.comingSoonTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
