@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import type { ScreenProps } from "../../Components";
 import { AppButton } from "../../Components/AppButton";
 import { getApps, getFavoriteApps, getFullIconUrl } from "../../api/appApi";
+import { useStore } from "../../store/store";
 import { ErrorDisplay } from "../ErrorDisplay";
 import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./HomeDisplay.module.scss";
@@ -13,16 +13,17 @@ type App = {
 	icon_url: string;
 };
 
-interface HomeDisplayProps extends ScreenProps {
-	onOpenApp: (opens: string) => void;
+interface HomeDisplayProps {
+	onSelectApp: (appId: number) => void;
 }
 
-export function HomeDisplay({ onOpenApp }: HomeDisplayProps) {
+export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 	const [apps, setApps] = useState<App[]>([]);
 	const [favoriteApps, setFavoriteApps] = useState<App[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const [isVisible, setIsVisible] = useState(false);
+	const { setCurrentAppId } = useStore();
 
 	const fetchData = useCallback(async () => {
 		try {
@@ -55,37 +56,48 @@ export function HomeDisplay({ onOpenApp }: HomeDisplayProps) {
 		return () => clearTimeout(timer);
 	}, [fetchData]);
 
+	const handleOpenApp = useCallback(
+		(app: App) => {
+			setCurrentAppId(app.id);
+			onSelectApp(app.id);
+		},
+		[setCurrentAppId],
+	);
+
 	const renderApps = useCallback(
 		(app: App) => (
 			<AppButton
 				key={app.id}
-				onOpenApp={() => onOpenApp(app.opens)}
+				onOpenApp={() => handleOpenApp(app)}
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={false}
 			/>
 		),
-		[onOpenApp],
+		[handleOpenApp],
 	);
 
 	const renderFavApps = useCallback(
 		(app: App) => (
 			<AppButton
 				key={app.id}
-				onOpenApp={() => onOpenApp(app.opens)}
+				onOpenApp={() => handleOpenApp(app)}
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={true}
 			/>
 		),
-		[onOpenApp],
+		[handleOpenApp],
 	);
+
 	if (isLoading) return <LoadingDisplay />;
 	if (error) return <ErrorDisplay error={"Error fetching apps"} />;
 
 	return (
 		<div
-			className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ""}`}
+			className={`${styles.homeScreenContainer} ${
+				isVisible ? styles.homeScreenContainerVisible : ""
+			}`}
 		>
 			<div className={styles.appsContainer}>{apps.map(renderApps)}</div>
 			<div className={styles.favoriteApps}>

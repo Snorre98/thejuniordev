@@ -1,4 +1,3 @@
-// routes.ts
 import {
 	BioDisplay,
 	ChatDisplay,
@@ -12,15 +11,13 @@ import { useNavigation } from "./hooks/useNavigation";
 import { useStore } from "./store/store";
 import type { Screens } from "./types";
 
-// Define prop types for each component
 type LockDisplayProps = { onNotificationClick: () => void };
-type HomeDisplayProps = { onOpenApp: (opens: string) => void };
+type HomeDisplayProps = { onSelectApp: (appId: number) => void };
 type MessagesDisplayProps = { onSelectThread: () => void };
 type ChatDisplayProps = { onBack: () => void };
 type ProjectDisplayProps = {};
 type BioDisplayProps = {};
 
-// Create a union type of all possible prop types
 type ComponentProps =
 	| LockDisplayProps
 	| HomeDisplayProps
@@ -42,14 +39,11 @@ export const routes: Record<Screens, React.ComponentType<any>> = {
 
 export const useRoutes = () => {
 	const { navigate } = useNavigation();
-	const { currentScreen, clearCurrentThreadId } = useStore();
+	const { currentScreen, clearCurrentThreadId, setCurrentAppId } = useStore();
 
-	const handleOpenApp = (opens: string) => {
-		if (opens.startsWith("http")) {
-			window.open(opens, "_blank");
-		} else {
-			navigate(opens as Screens);
-		}
+	const handleSelectApp = (appId: number) => {
+		setCurrentAppId(appId);
+		navigate("project");
 	};
 
 	const handlePullUp = () => {
@@ -66,7 +60,9 @@ export const useRoutes = () => {
 					onNotificationClick: () => navigate("messages"),
 				} as LockDisplayProps;
 			case "home":
-				return { onOpenApp: handleOpenApp } as HomeDisplayProps;
+				return {
+					onSelectApp: handleSelectApp,
+				} as HomeDisplayProps;
 			case "messages":
 				return {
 					onSelectThread: () => navigate("chat"),
