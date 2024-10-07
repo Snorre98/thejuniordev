@@ -1,19 +1,21 @@
 import type { StateCreator } from "zustand";
+import type { Screens } from "../../types";
+import type { CombinedState } from "../store";
 
-export type Screen = "lock" | "home" | "messages" | "bio" | "chat" | "project";
-
-export type AppState = {
-	currentScreen: Screen;
+export interface AppState {
+	currentScreen: Screens;
 	isPulledUp: boolean;
-	backgrounds: { [key in Screen]?: string };
+	backgrounds: { [key in Screens]?: string };
 	defaultBackground: string;
-	setScreen: (screen: Screen) => void;
+	setScreen: (screen: Screens) => void;
 	setPulledUp: (isPulledUp: boolean) => void;
-	setBackground: (screen: Screen, background: string) => void;
+	setBackground: (screen: Screens, background: string) => void;
 	setDefaultBackground: (background: string) => void;
-};
+}
 
-export const createAppSlice: StateCreator<AppState> = (set) => ({
+export const createAppSlice: StateCreator<CombinedState, [], [], AppState> = (
+	set,
+) => ({
 	currentScreen: "lock",
 	isPulledUp: false,
 	backgrounds: {},
@@ -21,7 +23,8 @@ export const createAppSlice: StateCreator<AppState> = (set) => ({
 	setScreen: (screen) => set({ currentScreen: screen }),
 	setPulledUp: (isPulledUp) => set({ isPulledUp }),
 	setBackground: (screen, background) =>
-		set((state) => ({
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		set((state: { backgrounds: any }) => ({
 			backgrounds: { ...state.backgrounds, [screen]: background },
 		})),
 	setDefaultBackground: (background) => set({ defaultBackground: background }),

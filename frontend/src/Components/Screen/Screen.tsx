@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useStore } from "../../store";
+import { useStore } from "../../store/store";
 import styles from "./Screen.module.scss";
 import { Bezel, Line } from "./components";
 

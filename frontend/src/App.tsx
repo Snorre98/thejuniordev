@@ -1,69 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Page } from "./Components";
-import {
-	BioDisplay,
-	ChatDisplay,
-	HomeDisplay,
-	LockDisplay,
-	MessagesDisplay,
-	ProjectDisplay,
-} from "./Display";
-import type { Thread } from "./api/chatApi";
+import { Screen } from "./Components/Screen";
+import { Line } from "./Components/Screen/components";
 import DEFAULT_BG from "./assets/background-two.jpg";
-import { useStore } from "./store";
+import { useRoutes } from "./routes";
+import { useStore } from "./store/store";
 
 const App = () => {
-	const { currentScreen, setScreen, setBackground, setDefaultBackground } =
-		useStore();
-	const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
+	const {
+		setBackground,
+		setDefaultBackground,
+		backgrounds,
+		defaultBackground,
+	} = useStore();
+	const { CurrentComponent, getComponentProps, currentScreen, handlePullUp } =
+		useRoutes();
 
 	useEffect(() => {
 		setDefaultBackground(DEFAULT_BG);
 		setBackground("messages", "NONE");
-		setBackground("chat", "NONE"); // No background for messages screen
-	}, [setDefaultBackground, setBackground]);
+		setBackground("chat", "NONE");
+	}, [setBackground, setDefaultBackground]);
 
-	const handleOpenApp = (opens: string) => {
-		if (opens.startsWith("http")) {
-			window.open(opens, "_blank");
-		} else {
-			setScreen(opens as string); // Cast to any as setScreen might not accept all string values
-		}
-	};
-
-	const handleSelectThread = (thread: Thread) => {
-		setSelectedThread(thread);
-		setScreen("chat");
-	};
-
-	const handleNotificationClick = () => {
-		setScreen("messages");
-	};
+	const background = backgrounds[currentScreen] || defaultBackground;
+	const showLine = currentScreen !== "home";
 
 	return (
 		<Page>
-			{currentScreen === "lock" && (
-				<LockDisplay
-					onPullUp={() => setScreen("home")}
-					onNotificationClick={handleNotificationClick}
-				/>
-			)}
-			{currentScreen === "home" && <HomeDisplay onOpenApp={handleOpenApp} />}
-			{currentScreen === "messages" && (
-				<MessagesDisplay
-					onSelectThread={handleSelectThread}
-					onPullUp={() => setScreen("home")}
-				/>
-			)}
-			{currentScreen === "chat" && selectedThread && (
-				<ChatDisplay
-					thread={selectedThread}
-					onBack={() => setScreen("messages")}
-					onPullUp={() => setScreen("home")}
-				/>
-			)}
-			{currentScreen === "project" && <ProjectDisplay />}
-			{currentScreen === "bio" && <BioDisplay />}
+			<Screen>
+				<div
+					style={{
+						backgroundImage:
+							background === "NONE"
+								? "none"
+								: background
+									? `url(${background})`
+									: "none",
+						height: "100%",
+						width: "100%",
+						position: "relative",
+					}}
+				>
+					{CurrentComponent && <CurrentComponent {...getComponentProps()} />}
+					{showLine && <Line onPullUp={handlePullUp} />}
+				</div>
+			</Screen>
 		</Page>
 	);
 };

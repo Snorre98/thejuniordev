@@ -1,51 +1,46 @@
 import { useEffect, useState } from "react";
-import { Message, Screen, type ScreenProps } from "../../Components";
+import { Message } from "../../Components";
 import { type Thread, fetchThreads, getFullIconUrl } from "../../api/chatApi";
+import { useStore } from "../../store/store";
 import styles from "./MessagesDisplay.module.scss";
 
-interface MessagesDisplayProps extends ScreenProps {
-	onSelectThread: (thread: Thread) => void;
-	onPullUp?: () => void;
+interface MessagesDisplayProps {
+	onSelectThread: (threadId: string) => void;
 }
 
-export function MessagesDisplay({
-	onPullUp,
-	onSelectThread,
-	...props
-}: MessagesDisplayProps) {
+export function MessagesDisplay({ onSelectThread }: MessagesDisplayProps) {
 	const [threads, setThreads] = useState<Thread[]>([]);
+	const { setCurrentThreadId } = useStore();
 
 	useEffect(() => {
 		const loadThreads = async () => {
 			const fetchedThreads = await fetchThreads();
 			setThreads(fetchedThreads);
 		};
-
 		loadThreads();
 	}, []);
 
-	const handleThreadClick = (thread: Thread) => {
-		onSelectThread(thread);
+	const handleThreadClick = (threadId: string) => {
+		setCurrentThreadId(threadId);
+		onSelectThread(threadId);
 	};
 
 	return (
-		<Screen onPullUp={onPullUp} {...props}>
-			<div className={styles.messagesContainer}>
-				<div className={styles.msgScreenTitle}>
-					<h5 className={styles.messageScreenTitle}>Meldinger</h5>
-				</div>
-				<input className={styles.searchBar} placeholder="søk" type="text" />
-				{threads.map((thread) => (
-					<Message
-						key={thread.id}
-						message={thread.last_message.message_text}
-						avatar={getFullIconUrl(thread.user_2.avatar)}
-						sender={thread.user_2.user_name}
-						onClick={() => handleThreadClick(thread)}
-						thread={thread.id}
-					/>
-				))}
+		<div className={styles.messagesContainer}>
+			<div className={styles.msgScreenTitle}>
+				<h5 className={styles.messageScreenTitle}>Meldinger</h5>
 			</div>
-		</Screen>
+			<input className={styles.searchBar} placeholder="søk" type="text" />
+			{threads.map((thread) => (
+				<Message
+					key={thread.id}
+					message={thread.last_message?.message_text || ""}
+					avatar={getFullIconUrl(thread.user_2?.avatar || "")}
+					sender={thread.user_2?.user_name || ""}
+					onClick={() => handleThreadClick(thread.id)}
+					thread={thread.id}
+				/>
+			))}
+		</div>
 	);
 }

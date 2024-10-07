@@ -1,4 +1,4 @@
-import { THEME_KEY, ThemeValue } from './constants';
+import { THEME_KEY, type ThemeValue } from './constants';
 
 export function getGlobalBackgroundColor(): string {
   return window.getComputedStyle(document.body, null).getPropertyValue('background-color');

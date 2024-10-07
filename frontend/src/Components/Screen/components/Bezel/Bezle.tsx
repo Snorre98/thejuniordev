@@ -1,4 +1,4 @@
-import { useStore } from "../../../../store";
+import { useStore } from "../../../../store/store";
 import type { Children } from "../../../../types";
 import styles from "./Bezel.module.scss";
 
@@ -10,7 +10,7 @@ export function Bezel({ children }: BezelProps) {
 	const { setScreen } = useStore();
 
 	const handleLock = () => {
-		setScreen("bio");
+		setScreen("lock");
 	};
 
 	return (
@@ -19,7 +19,6 @@ export function Bezel({ children }: BezelProps) {
 				<span className={styles.notch} />
 				{children}
 			</div>
-			{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 			<span className={styles.lockButton} onClick={handleLock} />
 		</div>
 	);
