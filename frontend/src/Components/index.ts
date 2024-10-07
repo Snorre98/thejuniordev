@@ -1,5 +1,5 @@
 export { AppButton } from "./AppButton";
-export { CommingSoon } from "./CommingSoon";
+export { ComingSoon } from "./CommingSoon";
 export { Message } from "./Message";
 export { Page } from "./Page";
 export { Screen } from "./Screen";
