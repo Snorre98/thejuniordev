@@ -13,7 +13,7 @@ export async function getFavoriteApps() {
 	try {
 		const { data, error } = await supabase
 			.from("favorite_apps")
-			.select("id, app_title, opens, icon_url")
+			.select("id, app_title, opens, icon_url, project")
 			.order("app_title", { ascending: true });
 
 		if (error) {
@@ -31,7 +31,7 @@ export async function getApps() {
 	try {
 		const { data, error } = await supabase
 			.from("apps")
-			.select("id, app_title, opens, icon_url")
+			.select("id, app_title, opens, icon_url, project")
 			.order("app_title", { ascending: true });
 
 		if (error) {

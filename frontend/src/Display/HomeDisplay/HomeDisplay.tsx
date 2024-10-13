@@ -11,6 +11,7 @@ type App = {
 	app_title: string;
 	opens?: Screens;
 	icon_url: string;
+	project?: number;
 };
 
 interface HomeDisplayProps {
@@ -61,8 +62,10 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 			if (app.opens) {
 				setScreen(app.opens);
 			} else {
-				setCurrentAppId(app.id);
-				onSelectApp(app.id);
+				console.log(app.app_title);
+				console.log(app.id);
+				setCurrentAppId(app.project);
+				onSelectApp(app.project);
 			}
 		},
 		[setCurrentAppId, setScreen, onSelectApp],
