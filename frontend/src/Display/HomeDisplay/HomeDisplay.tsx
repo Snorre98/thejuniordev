@@ -63,9 +63,14 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 				setScreen(app.opens);
 			} else {
 				console.log(app.app_title);
-				console.log(app.id);
-				setCurrentAppId(app.project);
-				onSelectApp(app.project);
+				console.log("APP ID", app.id);
+				console.log("PROJECT: ", app.project);
+				setCurrentAppId(app.id); // Set the current app ID, not the project ID
+				if (app.project) {
+					onSelectApp(app.project); // Pass the project ID to onSelectApp if it exists
+				} else {
+					console.error("No project associated with this app");
+				}
 			}
 		},
 		[setCurrentAppId, setScreen, onSelectApp],

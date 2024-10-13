@@ -60,25 +60,19 @@ export async function getProjects() {
 
 export async function getProjectByAppId(appId: number) {
 	try {
-		const { data, error } = await supabase
-			.from("apps")
+		const { data: projectData, error } = await supabase
+			.from("project")
 			.select(`
-          id,
-          app_title,
-          icon_url,
-          opens,
-          project:project (
-            id,
-            title,
-            icon,
-            participants,
-            category,
-            repo,
-            description,
-            technology,
-            techlist
-          )
-        `)
+                id,
+                title,
+                icon,
+                participants,
+                category,
+                repo,
+                description,
+                technology,
+                techlist
+            `)
 			.eq("id", appId)
 			.single();
 
@@ -86,19 +80,11 @@ export async function getProjectByAppId(appId: number) {
 			throw error;
 		}
 
-		if (!data || !data.project) {
+		if (!projectData) {
 			throw new Error("Project not found for the given app ID");
 		}
 
-		return {
-			app: {
-				id: data.id,
-				app_title: data.app_title,
-				icon_url: data.icon_url,
-				opens: data.opens,
-			},
-			project: data.project,
-		};
+		return projectData;
 	} catch (error) {
 		console.error("Error fetching project by app ID:", error);
 		throw error;
