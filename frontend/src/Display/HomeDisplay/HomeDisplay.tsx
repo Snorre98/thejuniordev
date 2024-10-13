@@ -43,26 +43,28 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 		} catch (error) {
 			setError("Failed to fetch apps");
 			console.error(error);
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
+	// 	} finally {
+	// 		setIsLoading(false);
+	// 	}
+	// }, []);
 
-	useEffect(() => {
-		fetchData();
-		const timer = setTimeout(() => {
-			setIsVisible(true);
-		}, 30);
-		return () => clearTimeout(timer);
-	}, [fetchData]);
+	// useEffect(() => {
+	// 	fetchData();
+	// 	const timer = setTimeout(() => {
+	// 		setIsVisible(true);
+	// 	}, 30);
+	// 	return () => clearTimeout(timer);
+	// }, [fetchData]);
 
-	const handleOpenApp = useCallback(
-		(app: App) => {
-			setCurrentAppId(app.id);
-			onSelectApp(app.id);
-		},
-		[setCurrentAppId],
-	);
+	// const handleOpenApp = useCallback(
+	// 	(app: App) => {
+	// 		setCurrentAppId(app.id);
+	// 		onSelectApp(app.id);
+	// 	},
+	// 	[setCurrentAppId],
+	// );
+
+  // TODO: fix apps which open a "simple display"
 
 	const renderApps = useCallback(
 		(app: App) => (
