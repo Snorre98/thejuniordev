@@ -3,6 +3,8 @@ import type React from "react";
 import { useEffect, useState } from "react";
 import { ComingSoon } from "../../Components";
 import { type BioCategory, fetchBioData } from "../../api/bioApi";
+import { ErrorDisplay } from "../ErrorDisplay";
+import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./BioDisplay.module.scss";
 
 export function BioDisplay() {
@@ -36,12 +38,19 @@ export function BioDisplay() {
 		setTimeout(() => setShowComingSoon(false), 1500);
 	};
 
+	const formatTime = (startTime, endTime) => {
+		if (!endTime) {
+			return `${new Date(startTime).toLocaleDateString()} - nå`;
+		}
+		return `${new Date(startTime).toLocaleDateString()} - ${new Date(endTime).toLocaleDateString()}`;
+	};
+
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <LoadingDisplay />;
 	}
 
 	if (error) {
-		return <div>Error: {error}</div>;
+		return <ErrorDisplay error={error} />;
 	}
 
 	return (
@@ -103,9 +112,7 @@ export function BioDisplay() {
 											<h4 className={styles.noteItemTitle}>{item.title}</h4>
 										</div>
 										<span className={styles.noteItemDates}>
-											{item.start && item.end
-												? `${new Date(item.start).toLocaleDateString()} - ${item.end ? new Date(item.end).toLocaleDateString() : "nå"}`
-												: "Dates not specified"}
+											{formatTime(item.start, item.end)}
 										</span>
 										<p className={styles.noteItemDescription}>
 											{item.description}
