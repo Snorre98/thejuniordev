@@ -96,19 +96,17 @@ export function BioDisplay() {
 								{category.items.map((item) => (
 									<div key={item.id} className={styles.noteSection}>
 										<div className={styles.noteHeader}>
-											{item.completed ? (
-												<Icon
-													icon={"mdi:checkbox-marked-circle-outline"}
-													width={"1.25rem"}
-													height={"1.25rem"}
-												/>
-											) : (
-												<Icon
-													icon={"mdi:checkbox-blank-circle-outline"}
-													width={"1.25rem"}
-													height={"1.25rem"}
-												/>
-											)}
+											<Icon
+												icon={
+													item.completed
+														? "mdi:checkbox-marked-circle-outline"
+														: "mdi:checkbox-blank-circle-outline"
+												}
+												width={"1.25rem"}
+												height={"1.25rem"}
+												style={{ minWidth: "1.25rem", minHeight: "1.25rem" }}
+											/>
+
 											<h4 className={styles.noteItemTitle}>{item.title}</h4>
 										</div>
 										<span className={styles.noteItemDates}>
