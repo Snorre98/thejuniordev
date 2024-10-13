@@ -1,28 +1,30 @@
 import { useCallback, useEffect, useState } from "react";
-import type { ScreenProps } from "../../Components";
 import { AppButton } from "../../Components/AppButton";
 import { getApps, getFavoriteApps, getFullIconUrl } from "../../api/appApi";
+import { useStore } from "../../store/store";
+import type { Screens } from "../../types";
 import { ErrorDisplay } from "../ErrorDisplay";
 import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./HomeDisplay.module.scss";
-
 type App = {
 	id: number;
 	app_title: string;
-	opens: string;
+	opens?: Screens;
 	icon_url: string;
+	project?: number;
 };
 
-interface HomeDisplayProps extends ScreenProps {
-	onOpenApp: (opens: string) => void;
+interface HomeDisplayProps {
+	onSelectApp: (appId: number) => void;
 }
 
-export function HomeDisplay({ onOpenApp }: HomeDisplayProps) {
+export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 	const [apps, setApps] = useState<App[]>([]);
 	const [favoriteApps, setFavoriteApps] = useState<App[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const [isVisible, setIsVisible] = useState(false);
+	const { setCurrentAppId, setScreen } = useStore();
 
 	const fetchData = useCallback(async () => {
 		try {
@@ -51,41 +53,63 @@ export function HomeDisplay({ onOpenApp }: HomeDisplayProps) {
 		fetchData();
 		const timer = setTimeout(() => {
 			setIsVisible(true);
-		}, 30);
+		}, 35);
 		return () => clearTimeout(timer);
 	}, [fetchData]);
+
+	const handleOpenApp = useCallback(
+		(app: App) => {
+			if (app.opens) {
+				setScreen(app.opens);
+			} else {
+				console.log(app.app_title);
+				console.log("APP ID", app.id);
+				console.log("PROJECT: ", app.project);
+				setCurrentAppId(app.id); // Set the current app ID, not the project ID
+				if (app.project) {
+					onSelectApp(app.project); // Pass the project ID to onSelectApp if it exists
+				} else {
+					console.error("No project associated with this app");
+				}
+			}
+		},
+		[setCurrentAppId, setScreen, onSelectApp],
+	);
 
 	const renderApps = useCallback(
 		(app: App) => (
 			<AppButton
 				key={app.id}
-				onOpenApp={() => onOpenApp(app.opens)}
+				onOpenApp={() => handleOpenApp(app)}
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={false}
 			/>
 		),
-		[onOpenApp],
+		[handleOpenApp],
 	);
 
 	const renderFavApps = useCallback(
 		(app: App) => (
 			<AppButton
 				key={app.id}
-				onOpenApp={() => onOpenApp(app.opens)}
+				onOpenApp={() => handleOpenApp(app)}
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={true}
 			/>
 		),
-		[onOpenApp],
+		[handleOpenApp],
 	);
+
 	if (isLoading) return <LoadingDisplay />;
 	if (error) return <ErrorDisplay error={"Error fetching apps"} />;
 
 	return (
 		<div
-			className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ""}`}
+			className={`${styles.homeScreenContainer} ${
+				isVisible ? styles.homeScreenContainerVisible : ""
+			}`}
 		>
 			<div className={styles.appsContainer}>{apps.map(renderApps)}</div>
 			<div className={styles.favoriteApps}>

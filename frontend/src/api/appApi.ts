@@ -13,7 +13,7 @@ export async function getFavoriteApps() {
 	try {
 		const { data, error } = await supabase
 			.from("favorite_apps")
-			.select("id, app_title, opens, icon_url")
+			.select("id, app_title, opens, icon_url, project")
 			.order("app_title", { ascending: true });
 
 		if (error) {
@@ -31,7 +31,7 @@ export async function getApps() {
 	try {
 		const { data, error } = await supabase
 			.from("apps")
-			.select("id, app_title, opens, icon_url")
+			.select("id, app_title, opens, icon_url, project")
 			.order("app_title", { ascending: true });
 
 		if (error) {
@@ -42,5 +42,51 @@ export async function getApps() {
 	} catch (error) {
 		console.error("Error fetching apps:", error);
 		return [];
+	}
+}
+
+export async function getProjects() {
+	try {
+		const { data, error } = await supabase.from("projects").select("*");
+		if (error) {
+			throw error;
+		}
+		return data;
+	} catch (error) {
+		console.error("Error fetching apps:", error);
+		return [];
+	}
+}
+
+export async function getProjectByAppId(appId: number) {
+	try {
+		const { data: projectData, error } = await supabase
+			.from("project")
+			.select(`
+                id,
+                title,
+                icon,
+                participants,
+                category,
+                repo,
+                description,
+                technology,
+                techlist
+            `)
+			.eq("id", appId)
+			.single();
+
+		if (error) {
+			throw error;
+		}
+
+		if (!projectData) {
+			throw new Error("Project not found for the given app ID");
+		}
+
+		return projectData;
+	} catch (error) {
+		console.error("Error fetching project by app ID:", error);
+		throw error;
 	}
 }
