@@ -65,8 +65,6 @@ export function ProjectDisplay() {
 	if (error) return <ErrorDisplay error={"No page"} />;
 	if (!projectData) return <ErrorDisplay error={"No page data"} />;
 
-	//const { project, app } = projectData;
-
 	return (
 		<div className={styles.projectContainer}>
 			<div className={styles.projectHeader}>
