@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { AppButton } from "../../Components/AppButton";
 import { getApps, getFavoriteApps, getFullIconUrl } from "../../api/appApi";
 import { useStore } from "../../store/store";
+import type { Screens } from "../../types";
 import { ErrorDisplay } from "../ErrorDisplay";
 import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./HomeDisplay.module.scss";
-
 type App = {
 	id: number;
 	app_title: string;
-	opens: string;
+	opens?: Screens;
 	icon_url: string;
 };
 
@@ -23,7 +23,7 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const [isVisible, setIsVisible] = useState(false);
-	const { setCurrentAppId } = useStore();
+	const { setCurrentAppId, setScreen } = useStore();
 
 	const fetchData = useCallback(async () => {
 		try {
@@ -43,28 +43,30 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 		} catch (error) {
 			setError("Failed to fetch apps");
 			console.error(error);
-	// 	} finally {
-	// 		setIsLoading(false);
-	// 	}
-	// }, []);
+		} finally {
+			setIsLoading(false);
+		}
+	}, []);
 
-	// useEffect(() => {
-	// 	fetchData();
-	// 	const timer = setTimeout(() => {
-	// 		setIsVisible(true);
-	// 	}, 30);
-	// 	return () => clearTimeout(timer);
-	// }, [fetchData]);
+	useEffect(() => {
+		fetchData();
+		const timer = setTimeout(() => {
+			setIsVisible(true);
+		}, 35);
+		return () => clearTimeout(timer);
+	}, [fetchData]);
 
-	// const handleOpenApp = useCallback(
-	// 	(app: App) => {
-	// 		setCurrentAppId(app.id);
-	// 		onSelectApp(app.id);
-	// 	},
-	// 	[setCurrentAppId],
-	// );
-
-  // TODO: fix apps which open a "simple display"
+	const handleOpenApp = useCallback(
+		(app: App) => {
+			if (app.opens) {
+				setScreen(app.opens);
+			} else {
+				setCurrentAppId(app.id);
+				onSelectApp(app.id);
+			}
+		},
+		[setCurrentAppId, setScreen, onSelectApp],
+	);
 
 	const renderApps = useCallback(
 		(app: App) => (
