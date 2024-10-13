@@ -38,7 +38,7 @@ export function BioDisplay() {
 		setTimeout(() => setShowComingSoon(false), 1500);
 	};
 
-	const formatTime = (startTime, endTime) => {
+	const formatTime = (startTime: string, endTime: string | null) => {
 		if (!endTime) {
 			return `${new Date(startTime).toLocaleDateString()} - nå`;
 		}
