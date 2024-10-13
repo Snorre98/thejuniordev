@@ -4,7 +4,7 @@ import { supabase } from "../../supabaseClient";
 interface BioItem {
 	id: number;
 	title: string;
-	start: string | null;
+	start: string;
 	end: string | null;
 	description: string | null;
 	completed: boolean;
