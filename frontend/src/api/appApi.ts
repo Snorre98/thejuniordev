@@ -1,4 +1,4 @@
-import { supabase } from "@/supabaseClient";
+import { supabase } from "~/supabaseClient";
 import { STORAGE_BASE_URL } from "../constants";
 
 export function getFullIconUrl(iconPath: string) {
