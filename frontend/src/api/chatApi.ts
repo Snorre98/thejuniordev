@@ -1,5 +1,5 @@
-import { supabase } from "~/supabaseClient.js";
 import { STORAGE_BASE_URL } from "../constants";
+import { supabase } from "../supabaseClient.js";
 
 export function getFullIconUrl(iconPath: string) {
 	if (!iconPath) {
