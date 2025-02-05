@@ -28,9 +28,11 @@ export function ProjectDisplay() {
 		if (currentAppId != null) {
 			async function fetchProjectData() {
 				try {
-					setIsLoading(true);
-					const data = await getProjectByAppId(currentAppId);
-					setProjectData(data);
+					if (currentAppId) {
+						setIsLoading(true);
+						const data = await getProjectByAppId(currentAppId);
+						setProjectData(data);
+					}
 				} catch (err) {
 					setError("Failed to fetch project data");
 					console.error(err);
