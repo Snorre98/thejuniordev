@@ -1,28 +1,28 @@
 # thejuniordev
-
-[thejunior.dev](https://thejunior.dev/) is my portfolio page. There was no domain available for my given name, Snorre. My friends call me Junior, so thats the story of the domain name.
-
-The purpose of the page is to showcase some of my experience, and in addition it is a project I created for starting to aquire experience with hosting web applications.
-It is also an outlet for me to experience with fun frontend UX.
+[thejunior.dev](https://thejunior.dev) is my portfolio page. There was no domain available for my given name, Snorre. My friends call me Junior, so that's the story of the domain name.
+The purpose of the page is to showcase some of my experience, and in addition, it is a project I created to start acquiring experience with hosting web applications.
+It is also an outlet for me to experiment with fun frontend UX.
 
 ## hosting and tech
+The backend and frontend are hosted on a [DigitalOcean Droplet](https://www.digitalocean.com/products/droplets).
+The project is a React single page application. There is no frontend routing, which I know is unorthodox. It's a deliberate choice to keep with the smartphone theme of the page. At early stages of development I disliked the decision, but it has grown on me due to the fact that I have to solve interesting frontend problems to achieve the wanted UX behavior. I leverage the barebones state management library [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) to conditionally render UI as the user navigates the page.
+The backend is a Supabase instance hosted in Docker on the Droplet. The original plan for hosting was to make the page available on a Raspberry Pi, therefore a [self-hosted Supabase instance](https://supabase.com/docs/guides/self-hosting/docker) was attractive. 
+I decided that the fastet way to deploy was to use cloud hosting with DigitalOcean, which meant that I did not have to deal with a dynamic DNS service or configure my router (which I am not free to configure).
 
-The backend and frontend is hosted on a [DigitalOcean Droplet](https://www.digitalocean.com/products/droplets).
 
-The project is a React single page application. There is no frontend routing, which I know is unortodocs. It's a deliberate choice to keep with the smartphone theme of the page. At early stages of development I disliked the decision, but it has grown on me due to the fact that I have to solve weird frontend problems to achive the wanted UX behaviour. I leverage the barebones state management library [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) to conditionaly render UI as the user navigates the page.
-
-The backend is a Supabase instance hosted in Docker on the Droplet. The original plan for hosting was to make the page available on a Raspberry Pi, therefor a [self-hosted Supabase instance](https://supabase.com/docs/guides/self-hosting/docker) was attractive, but I am not free to configure my LAN router for a DNS to reach the page.
-
+Todo: self-host on Raspberry Pi to save on cost of Digital Ocean Droplet.
 
 ## Some of what I have learned
 
-- configuring a simple nginx webserver
-- deploying a webapplication to a remote server
-  - workflow related to this
-  - troubleshooting related to this
-- troubleshoot problems related to buildinga React webapp with Vite
+- Configuring a simple nginx webserver
+- Deploying a web application to a remote server
+  - Workflow related to this
+  - Troubleshooting related to this
+- Troubleshooting problems related to building a React webapp with Vite
 
 ## deployment
+
+ToDo: create a pieline for deployment.
 
 ### nginx
 
