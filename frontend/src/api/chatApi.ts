@@ -1,12 +1,12 @@
 import { supabase } from "../supabaseClient";
-import { STORAGE_BASE_URL } from "../constants";
+import { AVATARS_BUCKET_NAME, STORAGE_BASE_URL } from "../constants";
 
 export function getFullIconUrl(iconPath: string) {
   if (!iconPath) {
     console.error("Invalid icon path");
     return "";
   }
-  return `${STORAGE_BASE_URL}avatars/${iconPath}`;
+  return `${STORAGE_BASE_URL}${AVATARS_BUCKET_NAME}${iconPath}`;
 }
 
 export interface Message {
