@@ -1,6 +1,6 @@
 # thejuniordev
 
-[thejunior.dev](https://thejunior.dev/) is my portfolio page. No domain suitable for my given name, Snorre, was availabe. My friends call me Junior, so thats the story of the domain name.
+[thejunior.dev](https://thejunior.dev/) is my portfolio page. There was no domain available for my given name, Snorre. My friends call me Junior, so thats the story of the domain name.
 
 The purpose of the page is to showcase some of my experience, and in addition it is a project I created for starting to aquire experience with hosting web applications.
 It is also an outlet for me to experience with fun frontend UX.
