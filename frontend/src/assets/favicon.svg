@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="26.820326mm"
+   height="26.820318mm"
+   viewBox="0 0 26.820326 26.820318"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-159.82357,-128.37018)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.935;stroke-opacity:1"
+       id="rect1"
+       width="25.885321"
+       height="25.885321"
+       x="160.29108"
+       y="128.83768" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.0834px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.14378;stroke-opacity:1"
+       x="159.48534"
+       y="141.36539"
+       id="text1"
+       transform="scale(1.0203401,0.98006538)"><tspan
+         style="stroke:#000000;stroke-width:1.14378;stroke-opacity:1"
+         x="159.48534"
+         y="141.36539"
+         id="tspan2">Jr</tspan><tspan
+         style="stroke:#000000;stroke-width:1.14378;stroke-opacity:1"
+         x="159.48534"
+         y="156.46964"
+         id="tspan3">Dev</tspan></text>
+  </g>
+</svg>
