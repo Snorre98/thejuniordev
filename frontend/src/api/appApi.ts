@@ -1,12 +1,12 @@
 import { supabase } from "../supabaseClient";
-import { STORAGE_BASE_URL, APPS_BUCKET_NAME } from "../constants";
+import { STORAGE_BASE_URL, APPS_BUCKET_PATH } from "../constants";
 
 export function getFullIconUrl(iconPath: string) {
   if (!iconPath) {
     console.error("Invalid icon path");
     return "";
   }
-  return `${STORAGE_BASE_URL}${APPS_BUCKET_NAME}${iconPath}`;
+  return `${STORAGE_BASE_URL}${APPS_BUCKET_PATH}${iconPath}`;
 }
 
 export async function getFavoriteApps() {
