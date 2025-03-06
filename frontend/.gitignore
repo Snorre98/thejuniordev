@@ -26,4 +26,8 @@ dist-ssr
 # supabase client
 supabaseClient.js
 
+# .env
+
+.env
+
 
