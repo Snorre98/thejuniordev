@@ -4,5 +4,6 @@ export { Message } from "./Message";
 export { Page } from "./Page";
 export { Screen } from "./Screen";
 export { Watch } from "./Watch";
+export { PrefetchLoader } from "./PrefetchLoader";
 /* ------------------ types ------------------ */
 export type { ScreenProps } from "./Screen";

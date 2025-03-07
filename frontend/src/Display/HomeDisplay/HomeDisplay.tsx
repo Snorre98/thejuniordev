@@ -5,7 +5,7 @@ import type { Screens } from "../../types";
 import { ErrorDisplay } from "../ErrorDisplay";
 import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./HomeDisplay.module.scss";
-import { useApps, useFavoriteApps, usePrefetch } from "../../hooks/useAppQueries";
+import { useApps, useFavoriteApps } from "../../hooks/useAppQueries";
 
 type App = {
 	id: number;
@@ -22,7 +22,6 @@ interface HomeDisplayProps {
 export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 	const [isVisible, setIsVisible] = useState(false);
 	const { setCurrentAppId, setScreen } = useStore();
-	const { prefetchProject } = usePrefetch();
 	
 	// Use React Query hooks instead of direct API calls
 	const { 
@@ -51,15 +50,13 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 			} else {
 				setCurrentAppId(app.id);
 				if (app.project) {
-					// Prefetch project data when hovering over app buttons
-					prefetchProject(app.project);
 					onSelectApp(app.project);
 				} else {
 					console.error("No project associated with this app");
 				}
 			}
 		},
-		[setCurrentAppId, setScreen, onSelectApp, prefetchProject],
+		[setCurrentAppId, setScreen, onSelectApp],
 	);
 
 	const renderApps = useCallback(
@@ -70,10 +67,9 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={false}
-				onMouseEnter={() => app.project && prefetchProject(app.project)}
 			/>
 		),
-		[handleOpenApp, prefetchProject],
+		[handleOpenApp],
 	);
 
 	const renderFavApps = useCallback(
@@ -84,10 +80,9 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={true}
-				onMouseEnter={() => app.project && prefetchProject(app.project)}
 			/>
 		),
-		[handleOpenApp, prefetchProject],
+		[handleOpenApp],
 	);
 
 	const isLoading = appsLoading || favAppsLoading;
