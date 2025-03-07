@@ -1,4 +1,5 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import type React from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import styles from './Line.module.scss';
 
 type LineProps = {
@@ -22,18 +23,17 @@ export function Line({ id, onPullUp, pullUpThreshold = 200 }: LineProps) {
   }, [onPullUp]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMove = (clientY: number) => {
       if (isDragging) {
-        const newY = Math.min(0, e.clientY - dragStartY);
+        const newY = Math.min(0, clientY - dragStartY);
         setPosition({ y: newY });
-
         if (-newY >= pullUpThreshold) {
           handlePullUp();
         }
       }
     };
 
-    const handleMouseUp = () => {
+    const handleEnd = () => {
       setIsDragging(false);
       if (-position.y < pullUpThreshold) {
         setPosition({ y: 0 });
@@ -41,12 +41,37 @@ export function Line({ id, onPullUp, pullUpThreshold = 200 }: LineProps) {
       pullUpTriggered.current = false;
     };
 
+    // Mouse events
+    const handleMouseMove = (e: MouseEvent) => {
+      handleMove(e.clientY);
+    };
+
+    const handleMouseUp = () => {
+      handleEnd();
+    };
+
+    // Touch events
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.cancelable) {
+        e.preventDefault(); // Prevent scrolling while dragging
+      }
+      handleMove(e.touches[0].clientY);
+    };
+
+    const handleTouchEnd = () => {
+      handleEnd();
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [isDragging, dragStartY, position.y, pullUpThreshold, handlePullUp]);
 
@@ -55,12 +80,18 @@ export function Line({ id, onPullUp, pullUpThreshold = 200 }: LineProps) {
     setDragStartY(e.clientY - position.y);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setDragStartY(e.touches[0].clientY - position.y);
+  };
+
   return (
     <div
       className={styles.lineContainer}
       id={id}
       ref={lineContainerRef}
       onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
       style={{
         transform: `translateY(${position.y}px)`,
         transition: isDragging ? 'none' : 'transform 0.3s ease-out',
