@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { AppButton } from "../../Components/AppButton";
-import { getApps, getFavoriteApps, getFullIconUrl } from "../../api/appApi";
 import { useStore } from "../../store/store";
 import type { Screens } from "../../types";
 import { ErrorDisplay } from "../ErrorDisplay";
 import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./HomeDisplay.module.scss";
+import { useApps, useFavoriteApps, usePrefetch } from "../../hooks/useAppQueries";
+
 type App = {
 	id: number;
 	app_title: string;
@@ -19,61 +20,46 @@ interface HomeDisplayProps {
 }
 
 export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
-	const [apps, setApps] = useState<App[]>([]);
-	const [favoriteApps, setFavoriteApps] = useState<App[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
 	const [isVisible, setIsVisible] = useState(false);
 	const { setCurrentAppId, setScreen } = useStore();
-
-	const fetchData = useCallback(async () => {
-		try {
-			setIsLoading(true);
-			const [appsData, favoriteAppsData] = await Promise.all([
-				getApps(),
-				getFavoriteApps(),
-			]);
-			const processApps = (appsData: App[]) => {
-				return appsData.map((app) => ({
-					...app,
-					icon_url: getFullIconUrl(app.icon_url),
-				}));
-			};
-			setApps(processApps(appsData));
-			setFavoriteApps(processApps(favoriteAppsData));
-		} catch (error) {
-			setError("Failed to fetch apps");
-			console.error(error);
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
+	const { prefetchProject } = usePrefetch();
+	
+	// Use React Query hooks instead of direct API calls
+	const { 
+		data: apps = [], 
+		isLoading: appsLoading, 
+		error: appsError 
+	} = useApps();
+	
+	const { 
+		data: favoriteApps = [], 
+		isLoading: favAppsLoading, 
+		error: favAppsError 
+	} = useFavoriteApps();
 
 	useEffect(() => {
-		fetchData();
 		const timer = setTimeout(() => {
 			setIsVisible(true);
 		}, 35);
 		return () => clearTimeout(timer);
-	}, [fetchData]);
+	}, []);
 
 	const handleOpenApp = useCallback(
 		(app: App) => {
 			if (app.opens) {
 				setScreen(app.opens);
 			} else {
-				console.log(app.app_title);
-				console.log("APP ID", app.id);
-				console.log("PROJECT: ", app.project);
-				setCurrentAppId(app.id); // Set the current app ID, not the project ID
+				setCurrentAppId(app.id);
 				if (app.project) {
-					onSelectApp(app.project); // Pass the project ID to onSelectApp if it exists
+					// Prefetch project data when hovering over app buttons
+					prefetchProject(app.project);
+					onSelectApp(app.project);
 				} else {
 					console.error("No project associated with this app");
 				}
 			}
 		},
-		[setCurrentAppId, setScreen, onSelectApp],
+		[setCurrentAppId, setScreen, onSelectApp, prefetchProject],
 	);
 
 	const renderApps = useCallback(
@@ -84,9 +70,10 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={false}
+				onMouseEnter={() => app.project && prefetchProject(app.project)}
 			/>
 		),
-		[handleOpenApp],
+		[handleOpenApp, prefetchProject],
 	);
 
 	const renderFavApps = useCallback(
@@ -97,10 +84,14 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 				iconURL={app.icon_url}
 				appTitle={app.app_title}
 				isFavorit={true}
+				onMouseEnter={() => app.project && prefetchProject(app.project)}
 			/>
 		),
-		[handleOpenApp],
+		[handleOpenApp, prefetchProject],
 	);
+
+	const isLoading = appsLoading || favAppsLoading;
+	const error = appsError || favAppsError;
 
 	if (isLoading) return <LoadingDisplay />;
 	if (error) return <ErrorDisplay error={"Error fetching apps"} />;
