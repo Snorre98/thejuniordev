@@ -5,7 +5,6 @@ import { Line } from "./Components/Screen/components";
 import DEFAULT_BG from "./assets/background-two.jpg";
 import { useRoutes } from "./routes";
 import { useStore } from "./store/store";
-import { LoadingDisplay } from "./Display";
 
 const App = () => {
 	const {
