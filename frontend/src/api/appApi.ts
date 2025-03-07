@@ -6,7 +6,6 @@ export function getFullIconUrl(iconPath: string) {
     console.error("Invalid icon path");
     return "";
   }
-  console.log(`correct URL:${STORAGE_BASE_URL}${APPS_BUCKET_PATH}${iconPath}`);
   return `${STORAGE_BASE_URL}${APPS_BUCKET_PATH}${iconPath}`;
 }
 
