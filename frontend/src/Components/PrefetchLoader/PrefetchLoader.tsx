@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getApps, getFavoriteApps, getProjects, getProjectByAppId } from "../../api/appApi";
 import { queryKeys } from "../../hooks/useAppQueries";
-import { LoadingDisplay } from "../../Display/LoadingDisplay";
 
 interface PrefetchLoaderProps {
   children: React.ReactNode;
+  loadingComponent: React.ReactNode; // Add this prop
 }
 
-export function PrefetchLoader({ children }: PrefetchLoaderProps) {
+export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderProps) {
   const queryClient = useQueryClient();
   const [prefetchComplete, setPrefetchComplete] = useState(false);
   
@@ -17,23 +17,23 @@ export function PrefetchLoader({ children }: PrefetchLoaderProps) {
     queryKey: [queryKeys.apps],
     queryFn: getApps,
   });
-
+  
   // Query to get all favorite apps
   const { data: favoriteApps, isLoading: favAppsLoading } = useQuery({
     queryKey: [queryKeys.favoriteApps],
     queryFn: getFavoriteApps,
   });
-
+  
   // Query to get all projects
   const { data: projects, isLoading: projectsLoading } = useQuery({
     queryKey: [queryKeys.projects],
     queryFn: getProjects,
   });
-
+  
   // Once we have the apps, prefetch all associated project data
   useEffect(() => {
     if (!apps || !favoriteApps || !projects) return;
-
+    
     const allApps = [...apps, ...favoriteApps];
     const uniqueProjectIds = new Set<number>();
     
@@ -43,7 +43,7 @@ export function PrefetchLoader({ children }: PrefetchLoaderProps) {
         uniqueProjectIds.add(app.project);
       }
     });
-
+    
     // Start prefetching all project data in parallel
     const prefetchPromises = Array.from(uniqueProjectIds).map(projectId => {
       return queryClient.prefetchQuery({
@@ -51,7 +51,7 @@ export function PrefetchLoader({ children }: PrefetchLoaderProps) {
         queryFn: () => getProjectByAppId(projectId),
       });
     });
-
+    
     // When all prefetch operations are complete, mark prefetching as done
     Promise.all(prefetchPromises)
       .then(() => {
@@ -64,12 +64,12 @@ export function PrefetchLoader({ children }: PrefetchLoaderProps) {
         setPrefetchComplete(true);
       });
   }, [apps, favoriteApps, projects, queryClient]);
-
-  // Show loading screen while we're loading the initial data
+  
+  // Show loading component while we're loading the initial data
   if (appsLoading || favAppsLoading || projectsLoading || !prefetchComplete) {
-    return <LoadingDisplay />;
+    return <>{loadingComponent}</>;
   }
-
+  
   // Once everything is prefetched, render the children
   return <>{children}</>;
 }

@@ -86,21 +86,20 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 	);
 
 	const isLoading = appsLoading || favAppsLoading;
-	const error = appsError || favAppsError;
+	//const error = appsError || favAppsError;
 
-	if (isLoading) return <LoadingDisplay />;
-	if (error) return <ErrorDisplay error={"Error fetching apps"} />;
+	//if (error) return <ErrorDisplay error={"Error fetching apps"} />;
 
 	return (
-		<div
-			className={`${styles.homeScreenContainer} ${
-				isVisible ? styles.homeScreenContainerVisible : ""
-			}`}
-		>
-			<div className={styles.appsContainer}>{apps.map(renderApps)}</div>
-			<div className={styles.favoriteApps}>
-				{favoriteApps.map(renderFavApps)}
-			</div>
+		<div className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ""}`}>
+		  {isLoading ? (
+			<LoadingDisplay />
+		  ) : (
+			<>
+			  <div className={styles.appsContainer}>{apps.map(renderApps)}</div>
+			  <div className={styles.favoriteApps}>{favoriteApps.map(renderFavApps)}</div>
+			</>
+		  )}
 		</div>
-	);
+	  );
 }
