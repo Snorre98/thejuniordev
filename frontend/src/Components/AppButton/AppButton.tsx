@@ -15,7 +15,9 @@ export function AppButton({
 }: AppButtonProps) {
 	return (
 		<div className={styles.appContainer}>
+			{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 			<div className={styles.appIconContainer} onClick={onOpenApp}>
+				{/* biome-ignore lint/a11y/useAltText: <explanation> */}
 				<img src={iconURL} className={styles.appIcon} />
 			</div>
 			{!isFavorit && <span className={styles.appTitle}>{appTitle}</span>}
