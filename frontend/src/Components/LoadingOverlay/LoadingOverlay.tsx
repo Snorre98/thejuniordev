@@ -10,7 +10,7 @@ interface LoadingOverlayProps {
 export function LoadingOverlay({ 
   children, 
   isLoading, 
-  minDisplayTime = 600 
+  minDisplayTime = 250 
 }: LoadingOverlayProps) {
   const [shouldRender, setShouldRender] = useState(isLoading);
   const [startTime, setStartTime] = useState<number | null>(null);
