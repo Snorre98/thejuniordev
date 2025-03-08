@@ -1,36 +1,19 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ComingSoon } from "../../Components";
-import { type BioCategory, fetchBioData } from "../../api/bioApi";
 import { ErrorDisplay } from "../ErrorDisplay";
 import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./BioDisplay.module.scss";
+import { useBioData } from "../../hooks/useBioQueries";
+import { LoadingOverlay } from "../../Components";
 
 export function BioDisplay() {
 	const [showComingSoon, setShowComingSoon] = useState(false);
 	const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-	const [bioData, setBioData] = useState<BioCategory[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
-
-	useEffect(() => {
-		async function loadBioData() {
-			try {
-				setIsLoading(true);
-				const data = await fetchBioData();
-				setBioData(data);
-				setError(null);
-			} catch (err) {
-				setError("Failed to load bio data. Please try again later.");
-				console.error("Error loading bio data:", err);
-			} finally {
-				setIsLoading(false);
-			}
-		}
-
-		loadBioData();
-	}, []);
+	
+	// Use the custom hook instead of direct API calls
+	const { data: bioData = [], isLoading, error } = useBioData();
 
 	const handleBackClick = (event: React.MouseEvent) => {
 		setCursorPos({ x: event.clientX, y: event.clientY });
@@ -50,11 +33,11 @@ export function BioDisplay() {
 	}
 
 	if (error) {
-		return <ErrorDisplay error={error} />;
+		return <ErrorDisplay error={"Failed to load bio data. Please try again later."} />;
 	}
 
 	return (
-		<>
+		<LoadingOverlay isLoading={isLoading}>
 			{showComingSoon && (
 				<ComingSoon duration={1500} x={cursorPos.x} y={cursorPos.y + 20} />
 			)}
@@ -149,6 +132,6 @@ export function BioDisplay() {
 					/>
 				</div>
 			</div>
-		</>
+		</LoadingOverlay>
 	);
 }

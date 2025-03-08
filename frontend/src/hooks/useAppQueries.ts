@@ -51,5 +51,12 @@ export function useProject(appId: number | null) {
     queryKey: queryKeys.project(appId || 0),
     queryFn: () => getProjectByAppId(appId || 0),
     enabled: !!appId, // Only run if appId is provided
+    select: (data) =>
+      data
+        ? {
+            ...data,
+            icon: getFullIconUrl(data.icon),
+          }
+        : null,
   });
 }

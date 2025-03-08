@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getApps, getFavoriteApps, getProjects, getProjectByAppId } from "../../api/appApi";
 import { queryKeys } from "../../hooks/useAppQueries";
+import { bioQueryKeys } from "../../hooks/useBioQueries";
+import { chatQueryKeys } from "../../hooks/useChatQueries";
+import { fetchBioData } from "../../api/bioApi";
+import { fetchThreads, fetchLatestMessage, fetchUser } from "../../api/chatApi";
 
 interface PrefetchLoaderProps {
   children: React.ReactNode;
-  loadingComponent?: React.ReactNode; // Add this prop
+  loadingComponent?: React.ReactNode;
 }
 
 export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderProps) {
@@ -28,6 +32,24 @@ export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderPro
   const { data: projects, isLoading: projectsLoading } = useQuery({
     queryKey: [queryKeys.projects],
     queryFn: getProjects,
+  });
+  
+  // Query to get bio data
+  const { data: bioData, isLoading: bioLoading } = useQuery({
+    queryKey: [bioQueryKeys.allBioData],
+    queryFn: fetchBioData,
+  });
+  
+  // Query to get chat threads
+  const { data: threads, isLoading: threadsLoading } = useQuery({
+    queryKey: [chatQueryKeys.threads],
+    queryFn: fetchThreads,
+  });
+  
+  // Query to get latest message for notifications
+  const { data: latestMessage, isLoading: latestMessageLoading } = useQuery({
+    queryKey: [chatQueryKeys.latestMessage],
+    queryFn: fetchLatestMessage,
   });
   
   // Once we have the apps, prefetch all associated project data
@@ -65,10 +87,45 @@ export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderPro
       });
   }, [apps, favoriteApps, projects, queryClient]);
   
+  // Prefetch message data for all threads
+  useEffect(() => {
+    if (!threads) return;
+    
+    const prefetchPromises = threads.map(thread => {
+      return queryClient.prefetchQuery({
+        queryKey: chatQueryKeys.messages(thread.id),
+        queryFn: () => fetchThreads(),
+      });
+    });
+    
+    // Also prefetch user data for the latest message if available
+    if (latestMessage && latestMessage.sender) {
+      prefetchPromises.push(
+        queryClient.prefetchQuery({
+          queryKey: chatQueryKeys.user(latestMessage.sender),
+          queryFn: () => fetchUser(latestMessage.sender),
+        })
+      );
+    }
+    
+    Promise.all(prefetchPromises)
+      .then(() => {
+        console.log(`Prefetched messages for ${threads.length} threads`);
+      })
+      .catch(error => {
+        console.error("Error prefetching messages:", error);
+      });
+  }, [threads, latestMessage, queryClient]);
+  
+  // Check if any of the major data types are still loading
+  const isLoading = appsLoading || favAppsLoading || projectsLoading || 
+                    bioLoading || threadsLoading || latestMessageLoading || 
+                    !prefetchComplete;
+  
   // Show loading component while we're loading the initial data
-  //if (appsLoading || favAppsLoading || projectsLoading || !prefetchComplete) {
-  //  return <>{loadingComponent}</>;
-  //}
+  if (isLoading && loadingComponent) {
+    return <>{loadingComponent}</>;
+  }
   
   // Once everything is prefetched, render the children
   return <>{children}</>;
