@@ -32,6 +32,7 @@ export function Notification({
 }: NotificationProps) {
 	const truncatedContent = truncateText(notificationContent, 100); // Adjust 100 to your desired max length
 	return (
+		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div className={styles.notificationContainer} onClick={onClick}>
 			<img src={appIcon} alt="app icon" className={styles.icon} />
 			<div className={styles.notificationText}>

@@ -47,8 +47,8 @@ export function Watch() {
         {daysList[currentDay]}, {currentDate}. {monthsList[currentMonth - 1]}
       </span>
       <h1 className={styles.watch}>
-        {currentHour < 10 ? '0' + currentHour : currentHour}:{''}
-        {currentMin < 10 ? '0' + currentMin : currentMin}
+        {currentHour < 10 ? `0${currentHour}` : currentHour}:{''}
+        {currentMin < 10 ? `0${currentMin}` : currentMin}
       </h1>
     </div>
   );

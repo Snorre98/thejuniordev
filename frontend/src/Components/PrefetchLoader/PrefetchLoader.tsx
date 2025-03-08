@@ -59,12 +59,14 @@ export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderPro
     const allApps = [...apps, ...favoriteApps];
     const uniqueProjectIds = new Set<number>();
     
-    // Collect all unique project IDs from apps
-    allApps.forEach(app => {
-      if (app.project) {
-        uniqueProjectIds.add(app.project);
-      }
-    });
+      
+  // Collect all unique project IDs from apps using for...of
+  for (const app of allApps) {
+    if (app.project) {
+      uniqueProjectIds.add(app.project);
+    }
+  }
+  
     
     // Start prefetching all project data in parallel
     const prefetchPromises = Array.from(uniqueProjectIds).map(projectId => {
@@ -99,7 +101,7 @@ export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderPro
     });
     
     // Also prefetch user data for the latest message if available
-    if (latestMessage && latestMessage.sender) {
+    if (latestMessage?.sender) {
       prefetchPromises.push(
         queryClient.prefetchQuery({
           queryKey: chatQueryKeys.user(latestMessage.sender),

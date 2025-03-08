@@ -37,7 +37,7 @@ export function ChatDisplay({ onBack }: ChatDisplayProps) {
 		if (chatMessagesRef.current) {
 			chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
 		}
-	}, [messages]);
+	}, []);
 
 	const isLoading = threadsLoading || messagesLoading || !currentThread;
 
