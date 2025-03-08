@@ -6,6 +6,7 @@ import { ErrorDisplay } from "../ErrorDisplay";
 import { LoadingDisplay } from "../LoadingDisplay";
 import styles from "./HomeDisplay.module.scss";
 import { useApps, useFavoriteApps } from "../../hooks/useAppQueries";
+import { LoadingOverlay } from "../../Components";
 
 type App = {
 	id: number;
@@ -86,20 +87,17 @@ export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
 	);
 
 	const isLoading = appsLoading || favAppsLoading;
-	//const error = appsError || favAppsError;
-
-	//if (error) return <ErrorDisplay error={"Error fetching apps"} />;
 
 	return (
-		<div className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ""}`}>
-		  {isLoading ? (
-			<LoadingDisplay />
-		  ) : (
+		<LoadingOverlay  isLoading={isLoading}>
+			<div className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ""}`}>
 			<>
 			  <div className={styles.appsContainer}>{apps.map(renderApps)}</div>
 			  <div className={styles.favoriteApps}>{favoriteApps.map(renderFavApps)}</div>
 			</>
-		  )}
+	
 		</div>
+		</LoadingOverlay>
+		
 	  );
 }

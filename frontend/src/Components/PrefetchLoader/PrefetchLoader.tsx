@@ -5,7 +5,7 @@ import { queryKeys } from "../../hooks/useAppQueries";
 
 interface PrefetchLoaderProps {
   children: React.ReactNode;
-  loadingComponent: React.ReactNode; // Add this prop
+  loadingComponent?: React.ReactNode; // Add this prop
 }
 
 export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderProps) {
@@ -66,9 +66,9 @@ export function PrefetchLoader({ children, loadingComponent }: PrefetchLoaderPro
   }, [apps, favoriteApps, projects, queryClient]);
   
   // Show loading component while we're loading the initial data
-  if (appsLoading || favAppsLoading || projectsLoading || !prefetchComplete) {
-    return <>{loadingComponent}</>;
-  }
+  //if (appsLoading || favAppsLoading || projectsLoading || !prefetchComplete) {
+  //  return <>{loadingComponent}</>;
+  //}
   
   // Once everything is prefetched, render the children
   return <>{children}</>;

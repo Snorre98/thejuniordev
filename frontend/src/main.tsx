@@ -3,8 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./global.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { PrefetchLoader, Screen, Page } from "./Components";
-import { LoadingDisplay } from "./Display";
+import { PrefetchLoader } from "./Components";
 
 
 // Create a client with optimized settings for prefetching
@@ -18,18 +17,12 @@ const queryClient = new QueryClient({
   },
 });
 
-const wrappedLoadingComponent = (
-  <Page>
-    <Screen>
-      <LoadingDisplay />
-    </Screen>
-  </Page>
-);
+
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <PrefetchLoader loadingComponent={wrappedLoadingComponent}>
+      <PrefetchLoader >
         <App />
       </PrefetchLoader>
     </QueryClientProvider>
