@@ -1,103 +1,93 @@
-import { useCallback, useEffect, useState } from "react";
-import { AppButton } from "../../Components/AppButton";
-import { useStore } from "../../store/store";
-import type { Screens } from "../../types";
-import { ErrorDisplay } from "../ErrorDisplay";
-import { LoadingDisplay } from "../LoadingDisplay";
-import styles from "./HomeDisplay.module.scss";
-import { useApps, useFavoriteApps } from "../../hooks/useAppQueries";
-import { LoadingOverlay } from "../../Components";
+import { useCallback, useEffect, useState } from 'react';
+import { LoadingOverlay } from '../../Components';
+import { AppButton } from '../../Components/AppButton';
+import { useApps, useFavoriteApps } from '../../hooks/useAppQueries';
+import { useStore } from '../../store/store';
+import type { Screens } from '../../types';
+import { ErrorDisplay } from '../ErrorDisplay';
+import { LoadingDisplay } from '../LoadingDisplay';
+import styles from './HomeDisplay.module.scss';
 
 type App = {
-	id: number;
-	app_title: string;
-	opens?: Screens;
-	icon_url: string;
-	project?: number;
+  id: number;
+  app_title: string;
+  opens?: Screens;
+  icon_url: string;
+  project?: number;
 };
 
 interface HomeDisplayProps {
-	onSelectApp: (appId: number) => void;
+  onSelectApp: (appId: number) => void;
 }
 
 export function HomeDisplay({ onSelectApp }: HomeDisplayProps) {
-	const [isVisible, setIsVisible] = useState(false);
-	const { setCurrentAppId, setScreen } = useStore();
-	
-	// Use React Query hooks instead of direct API calls
-	const { 
-		data: apps = [], 
-		isLoading: appsLoading, 
-		error: appsError 
-	} = useApps();
-	
-	const { 
-		data: favoriteApps = [], 
-		isLoading: favAppsLoading, 
-		error: favAppsError 
-	} = useFavoriteApps();
+  const [isVisible, setIsVisible] = useState(false);
+  const { setCurrentAppId, setScreen } = useStore();
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setIsVisible(true);
-		}, 35);
-		return () => clearTimeout(timer);
-	}, []);
+  // Use React Query hooks instead of direct API calls
+  const { data: apps = [], isLoading: appsLoading, error: appsError } = useApps();
 
-	const handleOpenApp = useCallback(
-		(app: App) => {
-			if (app.opens) {
-				setScreen(app.opens);
-			} else {
-				setCurrentAppId(app.id);
-				if (app.project) {
-					onSelectApp(app.project);
-				} else {
-					console.error("No project associated with this app");
-				}
-			}
-		},
-		[setCurrentAppId, setScreen, onSelectApp],
-	);
+  const { data: favoriteApps = [], isLoading: favAppsLoading, error: favAppsError } = useFavoriteApps();
 
-	const renderApps = useCallback(
-		(app: App) => (
-			<AppButton
-				key={app.id}
-				onOpenApp={() => handleOpenApp(app)}
-				iconURL={app.icon_url}
-				appTitle={app.app_title}
-				isFavorit={false}
-			/>
-		),
-		[handleOpenApp],
-	);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 35);
+    return () => clearTimeout(timer);
+  }, []);
 
-	const renderFavApps = useCallback(
-		(app: App) => (
-			<AppButton
-				key={app.id}
-				onOpenApp={() => handleOpenApp(app)}
-				iconURL={app.icon_url}
-				appTitle={app.app_title}
-				isFavorit={true}
-			/>
-		),
-		[handleOpenApp],
-	);
+  const handleOpenApp = useCallback(
+    (app: App) => {
+      if (app.opens) {
+        setScreen(app.opens);
+      } else {
+        setCurrentAppId(app.id);
+        if (app.project) {
+          onSelectApp(app.project);
+        } else {
+          console.error('No project associated with this app');
+        }
+      }
+    },
+    [setCurrentAppId, setScreen, onSelectApp],
+  );
 
-	const isLoading = appsLoading || favAppsLoading;
+  const renderApps = useCallback(
+    (app: App) => (
+      <AppButton
+        key={app.id}
+        onOpenApp={() => handleOpenApp(app)}
+        iconURL={app.icon_url}
+        appTitle={app.app_title}
+        isFavorit={false}
+      />
+    ),
+    [handleOpenApp],
+  );
 
-	return (
-		<LoadingOverlay  isLoading={isLoading}>
-			<div className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ""}`}>
-			<>
-			  <div className={styles.appsContainer}>{apps.map(renderApps)}</div>
-			  <div className={styles.favoriteApps}>{favoriteApps.map(renderFavApps)}</div>
-			</>
-	
-		</div>
-		</LoadingOverlay>
-		
-	  );
+  const renderFavApps = useCallback(
+    (app: App) => (
+      <AppButton
+        key={app.id}
+        onOpenApp={() => handleOpenApp(app)}
+        iconURL={app.icon_url}
+        appTitle={app.app_title}
+        isFavorit={true}
+      />
+    ),
+    [handleOpenApp],
+  );
+
+  const isLoading = appsLoading || favAppsLoading;
+
+  return (
+    <LoadingOverlay isLoading={isLoading}>
+      <div className={`${styles.homeScreenContainer} ${isVisible ? styles.homeScreenContainerVisible : ''}`}>
+        <>
+          <div className={styles.appsContainer}>{apps.map(renderApps)}</div>
+          <div className={styles.favoriteApps}>{favoriteApps.map(renderFavApps)}</div>
+        </>
+      </div>
+    </LoadingOverlay>
+  );
 }

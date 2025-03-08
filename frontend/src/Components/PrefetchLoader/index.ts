@@ -1,1 +1,1 @@
-export { PrefetchLoader } from "./PrefetchLoader";
+export { PrefetchLoader } from './PrefetchLoader';

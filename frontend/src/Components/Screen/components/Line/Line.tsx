@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Line.module.scss';
 
 type LineProps = {

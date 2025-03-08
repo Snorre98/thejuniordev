@@ -1,4 +1,4 @@
-import { supabase } from "../supabaseClient";
+import { supabase } from '../supabaseClient';
 
 // Types
 interface BioItem {
@@ -18,9 +18,7 @@ export interface BioCategory {
 
 // Function to fetch all bio data
 export async function fetchBioData(): Promise<BioCategory[]> {
-  const { data: categories, error: categoryError } = await supabase
-    .from("bio_category")
-    .select("*");
+  const { data: categories, error: categoryError } = await supabase.from('bio_category').select('*');
 
   if (categoryError) {
     throw new Error(`Error fetching categories: ${categoryError.message}`);
@@ -30,15 +28,13 @@ export async function fetchBioData(): Promise<BioCategory[]> {
 
   for (const category of categories) {
     const { data: items, error: itemError } = await supabase
-      .from("bio_item")
-      .select("*")
-      .eq("item_category", category.category)
-      .order("start", { ascending: false });
+      .from('bio_item')
+      .select('*')
+      .eq('item_category', category.category)
+      .order('start', { ascending: false });
 
     if (itemError) {
-      throw new Error(
-        `Error fetching items for category ${category.category}: ${itemError.message}`
-      );
+      throw new Error(`Error fetching items for category ${category.category}: ${itemError.message}`);
     }
 
     bioData.push({
@@ -51,19 +47,15 @@ export async function fetchBioData(): Promise<BioCategory[]> {
 }
 
 // Function to fetch bio data for a specific category
-export async function fetchBioCategoryData(
-  category: string
-): Promise<BioCategory | null> {
+export async function fetchBioCategoryData(category: string): Promise<BioCategory | null> {
   const { data: items, error } = await supabase
-    .from("bio_item")
-    .select("*")
-    .eq("item_category", category)
-    .order("start", { ascending: false });
+    .from('bio_item')
+    .select('*')
+    .eq('item_category', category)
+    .order('start', { ascending: false });
 
   if (error) {
-    throw new Error(
-      `Error fetching items for category ${category}: ${error.message}`
-    );
+    throw new Error(`Error fetching items for category ${category}: ${error.message}`);
   }
 
   return {

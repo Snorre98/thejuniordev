@@ -1,1 +1,1 @@
-export { ProjectDisplay } from "./ProjectDisplay";
+export { ProjectDisplay } from './ProjectDisplay';

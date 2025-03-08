@@ -1,1 +1,1 @@
-export { ErrorDisplay } from "./ErrorDisplay";
+export { ErrorDisplay } from './ErrorDisplay';

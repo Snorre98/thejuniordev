@@ -1,1 +1,1 @@
-export { LoadingDisplay } from "./LoadingDisplay";
+export { LoadingDisplay } from './LoadingDisplay';

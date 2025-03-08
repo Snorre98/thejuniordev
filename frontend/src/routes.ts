@@ -6,10 +6,10 @@ import {
   LockDisplay,
   MessagesDisplay,
   ProjectDisplay,
-} from "./Display";
-import { useNavigation } from "./hooks/useNavigation";
-import { useStore } from "./store/store";
-import type { Screens } from "./types";
+} from './Display';
+import { useNavigation } from './hooks/useNavigation';
+import { useStore } from './store/store';
+import type { Screens } from './types';
 
 type LockDisplayProps = { onNotificationClick: () => void };
 type HomeDisplayProps = { onSelectApp: (appId: number) => void };
@@ -28,10 +28,7 @@ type RouteComponentProps =
   | BioDisplayProps;
 
 // Define a type for your route components
-export const routes: Record<
-  Screens,
-  React.ComponentType<RouteComponentProps>
-> = {
+export const routes: Record<Screens, React.ComponentType<RouteComponentProps>> = {
   lock: LockDisplay as React.ComponentType<RouteComponentProps>,
   home: HomeDisplay as React.ComponentType<RouteComponentProps>,
   messages: MessagesDisplay as React.ComponentType<RouteComponentProps>,
@@ -48,40 +45,40 @@ export const useRoutes = () => {
 
   const handleSelectApp = (appId: number) => {
     setCurrentAppId(appId);
-    navigate("project");
+    navigate('project');
   };
 
   const handlePullUp = () => {
     clearCurrentThreadId();
-    navigate("home");
+    navigate('home');
   };
 
   const CurrentComponent = routes[currentScreen];
 
   const getComponentProps = (): RouteComponentProps => {
     switch (currentScreen) {
-      case "lock":
+      case 'lock':
         return {
-          onNotificationClick: () => navigate("messages"),
+          onNotificationClick: () => navigate('messages'),
         } as LockDisplayProps;
-      case "home":
+      case 'home':
         return {
           onSelectApp: handleSelectApp,
         } as HomeDisplayProps;
-      case "messages":
+      case 'messages':
         return {
-          onSelectThread: () => navigate("chat"),
+          onSelectThread: () => navigate('chat'),
         } as MessagesDisplayProps;
-      case "chat":
+      case 'chat':
         return {
           onBack: () => {
             clearCurrentThreadId();
-            navigate("messages");
+            navigate('messages');
           },
         } as ChatDisplayProps;
-      case "project":
+      case 'project':
         return {} as ProjectDisplayProps;
-      case "bio":
+      case 'bio':
         return {} as BioDisplayProps;
       default:
         return {} as RouteComponentProps;

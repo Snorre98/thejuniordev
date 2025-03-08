@@ -1,18 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import {
-  fetchThreads,
-  fetchMessages,
-  fetchLatestMessage,
-  fetchUser,
-  getFullIconUrl,
-} from "../api/chatApi";
+import { useQuery } from '@tanstack/react-query';
+import { fetchLatestMessage, fetchMessages, fetchThreads, fetchUser, getFullIconUrl } from '../api/chatApi';
 
 // Query keys for better cache management
 export const chatQueryKeys = {
-  threads: "threads",
-  messages: (threadId: string) => ["messages", threadId],
-  latestMessage: "latestMessage",
-  user: (userId: string) => ["user", userId],
+  threads: 'threads',
+  messages: (threadId: string) => ['messages', threadId],
+  latestMessage: 'latestMessage',
+  user: (userId: string) => ['user', userId],
 };
 
 export function useThreads() {
@@ -24,7 +18,7 @@ export function useThreads() {
         ...thread,
         user_2: {
           ...thread.user_2,
-          avatar: getFullIconUrl(thread.user_2?.avatar || ""),
+          avatar: getFullIconUrl(thread.user_2?.avatar || ''),
         },
       })),
   });
@@ -32,8 +26,8 @@ export function useThreads() {
 
 export function useMessages(threadId: string | null) {
   return useQuery({
-    queryKey: chatQueryKeys.messages(threadId || ""),
-    queryFn: () => fetchMessages(threadId || ""),
+    queryKey: chatQueryKeys.messages(threadId || ''),
+    queryFn: () => fetchMessages(threadId || ''),
     enabled: !!threadId, // Only run if threadId is provided
   });
 }
@@ -47,8 +41,8 @@ export function useLatestMessage() {
 
 export function useUser(userId: string | null) {
   return useQuery({
-    queryKey: chatQueryKeys.user(userId || ""),
-    queryFn: () => fetchUser(userId || ""),
+    queryKey: chatQueryKeys.user(userId || ''),
+    queryFn: () => fetchUser(userId || ''),
     enabled: !!userId, // Only run if userId is provided
   });
 }

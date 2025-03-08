@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import { LoadingOverlay } from '../../Components';
 import { Notification } from '../../Components/Notification';
 import type { NotificationProps } from '../../Components/Notification/Notification';
 import { Watch } from '../../Components/Watch';
-import styles from './LockDisplay.module.scss';
-import { LoadingOverlay } from '../../Components';
 import { useLatestMessage, useUser } from '../../hooks/useChatQueries';
+import styles from './LockDisplay.module.scss';
 
 interface LockDisplayProps {
   onNotificationClick: () => void;
@@ -12,11 +12,11 @@ interface LockDisplayProps {
 
 export function LockDisplay({ onNotificationClick }: LockDisplayProps) {
   const [latestNotification, setLatestNotification] = useState<NotificationProps | null>(null);
-  
+
   // Use the custom hooks for fetching data
   const { data: latestMessage, isLoading: messageLoading } = useLatestMessage();
   const { data: sender, isLoading: userLoading } = useUser(latestMessage?.sender || null);
-  
+
   const isLoading = messageLoading || userLoading;
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function LockDisplay({ onNotificationClick }: LockDisplayProps) {
       });
     }
   }, [latestMessage, sender]);
-  
+
   return (
     <LoadingOverlay isLoading={isLoading}>
       <div className={styles.lockScreenContainer}>

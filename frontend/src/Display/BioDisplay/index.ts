@@ -1,1 +1,1 @@
-export { BioDisplay } from "./BioDisplay";
+export { BioDisplay } from './BioDisplay';

@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchBioData, fetchBioCategoryData } from "../api/bioApi";
+import { useQuery } from '@tanstack/react-query';
+import { fetchBioCategoryData, fetchBioData } from '../api/bioApi';
 
 // Query keys for better cache management
 export const bioQueryKeys = {
-  allBioData: "bio",
-  bioCategory: (category: string) => ["bio", category],
+  allBioData: 'bio',
+  bioCategory: (category: string) => ['bio', category],
 };
 
 export function useBioData() {
@@ -16,8 +16,8 @@ export function useBioData() {
 
 export function useBioCategory(category: string | null) {
   return useQuery({
-    queryKey: bioQueryKeys.bioCategory(category || ""),
-    queryFn: () => fetchBioCategoryData(category || ""),
+    queryKey: bioQueryKeys.bioCategory(category || ''),
+    queryFn: () => fetchBioCategoryData(category || ''),
     enabled: !!category, // Only run if category is provided
   });
 }

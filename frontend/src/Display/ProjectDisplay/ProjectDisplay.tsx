@@ -1,25 +1,19 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
-import React from "react";
-import { useStore } from "../../store/store";
-import { ErrorDisplay } from "../ErrorDisplay";
-import styles from "./ProjectDisplay.module.scss";
-import { useProject } from "../../hooks/useAppQueries";
-import { LoadingOverlay } from "../../Components";
-
-
+import { Icon } from '@iconify/react/dist/iconify.js';
+import React from 'react';
+import { LoadingOverlay } from '../../Components';
+import { useProject } from '../../hooks/useAppQueries';
+import { useStore } from '../../store/store';
+import { ErrorDisplay } from '../ErrorDisplay';
+import styles from './ProjectDisplay.module.scss';
 
 export function ProjectDisplay() {
   const { currentAppId } = useStore();
   // Use the custom hook instead of direct API calls and local state
-  const {
-    data: projectData,
-    isLoading,
-    error
-  } = useProject(currentAppId);
+  const { data: projectData, isLoading, error } = useProject(currentAppId);
 
   const handleOpen = () => {
     if (projectData?.repo) {
-      window.open(projectData.repo, "_blank", "noopener,noreferrer");
+      window.open(projectData.repo, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -27,12 +21,10 @@ export function ProjectDisplay() {
     return contributors.data.map((contributor, index) => (
       // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
       <React.Fragment key={index}>
-        {index > 0 && index === contributors.data.length - 1 && (
-          <span> and </span>
-        )}
+        {index > 0 && index === contributors.data.length - 1 && <span> and </span>}
         {index > 0 && index < contributors.data.length - 1 && <span>, </span>}
         <span>{contributor}</span>
-        {index === contributors.data.length - 1 && "."}
+        {index === contributors.data.length - 1 && '.'}
       </React.Fragment>
     ));
   };
@@ -40,18 +32,14 @@ export function ProjectDisplay() {
   return (
     <LoadingOverlay isLoading={isLoading}>
       {error ? (
-        <ErrorDisplay error={"Failed to fetch project data"} />
+        <ErrorDisplay error={'Failed to fetch project data'} />
       ) : !projectData ? (
-        <ErrorDisplay error={"No project data available"} />
+        <ErrorDisplay error={'No project data available'} />
       ) : (
         <div className={styles.projectContainer}>
           <div className={styles.projectHeader}>
             <div className={styles.projectIconWrapper}>
-              <img
-                src={projectData.icon}
-                alt="project-icon"
-                className={styles.projectIcon}
-              />
+              <img src={projectData.icon} alt="project-icon" className={styles.projectIcon} />
             </div>
             <h2 className={styles.projectTitle}>{projectData.title}</h2>
             <div className={styles.projectParticipants}>
@@ -68,7 +56,7 @@ export function ProjectDisplay() {
               onClick={handleOpen}
               aria-label={`Open GitHub repository for ${projectData.title} project`}
             >
-              <Icon icon={"mdi:github"} width={"1.25rem"} height={"1.25rem"} />
+              <Icon icon={'mdi:github'} width={'1.25rem'} height={'1.25rem'} />
               GitHub repo
             </button>
           </div>
@@ -82,7 +70,7 @@ export function ProjectDisplay() {
               <ul>
                 {projectData.techlist.data.map((tech: string, index: number) => (
                   // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-				<li key={index}>{tech}</li>
+                  <li key={index}>{tech}</li>
                 ))}
               </ul>
             </section>

@@ -1,18 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import {
-  getApps,
-  getFavoriteApps,
-  getFullIconUrl,
-  getProjects,
-  getProjectByAppId,
-} from "../api/appApi";
+import { useQuery } from '@tanstack/react-query';
+import { getApps, getFavoriteApps, getFullIconUrl, getProjectByAppId, getProjects } from '../api/appApi';
 
 // Query keys for better cache management
 export const queryKeys = {
-  apps: "apps",
-  favoriteApps: "favoriteApps",
-  projects: "projects",
-  project: (id: number) => ["project", id],
+  apps: 'apps',
+  favoriteApps: 'favoriteApps',
+  projects: 'projects',
+  project: (id: number) => ['project', id],
 };
 
 export function useApps() {
